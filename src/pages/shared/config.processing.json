@@ -6,7 +6,14 @@
       "label": {
         "en": "Standard (5–7 working days)",
         "zh-TW": "一般（5–7 個工作天）",
-        "zh-CN": "普通（5–7 个工作日）"
+        "zh-CN": "普通（5–7 个工作日）",
+        "ja": "通常（5〜7営業日）",
+        "ko": "일반 (영업일 5~7일)",
+        "th": "ปกติ (5–7 วันทำการ)",
+        "es": "Estándar (5–7 días hábiles)",
+        "ru": "Стандарт (5–7 рабочих дней)",
+        "ms": "Standard (5–7 hari bekerja)",
+        "id": "Standar (5–7 hari kerja)"
       }
     },
     {
@@ -15,7 +22,14 @@
       "label": {
         "en": "Rush (4 working days)",
         "zh-TW": "加急（4 個工作天）",
-        "zh-CN": "加急（4 个工作日）"
+        "zh-CN": "加急（4 个工作日）",
+        "ja": "急ぎ（4営業日）",
+        "ko": "긴급 (영업일 4일)",
+        "th": "เร่งด่วน (4 วันทำการ)",
+        "es": "Urgente (4 días hábiles)",
+        "ru": "Срочно (4 рабочих дня)",
+        "ms": "Segera (4 hari bekerja)",
+        "id": "Cepat (4 hari kerja)"
       }
     },
     {
@@ -24,7 +38,14 @@
       "label": {
         "en": "Rush (3 working days)",
         "zh-TW": "加急（3 個工作天）",
-        "zh-CN": "加急（3 个工作日）"
+        "zh-CN": "加急（3 个工作日）",
+        "ja": "急ぎ（3営業日）",
+        "ko": "긴급 (영업일 3일)",
+        "th": "เร่งด่วน (3 วันทำการ)",
+        "es": "Urgente (3 días hábiles)",
+        "ru": "Срочно (3 рабочих дня)",
+        "ms": "Segera (3 hari bekerja)",
+        "id": "Cepat (3 hari kerja)"
       }
     },
     {
@@ -33,7 +54,14 @@
       "label": {
         "en": "Rush (2 working days)",
         "zh-TW": "加急（2 個工作天）",
-        "zh-CN": "加急（2 个工作日）"
+        "zh-CN": "加急（2 个工作日）",
+        "ja": "急ぎ（2営業日）",
+        "ko": "긴급 (영업일 2일)",
+        "th": "เร่งด่วน (2 วันทำการ)",
+        "es": "Urgente (2 días hábiles)",
+        "ru": "Срочно (2 рабочих дня)",
+        "ms": "Segera (2 hari bekerja)",
+        "id": "Cepat (2 hari kerja)"
       }
     }
   ]

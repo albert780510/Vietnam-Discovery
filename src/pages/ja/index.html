@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vietnam eVisa Assistance | Vietnam Discovery</title>
+  <title>ベトナムeビザ代行 | Vietnam Discovery</title>
   <link rel="stylesheet" href="/shared/site.css" />
 </head>
 <body>
@@ -12,7 +12,7 @@
       <div class="brand">
         <img src="/shared/logo.jpg" alt="Vietnam Discovery" />
         <span>Vietnam Discovery</span>
-        <span class="badge">Vietnam eVisa Assistance</span>
+        <span class="badge">ベトナムeビザ代行</span>
       </div>
       <div class="small">
         <select id="langSelect" aria-label="Language"></select>
@@ -21,105 +21,102 @@
 
     <div class="grid">
       <div class="card">
-        <div class="h1"><span class="nowrap">Vietnam eVisa Assistance</span> (fast & reliable)</div>
-        <p class="p">Apply for a Vietnam eVisa: upload your passport bio page and ID photo, and leave your contact details (address/phone). We help review and prepare your application to reduce rejection risk.</p>
+        <div class="h1"><span class="nowrap">ベトナムeビザ代行</span>（迅速・安心）</div>
+        <p class="p">パスポート顔写真ページと証明写真をアップロードし、連絡先（住所/電話）を入力してください。書類確認・申請サポートで却下リスクを下げます。</p>
 
         <div class="notice" id="status" style="display:none"></div>
 
         <form id="lead-form">
           <div>
-            <label>Visa type</label>
+            <label>ビザ種別</label>
             <select id="product"></select>
             <div class="help" id="productPrice" style="margin-top:6px"></div>
           </div>
 
           <div style="margin-top:10px">
-            <label>Processing time</label>
+            <label>処理時間</label>
             <select id="speed"></select>
-            <div class="help" style="margin-top:6px">We start processing the same day once payment info is received.</div>
+            <div class="help" style="margin-top:6px">お支払い情報を受領した当日に手続きを開始します。</div>
           </div>
 
           <div class="row">
             <div>
-              <label>Email</label>
+              <label>メール</label>
               <input id="email" type="email" placeholder="name@example.com" required />
             </div>
             <div>
-              <label>Phone</label>
-              <input id="phone" type="tel" placeholder="+1 000 000 0000" required />
+              <label>電話番号</label>
+              <input id="phone" type="tel" placeholder="+81 00 0000 0000" required />
             </div>
           </div>
 
           <div>
-            <label>Address (English)</label>
+            <label>住所（英語）</label>
             <textarea id="address" rows="2" placeholder="Street, District, City, Country" required></textarea>
-            <div class="help">Vietnam eVisa forms usually require an English address. If yours is in another language, paste it and click <a id="translateAddress" href="#" target="_blank" rel="noopener">Translate to English</a>.</div>
+            <div class="help">ベトナムeビザ申請では住所を英語で入力する必要があります。別言語の住所は貼り付けて、<a id="translateAddress" href="#" target="_blank" rel="noopener">英語に翻訳</a> をクリックしてください。</div>
           </div>
 
           <div>
-            <label>Planned arrival date</label>
+            <label>入国予定日</label>
             <input id="arrival" type="date" required />
           </div>
 
           <div class="row">
             <div>
-              <label>Nationality</label>
-              <select id="nationality" required><option value="">Select…</option></select>
-              <div class="help">Flag + English name.</div>
+              <label>国籍</label>
+              <select id="nationality" required><option value="">選択…</option></select>
+              <div class="help">国旗＋英語表記</div>
             </div>
             <div>
-              <label>Entry gate</label>
-              <select id="entryGate" required><option value="">Select…</option></select>
-              <div class="help">Choose your planned entry airport/gate.</div>
+              <label>入国ゲート</label>
+              <select id="entryGate" required><option value="">選択…</option></select>
+              <div class="help">入国予定の空港/ゲートを選択してください。</div>
             </div>
           </div>
 
           <div class="row">
             <div>
-              <label>Passport bio page (photo)</label>
+              <label>パスポート顔写真ページ（画像）</label>
               <input id="passport" type="file" accept="image/*" required />
-              <div class="help">Good lighting, no glare, text must be readable.</div>
+              <div class="help">明るい場所で、反射なし、文字が読める画像をご用意ください。</div>
             </div>
             <div>
-              <label>ID photo (photo)</label>
+              <label>証明写真（画像）</label>
               <input id="photo" type="file" accept="image/*" required />
-              <div class="help">We do basic quality checks (blur/too dark/overexposed).</div>
+              <div class="help">基本的な品質チェック（ぼやけ・暗すぎ・露出オーバー）を行います。</div>
             </div>
           </div>
 
           <div>
-            <label>Notes (optional)</label>
-            <textarea id="notes" rows="3" placeholder="Urgent? Flight info? …"></textarea>
+            <label>備考（任意）</label>
+            <textarea id="notes" rows="3" placeholder="至急、フライト情報など…"></textarea>
           </div>
 
-          <button class="btn" type="submit">Create order & get bank transfer details</button>
+          <button class="btn" type="submit">注文を作成して支払い情報を表示</button>
         </form>
 
         <div class="card" id="paymentBox" style="display:none;margin-top:14px">
-          <div style="font-weight:800">Next: Payment</div>
-          <p class="p">Order ID: <span id="orderId" style="font-weight:800"></span></p><div class="small">Account: 0152979250648</div>
-            <div class="small">Name: Lai Ruihong</div>
-            <div class="small" style="margin-top:8px">After transfer, please send: <b>last 5 digits + transfer time + (optional) screenshot</b> (recommended note: Order ID).</div>
-          </div>
+          <div style="font-weight:800">次へ：お支払い</div>
+          <p class="p">注文番号：<span id="orderId" style="font-weight:800"></span></p>
           <div class="notice">
             <div style="font-weight:800;margin-bottom:6px">USDT (BEP20 / BNB Smart Chain)</div>
-            <div class="small">Address: <span style="font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489</span></div>
+            <div class="small">アドレス：<span style="font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489</span></div>
             <div class="small" style="margin-top:6px">幣安實名kyc二級認證合格地址</div>
             <div class="small" style="margin-top:8px"><img src="/shared/usdt_bep20.png" alt="USDT BEP20 QR" style="width:160px;height:160px;border-radius:12px;border:1px solid rgba(255,255,255,.12)" /></div>
-            <div class="small" style="margin-top:8px">Network: <b>BEP20</b> only. Send <b>TXID</b> after payment.</div>
+            <div class="small" style="margin-top:8px">ネットワークは <b>BEP20</b> のみ。送金後に <b>TXID</b> をお送りください。</div>
           </div>
         </div>
 
         <div class="notice" style="margin-top:14px">
-          <div style="font-weight:800;margin-bottom:6px">Contact</div>
+          <div style="font-weight:800;margin-bottom:6px">お問い合わせ</div>
           <div class="small">Telegram: <a href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">@AlbertLaipi</a></div>
-          <div class="small">LINE: <a id="lineLink" href="#">(to be added)</a></div>
-          <div class="small">WeChat: <span id="wechatId">(to be added)</span></div>
-          <div class="small">Facebook group: <a id="fbGroupLink" href="#">(to be added)</a></div>
+          <div class="small">LINE: <a id="lineLink" href="#">（準備中）</a></div>
+          <div class="small">WeChat: <span id="wechatId">（準備中）</span></div>
+          <div class="small">Facebook group: <a id="fbGroupLink" href="#">（準備中）</a></div>
         </div>
 
         <div class="footer">
-          <div><b>Privacy:</b> Your uploads are used only for visa application and support. We delete data after service completion (MVP uses manual processing).</div>
+          <div><b>プライバシー：</b>アップロードされたデータはビザ申請とサポートのためにのみ使用し、サービス完了後に削除します（MVPは手動処理）。</div>
           <div style="margin-top:6px">© Vietnam Discovery</div>
         </div>
       </div>

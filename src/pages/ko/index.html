@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vietnam eVisa Assistance (Korean) | Vietnam Discovery</title>
+  <title>베트남 e비자 대행 | Vietnam Discovery</title>
   <link rel="stylesheet" href="/shared/site.css" />
 </head>
 <body>
@@ -12,7 +12,7 @@
       <div class="brand">
         <img src="/shared/logo.jpg" alt="Vietnam Discovery" />
         <span>Vietnam Discovery</span>
-        <span class="badge">Vietnam eVisa Assistance</span>
+        <span class="badge">베트남 e비자 대행</span>
       </div>
       <div class="small">
         <select id="langSelect" aria-label="Language"></select>
@@ -21,105 +21,102 @@
 
     <div class="grid">
       <div class="card">
-        <div class="h1"><span class="nowrap">Vietnam eVisa Assistance</span> (fast & reliable)</div>
-        <p class="p">Apply for a Vietnam eVisa: upload your passport bio page and ID photo, and leave your contact details (address/phone). We help review and prepare your application to reduce rejection risk.</p>
+        <div class="h1"><span class="nowrap">베트남 e비자 대행</span> (빠르고 신뢰할 수 있게)</div>
+        <p class="p">여권 인적사항면과 증명사진을 업로드하고 연락처(주소/전화)를 입력해 주세요. 서류 검토 및 신청 지원으로 반려 위험을 줄입니다.</p>
 
         <div class="notice" id="status" style="display:none"></div>
 
         <form id="lead-form">
           <div>
-            <label>Visa type</label>
+            <label>비자 종류</label>
             <select id="product"></select>
             <div class="help" id="productPrice" style="margin-top:6px"></div>
           </div>
 
           <div style="margin-top:10px">
-            <label>Processing time</label>
+            <label>처리 기간</label>
             <select id="speed"></select>
-            <div class="help" style="margin-top:6px">We start processing the same day once payment info is received.</div>
+            <div class="help" style="margin-top:6px">결제 정보(TXID 등) 확인 후 당일 바로 진행합니다.</div>
           </div>
 
           <div class="row">
             <div>
-              <label>Email</label>
+              <label>이메일</label>
               <input id="email" type="email" placeholder="name@example.com" required />
             </div>
             <div>
-              <label>Phone</label>
-              <input id="phone" type="tel" placeholder="+1 000 000 0000" required />
+              <label>전화번호</label>
+              <input id="phone" type="tel" placeholder="+82 10-0000-0000" required />
             </div>
           </div>
 
           <div>
-            <label>Address (English)</label>
+            <label>주소(영문)</label>
             <textarea id="address" rows="2" placeholder="Street, District, City, Country" required></textarea>
-            <div class="help">Vietnam eVisa forms usually require an English address. If yours is in another language, paste it and click <a id="translateAddress" href="#" target="_blank" rel="noopener">Translate to English</a>.</div>
+            <div class="help">베트남 e비자 신청에는 영문 주소가 필요합니다. 다른 언어라면 붙여넣고 <a id="translateAddress" href="#" target="_blank" rel="noopener">영문으로 번역</a>을 눌러주세요.</div>
           </div>
 
           <div>
-            <label>Planned arrival date</label>
+            <label>입국 예정일</label>
             <input id="arrival" type="date" required />
           </div>
 
           <div class="row">
             <div>
-              <label>Nationality</label>
-              <select id="nationality" required><option value="">Select…</option></select>
-              <div class="help">Flag + English name.</div>
+              <label>국적</label>
+              <select id="nationality" required><option value="">선택…</option></select>
+              <div class="help">국기 + 영어 표기</div>
             </div>
             <div>
-              <label>Entry gate</label>
-              <select id="entryGate" required><option value="">Select…</option></select>
-              <div class="help">Choose your planned entry airport/gate.</div>
+              <label>입국 게이트</label>
+              <select id="entryGate" required><option value="">선택…</option></select>
+              <div class="help">예정 입국 공항/게이트를 선택하세요.</div>
             </div>
           </div>
 
           <div class="row">
             <div>
-              <label>Passport bio page (photo)</label>
+              <label>여권 인적사항면(사진)</label>
               <input id="passport" type="file" accept="image/*" required />
-              <div class="help">Good lighting, no glare, text must be readable.</div>
+              <div class="help">밝은 조명, 반사 없음, 글자가 선명해야 합니다.</div>
             </div>
             <div>
-              <label>ID photo (photo)</label>
+              <label>증명사진(사진)</label>
               <input id="photo" type="file" accept="image/*" required />
-              <div class="help">We do basic quality checks (blur/too dark/overexposed).</div>
+              <div class="help">기본 품질 검사(흐림/어두움/과다노출)를 합니다.</div>
             </div>
           </div>
 
           <div>
-            <label>Notes (optional)</label>
-            <textarea id="notes" rows="3" placeholder="Urgent? Flight info? …"></textarea>
+            <label>메모(선택)</label>
+            <textarea id="notes" rows="3" placeholder="급행 여부, 항공편 정보 등…"></textarea>
           </div>
 
-          <button class="btn" type="submit">Create order & get bank transfer details</button>
+          <button class="btn" type="submit">주문 생성 및 결제 정보 확인</button>
         </form>
 
         <div class="card" id="paymentBox" style="display:none;margin-top:14px">
-          <div style="font-weight:800">Next: Payment</div>
-          <p class="p">Order ID: <span id="orderId" style="font-weight:800"></span></p><div class="small">Account: 0152979250648</div>
-            <div class="small">Name: Lai Ruihong</div>
-            <div class="small" style="margin-top:8px">After transfer, please send: <b>last 5 digits + transfer time + (optional) screenshot</b> (recommended note: Order ID).</div>
-          </div>
+          <div style="font-weight:800">다음: 결제</div>
+          <p class="p">주문번호: <span id="orderId" style="font-weight:800"></span></p>
           <div class="notice">
             <div style="font-weight:800;margin-bottom:6px">USDT (BEP20 / BNB Smart Chain)</div>
-            <div class="small">Address: <span style="font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489</span></div>
+            <div class="small">주소: <span style="font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489</span></div>
             <div class="small" style="margin-top:6px">幣安實名kyc二級認證合格地址</div>
             <div class="small" style="margin-top:8px"><img src="/shared/usdt_bep20.png" alt="USDT BEP20 QR" style="width:160px;height:160px;border-radius:12px;border:1px solid rgba(255,255,255,.12)" /></div>
-            <div class="small" style="margin-top:8px">Network: <b>BEP20</b> only. Send <b>TXID</b> after payment.</div>
+            <div class="small" style="margin-top:8px">네트워크는 <b>BEP20</b>만 가능합니다. 결제 후 <b>TXID</b>를 보내주세요.</div>
           </div>
         </div>
 
         <div class="notice" style="margin-top:14px">
-          <div style="font-weight:800;margin-bottom:6px">Contact</div>
+          <div style="font-weight:800;margin-bottom:6px">문의</div>
           <div class="small">Telegram: <a href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">@AlbertLaipi</a></div>
-          <div class="small">LINE: <a id="lineLink" href="#">(to be added)</a></div>
-          <div class="small">WeChat: <span id="wechatId">(to be added)</span></div>
-          <div class="small">Facebook group: <a id="fbGroupLink" href="#">(to be added)</a></div>
+          <div class="small">LINE: <a id="lineLink" href="#">(추가 예정)</a></div>
+          <div class="small">WeChat: <span id="wechatId">(추가 예정)</span></div>
+          <div class="small">Facebook group: <a id="fbGroupLink" href="#">(추가 예정)</a></div>
         </div>
 
         <div class="footer">
-          <div><b>Privacy:</b> Your uploads are used only for visa application and support. We delete data after service completion (MVP uses manual processing).</div>
+          <div><b>개인정보:</b> 업로드한 자료는 비자 신청 및 상담을 위해서만 사용되며, 서비스 완료 후 삭제합니다(MVP는 수동 처리).</div>
           <div style="margin-top:6px">© Vietnam Discovery</div>
         </div>
       </div>

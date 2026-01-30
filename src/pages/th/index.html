@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vietnam eVisa Assistance | Vietnam Discovery</title>
+  <title>บริการ eVisa เวียดนาม | Vietnam Discovery</title>
   <link rel="stylesheet" href="/shared/site.css" />
 </head>
 <body>
@@ -12,7 +12,7 @@
       <div class="brand">
         <img src="/shared/logo.jpg" alt="Vietnam Discovery" />
         <span>Vietnam Discovery</span>
-        <span class="badge">Vietnam eVisa Assistance</span>
+        <span class="badge">บริการ eVisa เวียดนาม</span>
       </div>
       <div class="small">
         <select id="langSelect" aria-label="Language"></select>
@@ -21,105 +21,102 @@
 
     <div class="grid">
       <div class="card">
-        <div class="h1"><span class="nowrap">Vietnam eVisa Assistance</span> (fast & reliable)</div>
-        <p class="p">Apply for a Vietnam eVisa: upload your passport bio page and ID photo, and leave your contact details (address/phone). We help review and prepare your application to reduce rejection risk.</p>
+        <div class="h1"><span class="nowrap">บริการ eVisa เวียดนาม</span> (รวดเร็ว & เชื่อถือได้)</div>
+        <p class="p">อัปโหลดหน้าข้อมูลหนังสือเดินทางและรูปถ่าย จากนั้นกรอกข้อมูลติดต่อ (ที่อยู่/โทรศัพท์) เราช่วยตรวจสอบและเตรียมใบสมัครเพื่อลดความเสี่ยงการถูกปฏิเสธ</p>
 
         <div class="notice" id="status" style="display:none"></div>
 
         <form id="lead-form">
           <div>
-            <label>Visa type</label>
+            <label>ประเภทวีซ่า</label>
             <select id="product"></select>
             <div class="help" id="productPrice" style="margin-top:6px"></div>
           </div>
 
           <div style="margin-top:10px">
-            <label>Processing time</label>
+            <label>ระยะเวลาดำเนินการ</label>
             <select id="speed"></select>
-            <div class="help" style="margin-top:6px">We start processing the same day once payment info is received.</div>
+            <div class="help" style="margin-top:6px">เมื่อได้รับข้อมูลการชำระเงินแล้ว เราจะเริ่มดำเนินการทันทีภายในวันเดียวกัน</div>
           </div>
 
           <div class="row">
             <div>
-              <label>Email</label>
+              <label>อีเมล</label>
               <input id="email" type="email" placeholder="name@example.com" required />
             </div>
             <div>
-              <label>Phone</label>
-              <input id="phone" type="tel" placeholder="+1 000 000 0000" required />
+              <label>โทรศัพท์</label>
+              <input id="phone" type="tel" placeholder="+66 00 000 0000" required />
             </div>
           </div>
 
           <div>
-            <label>Address (English)</label>
+            <label>ที่อยู่ (ภาษาอังกฤษ)</label>
             <textarea id="address" rows="2" placeholder="Street, District, City, Country" required></textarea>
-            <div class="help">Vietnam eVisa forms usually require an English address. If yours is in another language, paste it and click <a id="translateAddress" href="#" target="_blank" rel="noopener">Translate to English</a>.</div>
+            <div class="help">แบบฟอร์ม eVisa มักต้องใช้ที่อยู่ภาษาอังกฤษ หากเป็นภาษาอื่น ให้วางข้อความแล้วกด <a id="translateAddress" href="#" target="_blank" rel="noopener">แปลเป็นอังกฤษ</a></div>
           </div>
 
           <div>
-            <label>Planned arrival date</label>
+            <label>วันที่คาดว่าจะเข้าประเทศ</label>
             <input id="arrival" type="date" required />
           </div>
 
           <div class="row">
             <div>
-              <label>Nationality</label>
-              <select id="nationality" required><option value="">Select…</option></select>
-              <div class="help">Flag + English name.</div>
+              <label>สัญชาติ</label>
+              <select id="nationality" required><option value="">เลือก…</option></select>
+              <div class="help">ธง + ชื่อภาษาอังกฤษ</div>
             </div>
             <div>
-              <label>Entry gate</label>
-              <select id="entryGate" required><option value="">Select…</option></select>
-              <div class="help">Choose your planned entry airport/gate.</div>
+              <label>ด่าน/สนามบินเข้าประเทศ</label>
+              <select id="entryGate" required><option value="">เลือก…</option></select>
+              <div class="help">เลือกสนามบิน/ด่านที่คาดว่าจะเข้าประเทศ</div>
             </div>
           </div>
 
           <div class="row">
             <div>
-              <label>Passport bio page (photo)</label>
+              <label>หน้าข้อมูลหนังสือเดินทาง (รูป)</label>
               <input id="passport" type="file" accept="image/*" required />
-              <div class="help">Good lighting, no glare, text must be readable.</div>
+              <div class="help">แสงสว่างดี ไม่มีเงาสะท้อน และต้องอ่านตัวอักษรได้ชัดเจน</div>
             </div>
             <div>
-              <label>ID photo (photo)</label>
+              <label>รูปถ่าย (รูป)</label>
               <input id="photo" type="file" accept="image/*" required />
-              <div class="help">We do basic quality checks (blur/too dark/overexposed).</div>
+              <div class="help">ตรวจสอบคุณภาพเบื้องต้น (เบลอ/มืดเกินไป/สว่างเกินไป)</div>
             </div>
           </div>
 
           <div>
-            <label>Notes (optional)</label>
-            <textarea id="notes" rows="3" placeholder="Urgent? Flight info? …"></textarea>
+            <label>หมายเหตุ (ไม่บังคับ)</label>
+            <textarea id="notes" rows="3" placeholder="ด่วน? ข้อมูลเที่ยวบิน? …"></textarea>
           </div>
 
-          <button class="btn" type="submit">Create order & get bank transfer details</button>
+          <button class="btn" type="submit">สร้างออเดอร์และดูข้อมูลการชำระเงิน</button>
         </form>
 
         <div class="card" id="paymentBox" style="display:none;margin-top:14px">
-          <div style="font-weight:800">Next: Payment</div>
-          <p class="p">Order ID: <span id="orderId" style="font-weight:800"></span></p><div class="small">Account: 0152979250648</div>
-            <div class="small">Name: Lai Ruihong</div>
-            <div class="small" style="margin-top:8px">After transfer, please send: <b>last 5 digits + transfer time + (optional) screenshot</b> (recommended note: Order ID).</div>
-          </div>
+          <div style="font-weight:800">ขั้นตอนถัดไป: ชำระเงิน</div>
+          <p class="p">รหัสออเดอร์: <span id="orderId" style="font-weight:800"></span></p>
           <div class="notice">
             <div style="font-weight:800;margin-bottom:6px">USDT (BEP20 / BNB Smart Chain)</div>
-            <div class="small">Address: <span style="font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489</span></div>
+            <div class="small">ที่อยู่: <span style="font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489</span></div>
             <div class="small" style="margin-top:6px">幣安實名kyc二級認證合格地址</div>
             <div class="small" style="margin-top:8px"><img src="/shared/usdt_bep20.png" alt="USDT BEP20 QR" style="width:160px;height:160px;border-radius:12px;border:1px solid rgba(255,255,255,.12)" /></div>
-            <div class="small" style="margin-top:8px">Network: <b>BEP20</b> only. Send <b>TXID</b> after payment.</div>
+            <div class="small" style="margin-top:8px">รองรับเฉพาะเครือข่าย <b>BEP20</b> เท่านั้น หลังชำระเงินกรุณาส่ง <b>TXID</b></div>
           </div>
         </div>
 
         <div class="notice" style="margin-top:14px">
-          <div style="font-weight:800;margin-bottom:6px">Contact</div>
+          <div style="font-weight:800;margin-bottom:6px">ติดต่อ</div>
           <div class="small">Telegram: <a href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">@AlbertLaipi</a></div>
-          <div class="small">LINE: <a id="lineLink" href="#">(to be added)</a></div>
-          <div class="small">WeChat: <span id="wechatId">(to be added)</span></div>
-          <div class="small">Facebook group: <a id="fbGroupLink" href="#">(to be added)</a></div>
+          <div class="small">LINE: <a id="lineLink" href="#">(จะเพิ่มภายหลัง)</a></div>
+          <div class="small">WeChat: <span id="wechatId">(จะเพิ่มภายหลัง)</span></div>
+          <div class="small">Facebook group: <a id="fbGroupLink" href="#">(จะเพิ่มภายหลัง)</a></div>
         </div>
 
         <div class="footer">
-          <div><b>Privacy:</b> Your uploads are used only for visa application and support. We delete data after service completion (MVP uses manual processing).</div>
+          <div><b>ความเป็นส่วนตัว:</b> ข้อมูลที่อัปโหลดใช้เพื่อการยื่นวีซ่าและการช่วยเหลือเท่านั้น และจะลบหลังบริการเสร็จสิ้น (MVP ใช้การดำเนินการแบบแมนนวล)</div>
           <div style="margin-top:6px">© Vietnam Discovery</div>
         </div>
       </div>

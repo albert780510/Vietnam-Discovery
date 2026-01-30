@@ -4,7 +4,14 @@
       "label": {
         "en": "Vietnam eVisa (single entry)",
         "zh-TW": "越南電子簽證 eVisa（單次入境）",
-        "zh-CN": "越南电子签证 eVisa（单次入境）"
+        "zh-CN": "越南电子签证 eVisa（单次入境）",
+        "ja": "ベトナムeビザ（シングル）",
+        "ko": "베트남 e비자(단수)",
+        "th": "วีซ่าอิเล็กทรอนิกส์เวียดนาม (เข้าได้ครั้งเดียว)",
+        "es": "eVisa de Vietnam (una entrada)",
+        "ru": "Электронная виза Вьетнама (однократная)",
+        "ms": "eVisa Vietnam (sekali masuk)",
+        "id": "eVisa Vietnam (sekali masuk)"
       },
       "prices": {
         "TWD": 1290,
@@ -22,7 +29,14 @@
       "label": {
         "en": "Vietnam eVisa (multiple entry)",
         "zh-TW": "越南電子簽證 eVisa（多次入境）",
-        "zh-CN": "越南电子签证 eVisa（多次入境）"
+        "zh-CN": "越南电子签证 eVisa（多次入境）",
+        "ja": "ベトナムeビザ（マルチ）",
+        "ko": "베트남 e비자(복수)",
+        "th": "วีซ่าอิเล็กทรอนิกส์เวียดนาม (เข้าได้หลายครั้ง)",
+        "es": "eVisa de Vietnam (múltiples entradas)",
+        "ru": "Электронная виза Вьетнама (многократная)",
+        "ms": "eVisa Vietnam (pelbagai masuk)",
+        "id": "eVisa Vietnam (beberapa kali masuk)"
       },
       "prices": {
         "TWD": 2390,
