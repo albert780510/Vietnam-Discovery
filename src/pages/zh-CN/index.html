@@ -10,11 +10,12 @@
   <div class="container">
     <div class="nav">
       <div class="brand">
+        <img src="/shared/logo.jpg" alt="Vietnam Discovery" />
         <span>Vietnam Discovery</span>
         <span class="badge">越南签证代办</span>
       </div>
       <div class="small">
-        <a href="/en/">EN</a> · <a href="/zh-tw/">繁中</a>
+        <select id="langSelect" aria-label="Language"></select>
       </div>
     </div>
 
@@ -46,7 +47,7 @@
           <div>
             <label>联系地址（英文）</label>
             <textarea id="address" rows="2" placeholder="Street, District, City, Country" required></textarea>
-            <div class="help">越南 eVisa 申请表通常需要填写地址与电话，请用英文填写。</div>
+            <div class="help">越南 eVisa 申请表通常需要填写地址与电话，请用英文填写。若你只有其他语言地址，可先粘贴，再点 <a id="translateAddress" href="#" target="_blank" rel="noopener">一键翻译成英文</a>。</div>
           </div>
 
           <div>
@@ -56,12 +57,14 @@
 
           <div class="row">
             <div>
-              <label>国籍（英文）</label>
-              <input id="nationality" type="text" placeholder="TAIWAN / CHINA / ..." />
+              <label>国籍</label>
+              <select id="nationality" required><option value="">请选择</option></select>
+              <div class="help">显示国旗 + 英文国名。</div>
             </div>
             <div>
-              <label>入境口岸（选填）</label>
-              <input id="entryGate" type="text" placeholder="Noi Bai / Tan Son Nhat / ..." />
+              <label>入境口岸</label>
+              <select id="entryGate" required><option value="">请选择</option></select>
+              <div class="help">请选择你预计入境的机场/口岸。</div>
             </div>
           </div>
 
@@ -87,14 +90,28 @@
         </form>
 
         <div class="card" id="paymentBox" style="display:none;margin-top:14px">
-          <div style="font-weight:800;margin-bottom:10px">下一步：转账付款</div>
+          <div style="font-weight:800">下一步：付款</div>
           <p class="p">订单编号：<span id="orderId" style="font-weight:800"></span></p>
-          <div class="notice">
-            <div style="font-weight:800;margin-bottom:6px">转账信息</div>
+          <div class="notice" style="margin-bottom:10px">
+            <div style="font-weight:800;margin-bottom:6px">转账（台币）</div>
             <div class="small">银行：玉山银行（代码 808）</div>
             <div class="small">账号：0152979250648</div>
             <div class="small">户名：赖瑞鸿</div>
             <div class="small" style="margin-top:8px">转账后请回传：<b>末五码 + 转账时间 + 截图（可选）</b>（建议备注：订单编号）</div>
+          </div>
+          <div class="notice" style="margin-bottom:10px">
+            <div style="font-weight:800;margin-bottom:6px">转账（越南盾 VND / 越南本地汇款）</div>
+            <div class="small">银行：BIDV（越南投资发展银行）</div>
+            <div class="small">账号：8863996574</div>
+            <div class="small">户名：Bùi Thị Bich Ngân</div>
+            <div class="small" style="margin-top:8px">转账后请回传：<b>转账金额 + 转账时间 + 截图（可选）</b>（建议备注：订单编号）</div>
+          </div>
+          <div class="notice">
+            <div style="font-weight:800;margin-bottom:6px">USDT（BEP20 / 币安链）</div>
+            <div class="small">地址：<span style="font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489</span></div>
+            <div class="small" style="margin-top:6px">幣安實名kyc二級認證合格地址</div>
+            <div class="small" style="margin-top:8px"><img src="/shared/usdt_bep20.png" alt="USDT BEP20 QR" style="width:160px;height:160px;border-radius:12px;border:1px solid rgba(255,255,255,.12)" /></div>
+            <div class="small" style="margin-top:8px">仅接受 <b>BEP20</b> 网络。付款后请回传 <b>TXID</b>。</div>
           </div>
         </div>
 
@@ -103,6 +120,7 @@
           <div class="small">LINE：<a id="lineLink" href="#">（待填）</a></div>
           <div class="small">微信：<span id="wechatId">（待填）</span></div>
           <div class="small">Facebook 社团：<a id="fbGroupLink" href="#">（待填）</a></div>
+          <div class="small">Telegram：<a href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">@AlbertLaipi</a></div>
         </div>
 
         <div class="footer">
