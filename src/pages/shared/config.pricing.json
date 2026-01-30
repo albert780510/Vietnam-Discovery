@@ -1,0 +1,22 @@
+{
+  "currency": "TWD",
+  "rounding": "ceil_to_100",
+  "products": {
+    "EVISA_SINGLE": {
+      "label": {
+        "zh-TW": "越南電子簽證 eVisa（單次入境）",
+        "zh-CN": "越南电子签证 eVisa（单次入境）"
+      },
+      "price": 1290,
+      "gov_fee_usd": 25
+    },
+    "EVISA_MULTI": {
+      "label": {
+        "zh-TW": "越南電子簽證 eVisa（多次入境）",
+        "zh-CN": "越南电子签证 eVisa（多次入境）"
+      },
+      "price": 2390,
+      "gov_fee_usd": 50
+    }
+  }
+}
