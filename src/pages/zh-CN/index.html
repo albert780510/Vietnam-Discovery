@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>越南签证代办｜Vietnam Discovery</title>
+  <link rel="stylesheet" href="../../shared/site.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">
+        <span>Vietnam Discovery</span>
+        <span class="badge">越南签证代办</span>
+      </div>
+      <div class="small">
+        <a href="../zh-TW/index.html">繁中</a>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="h1">越南 eVisa 代办（透明、快速、本地协助）</div>
+        <p class="p">你只需要提供护照资料页与证件照，我们协助整理、检查与送件，降低退件风险。</p>
+
+        <div class="kv">
+          <div><div class="t">官方网站</div><div class="v"><a href="https://evisa.gov.vn/" target="_blank" rel="noopener">evisa.gov.vn</a></div></div>
+          <div><div class="t">政府规费</div><div class="v">单次 25 USD / 多次 50 USD</div></div>
+          <div><div class="t">对外固定价</div><div class="v" id="price">—</div></div>
+        </div>
+
+        <div class="notice" id="status" style="display:none"></div>
+
+        <form id="lead-form">
+          <div>
+            <label>签证类型</label>
+            <select id="product"></select>
+            <div class="help">价格为对外固定台币价（已含服务成本）。</div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Email（用于联系与发送结果）</label>
+              <input id="email" type="email" placeholder="name@example.com" required />
+            </div>
+            <div>
+              <label>预计入境日（可先填大概）</label>
+              <input id="arrival" type="date" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>国籍（英文）</label>
+              <input id="nationality" type="text" placeholder="TAIWAN / CHINA / ..." />
+            </div>
+            <div>
+              <label>入境口岸（选填）</label>
+              <input id="entryGate" type="text" placeholder="Noi Bai / Tan Son Nhat / ..." />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>护照资料页（照片）</label>
+              <input id="passport" type="file" accept="image/*" required />
+              <div class="help">建议：光线充足、文字清晰可读、不要反光。</div>
+            </div>
+            <div>
+              <label>证件照（照片）</label>
+              <input id="photo" type="file" accept="image/*" required />
+              <div class="help">系统会做基本质量检查（模糊/过暗/过曝）。</div>
+            </div>
+          </div>
+
+          <div>
+            <label>备注（选填）</label>
+            <textarea id="notes" rows="3" placeholder="例如：是否需要加急、航班信息…"></textarea>
+          </div>
+
+          <button class="btn" type="submit">建立订单并获取转账信息</button>
+        </form>
+
+        <div class="card" id="paymentBox" style="display:none;margin-top:14px">
+          <div style="font-weight:800;margin-bottom:10px">下一步：转账付款</div>
+          <p class="p">订单编号：<span id="orderId" style="font-weight:800"></span></p>
+          <div class="notice">
+            <div style="font-weight:800;margin-bottom:6px">转账信息（由 Albert 提供后填入）</div>
+            <div class="small">银行：＿＿＿</div>
+            <div class="small">账号：＿＿＿</div>
+            <div class="small">户名：＿＿＿</div>
+            <div class="small" style="margin-top:8px">转账后请回传：<b>末五码 + 转账时间 + 截图（可选）</b></div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div><b>隐私提醒：</b>你上传的数据仅用于签证申请与客服联系；我们会在完成服务后删除数据（MVP 版先走人工流程）。</div>
+          <div style="margin-top:6px">© Vietnam Discovery</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="font-weight:800;margin-bottom:10px">信任与说明</div>
+        <p class="p">我们会在网站放置越南本地公司营业执照与服务条款（你提供文件后上架）。</p>
+        <div class="notice">
+          <div style="font-weight:800">你会拿到什么？</div>
+          <div class="small">1) 文件检查与整理（避免照片/护照不合格）</div>
+          <div class="small">2) 送件前确认（必要时会请你补件）</div>
+          <div class="small">3) 申请进度提醒与结果交付</div>
+        </div>
+        <p class="p" style="margin-top:12px">常见问题：<a href="https://evisa.gov.vn/faq" target="_blank" rel="noopener">官方 FAQ</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="../../shared/app.js"></script>
+  <script type="module">
+    window.__VD_init('zh-CN');
+  </script>
+</body>
+</html>

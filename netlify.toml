@@ -1,0 +1,11 @@
+[build]
+  publish = "src/pages"
+  functions = "netlify/functions"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Note: enable site-level env vars later for notifications / storage.
