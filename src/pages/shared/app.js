@@ -213,6 +213,77 @@ async function main(locale){
     });
   }
 
+  // Payment proof submission
+  const proofForm = qs('#paymentProofForm');
+  if (proofForm) {
+    proofForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const orderId = qs('#paymentProof')?.dataset?.orderId || qs('#orderId')?.textContent?.trim();
+      const method = qs('#payMethod')?.value || '';
+      const txid = qs('#txid')?.value?.trim() || '';
+      const last5 = qs('#last5')?.value?.trim() || '';
+      const amount = qs('#payAmount')?.value?.trim() || '';
+      const currency = qs('#payCurrency')?.value || '';
+      const note = qs('#payNote')?.value?.trim() || '';
+
+      const file = qs('#proofImage')?.files?.[0];
+      let proofImage = '';
+      if (file) {
+        const r = await validateImageFile(file, { kind:'photo', minWidth: 400, minHeight: 400, maxMB: 6 });
+        if (!r.ok) {
+          return setStatus('danger', (isEn?'Payment proof image is invalid: ':(isZhCn?'付款截图不符合要求：':'付款截圖不符合要求：')) + (r.message || r.reason));
+        }
+        proofImage = await new Promise((resolve, reject) => {
+          const fr = new FileReader();
+          fr.onload = () => resolve(String(fr.result || ''));
+          fr.onerror = () => reject(new Error('file_read_failed'));
+          fr.readAsDataURL(file);
+        });
+      }
+
+      if (!orderId) return setStatus('danger', isEn ? 'Missing Order ID.' : (isZhCn ? '缺少订单编号。' : '缺少訂單編號。'));
+      if (!method) return setStatus('danger', isEn ? 'Please choose a payment method.' : (isZhCn ? '请选择付款方式。' : '請選擇付款方式。'));
+
+      // minimal requirements
+      if (method === 'USDT' && !txid) return setStatus('danger', isEn ? 'Please enter TXID.' : (isZhCn ? '请填写 TXID。' : '請填寫 TXID。'));
+      if ((method === 'TWD' || method === 'CNY') && !file) return setStatus('danger', isEn ? 'Please upload a payment screenshot.' : (isZhCn ? '请上传付款截图。' : '請上傳付款截圖。'));
+
+      const submitBtn = proofForm.querySelector('button[type=submit]');
+      if (submitBtn) submitBtn.disabled = true;
+      await setStatus('info', isEn ? 'Submitting payment info…' : (isZhCn ? '正在提交付款信息…' : '正在提交付款資訊…'));
+
+      try {
+        const res = await fetch('/.netlify/functions/submit_payment', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            locale,
+            orderId,
+            method,
+            txid: txid || undefined,
+            last5: last5 || undefined,
+            amount: amount || undefined,
+            currency: currency || undefined,
+            note: note || undefined,
+            proofImage: proofImage || undefined
+          })
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || 'submit_failed');
+
+        await setStatus('info', isEn
+          ? 'Payment info submitted. We will start processing the same day once confirmed.'
+          : (isZhCn ? '付款信息已提交，我们确认后当天立刻处理。' : '付款資訊已提交，我們確認後當天立刻處理。')
+        );
+        if (submitBtn) submitBtn.disabled = false;
+      } catch (err) {
+        await setStatus('danger', (isEn?'Failed to submit payment info: ':(isZhCn?'提交付款信息失败：':'提交付款資訊失敗：')) + err.message);
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  }
+
   passportInput.addEventListener('change', async () => {
     if (!passportInput.files?.[0]) return;
     await setStatus('info', isEn ? 'Checking passport bio page image…' : (isZhCn ? '正在检查护照资料页图片…' : '正在檢查護照資料頁圖片…'));
@@ -300,6 +371,13 @@ async function main(locale){
       await setStatus('info', msg);
       qs('#orderId').textContent = data.orderId;
       qs('#paymentBox').style.display = 'block';
+
+      // Payment proof submission UI
+      const proofBox = qs('#paymentProof');
+      if (proofBox) {
+        proofBox.style.display = 'block';
+        proofBox.dataset.orderId = data.orderId;
+      }
     } catch (err) {
       await setStatus('danger', (isEn?'Failed to create order: ':(isZhCn?'建立订单失败：':'建立訂單失敗：')) + err.message);
       form.querySelector('button[type=submit]').disabled = false;

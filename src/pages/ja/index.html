@@ -109,6 +109,53 @@
             <div class="small" style="margin-top:8px"><img src="/shared/usdt_bep20.png" alt="USDT BEP20 QR" style="width:160px;height:160px;border-radius:12px;border:1px solid rgba(255,255,255,.12)" /></div>
             <div class="small" style="margin-top:8px">ネットワークは <b>BEP20</b> のみ。送金後に <b>TXID</b> をお送りください。</div>
           </div>
+
+        <div class="card" id="paymentProof" style="display:none;margin-top:14px">
+          <div style="font-weight:800">Payment confirmation</div>
+          <div class="help" style="margin-top:6px">After payment, submit TXID or upload a screenshot so we can confirm quickly.</div>
+          <form id="paymentProofForm" style="margin-top:10px">
+            <div class="row">
+              <div>
+                <label>Payment method</label>
+                <select id="payMethod" required>
+                  <option value="">Select…</option>
+                  <option value="USDT">USDT (BEP20)</option>
+                  <option value="TWD">TWD bank transfer</option>
+                  <option value="CNY">CNY (Alipay)</option>
+                </select>
+              </div>
+              <div>
+                <label>TXID (USDT only)</label>
+                <input id="txid" type="text" placeholder="0x..." />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label>Last 5 digits (bank transfer)</label>
+                <input id="last5" type="text" placeholder="12345" />
+              </div>
+              <div>
+                <label>Amount (optional)</label>
+                <input id="payAmount" type="text" placeholder="" />
+                <input id="payCurrency" type="hidden" value="" />
+              </div>
+            </div>
+
+            <div>
+              <label>Payment screenshot (for bank transfer / Alipay)</label>
+              <input id="proofImage" type="file" accept="image/*" />
+              <div class="help">Upload a screenshot of your transfer / payment record.</div>
+            </div>
+
+            <div>
+              <label>Note (optional)</label>
+              <textarea id="payNote" rows="2" placeholder=""></textarea>
+            </div>
+
+            <button class="btn" type="submit">Submit payment info</button>
+          </form>
+        </div>
         </div>
 
         <div class="notice" style="margin-top:14px">

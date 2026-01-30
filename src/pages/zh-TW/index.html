@@ -109,6 +109,53 @@
             <div class="small">戶名：賴瑞鴻</div>
             <div class="small" style="margin-top:8px">轉帳後請回傳：<b>末五碼 + 轉帳時間 + 截圖（可選）</b>（建議備註填：訂單編號）</div>
           </div>
+
+        <div class="card" id="paymentProof" style="display:none;margin-top:14px">
+          <div style="font-weight:800">付款確認</div>
+          <div class="help" style="margin-top:6px">付款後請提交 TXID 或上傳截圖，以便我們快速核對。</div>
+          <form id="paymentProofForm" style="margin-top:10px">
+            <div class="row">
+              <div>
+                <label>付款方式</label>
+                <select id="payMethod" required>
+                  <option value="">請選擇</option>
+                  <option value="USDT">USDT (BEP20)</option>
+                  <option value="TWD">TWD bank transfer</option>
+                  <option value="CNY">CNY (Alipay)</option>
+                </select>
+              </div>
+              <div>
+                <label>TXID（僅 USDT）</label>
+                <input id="txid" type="text" placeholder="0x..." />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label>末五碼（轉帳）</label>
+                <input id="last5" type="text" placeholder="12345" />
+              </div>
+              <div>
+                <label>金額（選填）</label>
+                <input id="payAmount" type="text" placeholder="" />
+                <input id="payCurrency" type="hidden" value="" />
+              </div>
+            </div>
+
+            <div>
+              <label>付款截圖（轉帳／支付寶）</label>
+              <input id="proofImage" type="file" accept="image/*" />
+              <div class="help">請上傳付款/轉帳記錄截圖。</div>
+            </div>
+
+            <div>
+              <label>備註（選填）</label>
+              <textarea id="payNote" rows="2" placeholder=""></textarea>
+            </div>
+
+            <button class="btn" type="submit">提交付款資訊</button>
+          </form>
+        </div>
           <div class="notice">
             <div style="font-weight:800;margin-bottom:6px">USDT（BEP20 / 幣安鏈）</div>
             <div class="small">地址：<span style="font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489</span></div>

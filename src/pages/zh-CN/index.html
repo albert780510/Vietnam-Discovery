@@ -103,12 +103,58 @@
           <div style="font-weight:800">下一步：付款</div>
           <p class="p">订单编号：<span id="orderId" style="font-weight:800"></span></p>
           <div class="notice" style="margin-bottom:10px">
-            <div style="font-weight:800;margin-bottom:6px">转账（台币）</div>
-            <div class="small">银行：玉山银行（代码 808）</div>
-            <div class="small">账号：0152979250648</div>
-            <div class="small">户名：赖瑞鸿</div>
-            <div class="small" style="margin-top:8px">转账后请回传：<b>末五码 + 转账时间 + 截图（可选）</b>（建议备注：订单编号）</div>
+            <div style="font-weight:800;margin-bottom:6px">人民币付款（支付宝）</div>
+            <div class="small">请使用支付宝扫码付款（建议备注：订单编号）。</div>
+            <div class="small" style="margin-top:8px"><img src="/shared/alipay_qr.jpg" alt="Alipay QR" style="width:180px;height:180px;border-radius:12px;border:1px solid rgba(255,255,255,.12)" /></div>
+            <div class="small" style="margin-top:8px">付款后请在本页提交：<b>截图</b>（或转账记录）。</div>
           </div>
+
+        <div class="card" id="paymentProof" style="display:none;margin-top:14px">
+          <div style="font-weight:800">付款确认</div>
+          <div class="help" style="margin-top:6px">付款后请提交 TXID 或上传截图，方便我们快速核对。</div>
+          <form id="paymentProofForm" style="margin-top:10px">
+            <div class="row">
+              <div>
+                <label>付款方式</label>
+                <select id="payMethod" required>
+                  <option value="">请选择</option>
+                  <option value="USDT">USDT (BEP20)</option>
+                  <option value="TWD">TWD bank transfer</option>
+                  <option value="CNY">CNY (Alipay)</option>
+                </select>
+              </div>
+              <div>
+                <label>TXID（仅 USDT）</label>
+                <input id="txid" type="text" placeholder="0x..." />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label>末五码（转账）</label>
+                <input id="last5" type="text" placeholder="12345" />
+              </div>
+              <div>
+                <label>金额（选填）</label>
+                <input id="payAmount" type="text" placeholder="" />
+                <input id="payCurrency" type="hidden" value="" />
+              </div>
+            </div>
+
+            <div>
+              <label>付款截图（转账／支付宝）</label>
+              <input id="proofImage" type="file" accept="image/*" />
+              <div class="help">请上传付款/转账记录截图。</div>
+            </div>
+
+            <div>
+              <label>备注（选填）</label>
+              <textarea id="payNote" rows="2" placeholder=""></textarea>
+            </div>
+
+            <button class="btn" type="submit">提交付款信息</button>
+          </form>
+        </div>
           <div class="notice">
             <div style="font-weight:800;margin-bottom:6px">USDT（BEP20 / 币安链）</div>
             <div class="small">地址：<span style="font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489</span></div>
