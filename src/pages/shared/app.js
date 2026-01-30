@@ -17,6 +17,16 @@ async function main(locale){
   const productPrice = qs('#productPrice');
   const form = qs('#lead-form');
   const statusEl = qs('#status');
+  const phoneEl = qs('#phone');
+  const addressEl = qs('#address');
+
+  // Fill contact placeholders if present
+  const lineLink = qs('#lineLink');
+  const fbGroupLink = qs('#fbGroupLink');
+  const wechatId = qs('#wechatId');
+  if (lineLink) lineLink.textContent = (locale==='en'?'(to be added)':'（待填）');
+  if (fbGroupLink) fbGroupLink.textContent = (locale==='en'?'(to be added)':'（待填）');
+  if (wechatId) wechatId.textContent = (locale==='en'?'(to be added)':'（待填）');
 
   // Populate products with price inline
   for (const [key, p] of Object.entries(pricing.products)){
@@ -76,12 +86,19 @@ async function main(locale){
 
     // Basic client validation
     const email = qs('#email').value.trim();
-    if (!email || !email.includes('@')) {
-      return setStatus('danger', locale==='zh-CN'?'请输入有效邮箱。':'請輸入有效 Email。');
-    }
-    if (!passportInput.files?.[0] || !photoInput.files?.[0]) {
-      return setStatus('danger', locale==='zh-CN'?'请上传护照资料页与证件照。':'請上傳護照資料頁與證件照。');
-    }
+    const phone = phoneEl?.value?.trim() || '';
+    const address = addressEl?.value?.trim() || '';
+
+    const msgEmail = locale==='zh-CN'?'请输入有效邮箱。':(locale==='en'?'Please enter a valid email.':'請輸入有效 Email。');
+    const msgPhone = locale==='zh-CN'?'请输入联系电话。':(locale==='en'?'Please enter a phone number.':'請輸入聯絡電話。');
+    const msgAddr  = locale==='zh-CN'?'请填写英文地址。':(locale==='en'?'Please enter your address in English.':'請填寫英文地址。');
+    const msgFiles = locale==='zh-CN'?'请上传护照资料页与证件照。':(locale==='en'?'Please upload passport bio page and ID photo.':'請上傳護照資料頁與證件照。');
+
+    if (!email || !email.includes('@')) return setStatus('danger', msgEmail);
+    if (!phone) return setStatus('danger', msgPhone);
+    if (!address) return setStatus('danger', msgAddr);
+    if (!passportInput.files?.[0] || !photoInput.files?.[0]) return setStatus('danger', msgFiles);
+
 
     // MVP: create order ticket (no file upload to storage yet)
     form.querySelector('button[type=submit]').disabled = true;
@@ -91,6 +108,8 @@ async function main(locale){
       locale,
       product: productSel.value,
       email,
+      phone,
+      address,
       arrival: qs('#arrival').value,
       nationality: qs('#nationality').value,
       entryGate: qs('#entryGate').value,

@@ -14,14 +14,14 @@
         <span class="badge">越南簽證代辦</span>
       </div>
       <div class="small">
-        <a href="/zh-cn/">简体</a>
+        <a href="/en/">EN</a> · <a href="/zh-cn/">简体</a>
       </div>
     </div>
 
     <div class="grid">
       <div class="card">
-        <div class="h1">越南 eVisa 代辦（透明、快速、在地協助）</div>
-        <p class="p">你只需要提供護照資料頁與證件照，我們協助整理、檢查與送件，降低退件風險。</p>
+        <div class="h1"><span class="nowrap">越南 eVisa 代辦</span>（透明、快速、在地協助）</div>
+        <p class="p">申辦越南簽證：請上傳護照資料頁與證件照，並留下聯絡方式（地址/電話）。我們協助整理、檢查與送件，降低退件風險。</p>
 
         <div class="notice" id="status" style="display:none"></div>
 
@@ -38,9 +38,20 @@
               <input id="email" type="email" placeholder="name@example.com" required />
             </div>
             <div>
-              <label>預計入境日（可先填大概）</label>
-              <input id="arrival" type="date" />
+              <label>聯絡電話</label>
+              <input id="phone" type="tel" placeholder="0900-000-000" required />
             </div>
+          </div>
+
+          <div>
+            <label>聯絡地址（英文）</label>
+            <textarea id="address" rows="2" placeholder="Street, District, City, Country" required></textarea>
+            <div class="help">越南 eVisa 申請表通常需要填寫地址與電話，請用英文填寫。</div>
+          </div>
+
+          <div>
+            <label>預計入境日（可先填大概）</label>
+            <input id="arrival" type="date" />
           </div>
 
           <div class="row">
@@ -87,22 +98,17 @@
           </div>
         </div>
 
+        <div class="notice" style="margin-top:14px">
+          <div style="font-weight:800;margin-bottom:6px">加入我們（客服與社群）</div>
+          <div class="small">LINE：<a id="lineLink" href="#">（待填）</a></div>
+          <div class="small">微信：<span id="wechatId">（待填）</span></div>
+          <div class="small">Facebook 社團：<a id="fbGroupLink" href="#">（待填）</a></div>
+        </div>
+
         <div class="footer">
           <div><b>隱私提醒：</b>你上傳的資料僅用於簽證申請與客服聯繫；我們會在完成服務後刪除資料（MVP 版會先以人工流程處理）。</div>
           <div style="margin-top:6px">© Vietnam Discovery</div>
         </div>
-      </div>
-
-      <div class="card">
-        <div style="font-weight:800;margin-bottom:10px">信賴與說明</div>
-        <p class="p">越南本地公司營業執照：申請中（約 1–2 週）。拿到文件後會第一時間上架於此頁。</p>
-        <div class="notice">
-          <div style="font-weight:800">你會拿到什麼？</div>
-          <div class="small">1) 文件檢查與整理（避免照片/護照不合格）</div>
-          <div class="small">2) 送件前確認（必要時會請你補件）</div>
-          <div class="small">3) 申請進度提醒與結果交付</div>
-        </div>
-        <p class="p" style="margin-top:12px">常見問題：<a href="https://evisa.gov.vn/faq" target="_blank" rel="noopener">官方 FAQ</a></p>
       </div>
     </div>
   </div>

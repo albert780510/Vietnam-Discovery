@@ -5,7 +5,8 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .nav{display:flex;gap:14px;align-items:center;justify-content:space-between;margin-bottom:18px}
 .brand{display:flex;gap:10px;align-items:center;font-weight:700}
 .badge{font-size:12px;color:var(--muted);border:1px solid rgba(255,255,255,.12);padding:4px 8px;border-radius:999px}
-.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.grid{display:grid;grid-template-columns:1fr;gap:18px}
+.nowrap{white-space:nowrap}
 @media (max-width:900px){.grid{grid-template-columns:1fr}}
 .card{background:rgba(16,26,51,.75);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:18px;backdrop-filter:blur(6px)}
 .h1{font-size:30px;line-height:1.2;margin:4px 0 10px}
