@@ -1,8 +1,13 @@
 import { validateImageFile } from './uploader.js';
 
-async function loadPricing() {
-  const res = await fetch('/shared/config.pricing.json');
+async function loadJson(path) {
+  const res = await fetch(path, { cache: 'no-store' });
+  if (!res.ok) throw new Error(`failed_to_load_${path}`);
   return res.json();
+}
+
+async function loadPricing() {
+  return loadJson('/shared/config.pricing.json');
 }
 
 function fmtTwd(n){
@@ -20,13 +25,45 @@ async function main(locale){
   const phoneEl = qs('#phone');
   const addressEl = qs('#address');
 
+  const nationalityEl = qs('#nationality');
+  const entryGateEl = qs('#entryGate');
+
   // Fill contact placeholders if present
   const lineLink = qs('#lineLink');
   const fbGroupLink = qs('#fbGroupLink');
   const wechatId = qs('#wechatId');
-  if (lineLink) lineLink.textContent = (locale==='en'?'(to be added)':'（待填）');
-  if (fbGroupLink) fbGroupLink.textContent = (locale==='en'?'(to be added)':'（待填）');
-  if (wechatId) wechatId.textContent = (locale==='en'?'(to be added)':'（待填）');
+  if (lineLink) lineLink.textContent = (locale==='en'?'LINE: albert780510':'LINE：albert780510');
+  if (lineLink) lineLink.href = 'https://line.me/R/ti/p/@albert780510';
+  if (fbGroupLink) {
+    fbGroupLink.textContent = (locale==='en'?'Facebook group':'Facebook 社團');
+    fbGroupLink.href = 'https://www.facebook.com/share/1CFZKSjVzy/?mibextid=wwXIfr';
+    fbGroupLink.target = '_blank';
+    fbGroupLink.rel = 'noopener';
+  }
+  if (wechatId) wechatId.textContent = 's20389741';
+
+  // Populate nationalities (50+)
+  if (nationalityEl && nationalityEl.tagName === 'SELECT') {
+    const nationalities = await loadJson('/shared/config.nationalities.json');
+    for (const n of nationalities) {
+      const opt = document.createElement('option');
+      opt.value = n.name_en;
+      opt.textContent = `${n.emoji} ${n.name_en}`;
+      nationalityEl.appendChild(opt);
+    }
+  }
+
+  // Populate entry gates
+  if (entryGateEl && entryGateEl.tagName === 'SELECT') {
+    const gates = await loadJson('/shared/config.entrygates.json');
+    for (const g of gates) {
+      const opt = document.createElement('option');
+      opt.value = g.value_en;
+      const label = g.label[locale] || g.label['en'];
+      opt.textContent = label;
+      entryGateEl.appendChild(opt);
+    }
+  }
 
   // Populate products with price inline
   for (const [key, p] of Object.entries(pricing.products)){
@@ -88,15 +125,21 @@ async function main(locale){
     const email = qs('#email').value.trim();
     const phone = phoneEl?.value?.trim() || '';
     const address = addressEl?.value?.trim() || '';
+    const nationality = nationalityEl?.value || '';
+    const entryGate = entryGateEl?.value || '';
 
     const msgEmail = locale==='zh-CN'?'请输入有效邮箱。':(locale==='en'?'Please enter a valid email.':'請輸入有效 Email。');
     const msgPhone = locale==='zh-CN'?'请输入联系电话。':(locale==='en'?'Please enter a phone number.':'請輸入聯絡電話。');
     const msgAddr  = locale==='zh-CN'?'请填写英文地址。':(locale==='en'?'Please enter your address in English.':'請填寫英文地址。');
+    const msgNat   = locale==='zh-CN'?'请选择国籍。':(locale==='en'?'Please select nationality.':'請選擇國籍。');
+    const msgGate  = locale==='zh-CN'?'请选择入境口岸。':(locale==='en'?'Please select entry gate.':'請選擇入境口岸。');
     const msgFiles = locale==='zh-CN'?'请上传护照资料页与证件照。':(locale==='en'?'Please upload passport bio page and ID photo.':'請上傳護照資料頁與證件照。');
 
     if (!email || !email.includes('@')) return setStatus('danger', msgEmail);
     if (!phone) return setStatus('danger', msgPhone);
     if (!address) return setStatus('danger', msgAddr);
+    if (!nationality) return setStatus('danger', msgNat);
+    if (!entryGate) return setStatus('danger', msgGate);
     if (!passportInput.files?.[0] || !photoInput.files?.[0]) return setStatus('danger', msgFiles);
 
 
@@ -111,8 +154,8 @@ async function main(locale){
       phone,
       address,
       arrival: qs('#arrival').value,
-      nationality: qs('#nationality').value,
-      entryGate: qs('#entryGate').value,
+      nationality,
+      entryGate,
       notes: qs('#notes').value
     };
 

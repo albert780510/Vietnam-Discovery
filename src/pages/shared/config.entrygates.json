@@ -1,0 +1,9 @@
+[
+  {"code":"NOI_BAI","value_en":"Noi Bai International Airport","label":{"zh-tw":"河內｜內排機場 (Noi Bai)","zh-cn":"河内｜内排机场 (Noi Bai)","en":"Hanoi | Noi Bai (HAN)"}},
+  {"code":"TAN_SON_NHAT","value_en":"Tan Son Nhat International Airport","label":{"zh-tw":"胡志明市｜新山一機場 (Tan Son Nhat)","zh-cn":"胡志明市｜新山一机场 (Tan Son Nhat)","en":"Ho Chi Minh City | Tan Son Nhat (SGN)"}},
+  {"code":"DA_NANG","value_en":"Da Nang International Airport","label":{"zh-tw":"峴港｜峴港機場 (Da Nang)","zh-cn":"岘港｜岘港机场 (Da Nang)","en":"Da Nang | Da Nang (DAD)"}},
+  {"code":"CAM_RANH","value_en":"Cam Ranh International Airport","label":{"zh-tw":"芽莊｜金蘭機場 (Cam Ranh)","zh-cn":"芽庄｜金兰机场 (Cam Ranh)","en":"Nha Trang | Cam Ranh (CXR)"}},
+  {"code":"PHU_QUOC","value_en":"Phu Quoc International Airport","label":{"zh-tw":"富國島｜富國機場 (Phu Quoc)","zh-cn":"富国岛｜富国机场 (Phu Quoc)","en":"Phu Quoc | Phu Quoc (PQC)"}},
+  {"code":"CAN_THO","value_en":"Can Tho International Airport","label":{"zh-tw":"芹苴｜芹苴機場 (Can Tho)","zh-cn":"芹苴｜芹苴机场 (Can Tho)","en":"Can Tho | Can Tho (VCA)"}},
+  {"code":"OTHER","value_en":"Other","label":{"zh-tw":"其他（我不確定）","zh-cn":"其他（我不确定）","en":"Other / Not sure"}}
+]
