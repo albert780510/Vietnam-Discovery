@@ -162,12 +162,16 @@ async function main(locale){
     productSel.appendChild(opt);
   }
 
-  function calcTotal(p){
-    const base = Number(p?.prices?.[displayCurrency] ?? NaN);
+  function calcTotalForCurrency(p, currency){
+    const base = Number(p?.prices?.[currency] ?? NaN);
     const speed = speedSel?.value || 'STD_5_7';
-    const addon = Number(p?.rushAddons?.[displayCurrency]?.[speed] ?? 0);
+    const addon = Number(p?.rushAddons?.[currency]?.[speed] ?? 0);
     if (!Number.isFinite(base)) return { total: NaN, base: NaN, addon: 0, speed };
     return { total: base + addon, base, addon, speed };
+  }
+
+  function calcTotal(p){
+    return calcTotalForCurrency(p, displayCurrency);
   }
 
   function updatePrice(){
@@ -213,9 +217,131 @@ async function main(locale){
     });
   }
 
+  // MetaMask (USDT on BSC) helper
+  async function setupMetaMaskPay(){
+    const txidInput = qs('#txid');
+    const methodSel = qs('#payMethod');
+    if (!txidInput || !methodSel) return;
+
+    const eth = window.ethereum;
+    if (!eth || typeof eth.request !== 'function') return; // MetaMask not available
+
+    const host = txidInput.closest('div') || proofForm || document.body;
+    const box = document.createElement('div');
+    box.style.marginTop = '8px';
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn';
+    btn.style.padding = '10px 12px';
+    btn.style.fontSize = '14px';
+    btn.textContent = isEn
+      ? 'Pay USDT with MetaMask'
+      : (isZhCn ? '用小狐狸钱包支付 USDT' : '用小狐狸錢包支付 USDT');
+
+    const help = document.createElement('div');
+    help.className = 'help';
+    help.style.marginTop = '6px';
+    help.textContent = isEn
+      ? 'Requires MetaMask and BNB for gas (BSC network). After payment, the TXID will be filled automatically.'
+      : (isZhCn ? '需要小狐狸钱包，并确保在 BSC 网络且有少量 BNB 作为手续费。付款后会自动填入 TXID。' : '需要小狐狸錢包，並確保在 BSC 網路且有少量 BNB 作為手續費。付款後會自動填入 TXID。');
+
+    box.appendChild(btn);
+    box.appendChild(help);
+    host.appendChild(box);
+
+    function toHex32(n){
+      const hex = n.toString(16);
+      return hex.padStart(64, '0');
+    }
+
+    function encodeTransfer(to, amountUnits){
+      // ERC20 transfer(address,uint256)
+      const selector = 'a9059cbb';
+      const addr = String(to).toLowerCase().replace(/^0x/, '').padStart(64, '0');
+      const amt = toHex32(amountUnits);
+      return '0x' + selector + addr + amt;
+    }
+
+    async function ensureBsc(){
+      const chainId = await eth.request({ method: 'eth_chainId' });
+      if (chainId === '0x38') return;
+      try {
+        await eth.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: '0x38' }] });
+      } catch (e) {
+        // Try add chain then switch
+        await eth.request({
+          method: 'wallet_addEthereumChain',
+          params: [{
+            chainId: '0x38',
+            chainName: 'BNB Smart Chain',
+            nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
+            rpcUrls: ['https://bsc-dataseed.binance.org/'],
+            blockExplorerUrls: ['https://bscscan.com']
+          }]
+        });
+      }
+    }
+
+    btn.addEventListener('click', async () => {
+      try {
+        const p = pricing.products[productSel.value];
+        const { total: usdtTotal } = calcTotalForCurrency(p, 'USDT');
+        if (!Number.isFinite(usdtTotal)) {
+          return setStatus('danger', isEn
+            ? 'USDT pricing not available for this product. Please pay using the address + QR code.'
+            : (isZhCn ? '该产品没有 USDT 定价，请使用地址/二维码转账。' : '此產品沒有 USDT 定價，請使用地址/QR 轉帳。')
+          );
+        }
+
+        // Force method to USDT
+        methodSel.value = 'USDT';
+
+        await setStatus('info', isEn
+          ? `Opening MetaMask… Amount: USDT ${usdtTotal}`
+          : (isZhCn ? `正在打开小狐狸… 金额：USDT ${usdtTotal}` : `正在打開小狐狸… 金額：USDT ${usdtTotal}`)
+        );
+
+        const accounts = await eth.request({ method: 'eth_requestAccounts' });
+        const from = accounts?.[0];
+        if (!from) throw new Error('no_wallet_account');
+
+        await ensureBsc();
+
+        const receiver = '0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489';
+        const usdtContract = '0x55d398326f99059fF775485246999027B3197955';
+        const decimals = 6n;
+
+        const units = BigInt(Math.round(Number(usdtTotal) * 1e6));
+        const data = encodeTransfer(receiver, units);
+
+        const txHash = await eth.request({
+          method: 'eth_sendTransaction',
+          params: [{
+            from,
+            to: usdtContract,
+            value: '0x0',
+            data
+          }]
+        });
+
+        if (txHash) {
+          txidInput.value = String(txHash);
+          await setStatus('info', isEn
+            ? `Payment sent. TXID filled. Please click “Submit payment info”.\n${txHash}`
+            : (isZhCn ? `已发送付款，TXID 已自动填入。请点击「提交付款信息」。\n${txHash}` : `已發送付款，TXID 已自動填入。請點擊「提交付款資訊」。\n${txHash}`)
+          );
+        }
+      } catch (err) {
+        await setStatus('danger', (isEn?'MetaMask payment failed: ':(isZhCn?'小狐狸付款失败：':'小狐狸付款失敗：')) + (err?.message || String(err)));
+      }
+    });
+  }
+
   // Payment proof submission
   const proofForm = qs('#paymentProofForm');
   if (proofForm) {
+    setupMetaMaskPay();
     proofForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
