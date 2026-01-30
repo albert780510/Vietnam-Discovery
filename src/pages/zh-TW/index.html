@@ -23,19 +23,13 @@
         <div class="h1">越南 eVisa 代辦（透明、快速、在地協助）</div>
         <p class="p">你只需要提供護照資料頁與證件照，我們協助整理、檢查與送件，降低退件風險。</p>
 
-        <div class="kv">
-          <div><div class="t">官方網站</div><div class="v"><a href="https://evisa.gov.vn/" target="_blank" rel="noopener">evisa.gov.vn</a></div></div>
-          <div><div class="t">政府規費</div><div class="v">單次 25 USD / 多次 50 USD</div></div>
-          <div><div class="t">對外固定價</div><div class="v" id="price">—</div></div>
-        </div>
-
         <div class="notice" id="status" style="display:none"></div>
 
         <form id="lead-form">
           <div>
             <label>簽證類型</label>
             <select id="product"></select>
-            <div class="help">價格為對外固定台幣價（已含服務成本）。</div>
+            <div class="help" id="productPrice" style="margin-top:6px"></div>
           </div>
 
           <div class="row">
