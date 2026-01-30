@@ -1,21 +1,39 @@
 {
-  "currency": "TWD",
-  "rounding": "ceil_to_100",
   "products": {
     "EVISA_SINGLE": {
       "label": {
+        "en": "Vietnam eVisa (single entry)",
         "zh-TW": "越南電子簽證 eVisa（單次入境）",
         "zh-CN": "越南电子签证 eVisa（单次入境）"
       },
-      "price": 1290,
+      "prices": {
+        "TWD": 1290,
+        "CNY": 250,
+        "USDT": 40
+      },
+      "rushAddons": {
+        "TWD": { "STD_5_7": 0, "D4": 400, "D3": 700, "D2": 1200 },
+        "CNY": { "STD_5_7": 0, "D4": 90,  "D3": 160, "D2": 260 },
+        "USDT": { "STD_5_7": 0, "D4": 12,  "D3": 22,  "D2": 37 }
+      },
       "gov_fee_usd": 25
     },
     "EVISA_MULTI": {
       "label": {
+        "en": "Vietnam eVisa (multiple entry)",
         "zh-TW": "越南電子簽證 eVisa（多次入境）",
         "zh-CN": "越南电子签证 eVisa（多次入境）"
       },
-      "price": 2390,
+      "prices": {
+        "TWD": 2390,
+        "CNY": 440,
+        "USDT": 70
+      },
+      "rushAddons": {
+        "TWD": { "STD_5_7": 0, "D4": 400, "D3": 800, "D2": 1500 },
+        "CNY": { "STD_5_7": 0, "D4": 90,  "D3": 180, "D2": 330 },
+        "USDT": { "STD_5_7": 0, "D4": 12,  "D3": 27,  "D2": 47 }
+      },
       "gov_fee_usd": 50
     }
   }
