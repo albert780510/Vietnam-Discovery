@@ -1,3 +1,6 @@
 # Local/generated config copies (not needed in repo)
 src/shared/config.entrygates.json
 src/shared/config.nationalities.json
+
+# Local Netlify folder
+.netlify
