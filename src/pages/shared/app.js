@@ -283,8 +283,33 @@ async function main(locale){
       }
     }
 
+    function autoSubmitProof(){
+      if (!proofForm) return;
+      // Ensure the TXID is already in the field before submit handler reads it.
+      setTimeout(() => {
+        if (typeof proofForm.requestSubmit === 'function') proofForm.requestSubmit();
+        else proofForm.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+      }, 0);
+    }
+
     btn.addEventListener('click', async () => {
       try {
+        // Require customer contact before we open MetaMask so we can auto-submit after TX.
+        const cm = qs('#contactMethod')?.value || '';
+        const cv = qs('#contactValue')?.value?.trim() || '';
+        if (!cm) {
+          return setStatus('danger', isEn
+            ? 'Please choose your preferred contact method first.'
+            : (isZhCn ? '请先选择你的联系方式类型。' : '請先選擇你的聯絡方式類型。')
+          );
+        }
+        if (!cv) {
+          return setStatus('danger', isEn
+            ? 'Please enter your contact first.'
+            : (isZhCn ? '请先填写你的联系方式。' : '請先填寫你的聯絡方式。')
+          );
+        }
+
         const p = pricing.products[productSel.value];
         const { total: usdtTotal } = calcTotalForCurrency(p, 'USDT');
         if (!Number.isFinite(usdtTotal)) {
@@ -328,9 +353,10 @@ async function main(locale){
         if (txHash) {
           txidInput.value = String(txHash);
           await setStatus('info', isEn
-            ? `Payment sent. TXID filled. Please click “Submit payment info”.\n${txHash}`
-            : (isZhCn ? `已发送付款，TXID 已自动填入。请点击「提交付款信息」。\n${txHash}` : `已發送付款，TXID 已自動填入。請點擊「提交付款資訊」。\n${txHash}`)
+            ? `Payment sent. TXID filled. Submitting payment info…\n${txHash}`
+            : (isZhCn ? `已发送付款，TXID 已自动填入。正在自动提交付款信息…\n${txHash}` : `已發送付款，TXID 已自動填入。正在自動提交付款資訊…\n${txHash}`)
           );
+          autoSubmitProof();
         }
       } catch (err) {
         await setStatus('danger', (isEn?'MetaMask payment failed: ':(isZhCn?'小狐狸付款失败：':'小狐狸付款失敗：')) + (err?.message || String(err)));
