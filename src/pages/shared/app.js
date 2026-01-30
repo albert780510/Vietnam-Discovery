@@ -42,6 +42,18 @@ async function main(locale){
   }
   if (wechatId) wechatId.textContent = 's20389741';
 
+  // Translate helper (any language -> English) via Google Translate
+  const translateLink = qs('#translateAddress');
+  if (translateLink && addressEl) {
+    translateLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const text = (addressEl.value || '').trim();
+      if (!text) return;
+      const url = `https://translate.google.com/?sl=auto&tl=en&text=${encodeURIComponent(text)}&op=translate`;
+      window.open(url, '_blank', 'noopener');
+    });
+  }
+
   // Populate nationalities (50+)
   if (nationalityEl && nationalityEl.tagName === 'SELECT') {
     const nationalities = await loadJson('/shared/config.nationalities.json');
