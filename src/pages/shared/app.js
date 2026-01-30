@@ -94,7 +94,7 @@ async function main(locale){
   if (lineLink) lineLink.textContent = (isEn?'LINE: albert780510':'LINE：albert780510');
   if (lineLink) lineLink.href = 'https://line.me/R/ti/p/albert780510';
   if (fbGroupLink) {
-    fbGroupLink.textContent = (isEn?'Facebook group':'Facebook 社團');
+    fbGroupLink.textContent = 'Vietnam Discovery';
     fbGroupLink.href = 'https://www.facebook.com/share/1CFZKSjVzy/?mibextid=wwXIfr';
     fbGroupLink.target = '_blank';
     fbGroupLink.rel = 'noopener';
