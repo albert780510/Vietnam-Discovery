@@ -4,6 +4,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .container{max-width:980px;margin:0 auto;padding:24px}
 .nav{display:flex;gap:14px;align-items:center;justify-content:space-between;margin-bottom:18px}
 .brand{display:flex;gap:10px;align-items:center;font-weight:700}
+.brand img{width:36px;height:36px;object-fit:contain;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);padding:6px}
 .badge{font-size:12px;color:var(--muted);border:1px solid rgba(255,255,255,.12);padding:4px 8px;border-radius:999px}
 .grid{display:grid;grid-template-columns:1fr;gap:18px}
 .nowrap{white-space:nowrap}

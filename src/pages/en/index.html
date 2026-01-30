@@ -10,6 +10,7 @@
   <div class="container">
     <div class="nav">
       <div class="brand">
+        <img src="/shared/logo.jpg" alt="Vietnam Discovery" />
         <span>Vietnam Discovery</span>
         <span class="badge">Vietnam eVisa Assistance</span>
       </div>
@@ -89,19 +90,26 @@
         </form>
 
         <div class="card" id="paymentBox" style="display:none;margin-top:14px">
-          <div style="font-weight:800">Next: Bank transfer</div>
+          <div style="font-weight:800">Next: Payment</div>
           <p class="p">Order ID: <span id="orderId" style="font-weight:800"></span></p>
-          <div class="notice">
-            <div style="font-weight:800;margin-bottom:6px">Bank details</div>
+          <div class="notice" style="margin-bottom:10px">
+            <div style="font-weight:800;margin-bottom:6px">Bank transfer (TWD)</div>
             <div class="small">Bank: E.SUN Bank (code 808)</div>
             <div class="small">Account: 0152979250648</div>
             <div class="small">Name: Lai Ruihong</div>
             <div class="small" style="margin-top:8px">After transfer, please send: <b>last 5 digits + transfer time + (optional) screenshot</b> (recommended note: Order ID).</div>
           </div>
+          <div class="notice">
+            <div style="font-weight:800;margin-bottom:6px">USDT (BEP20 / BNB Smart Chain)</div>
+            <div class="small">Address: <span style="font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489</span></div>
+            <div class="small" style="margin-top:8px"><img src="/shared/usdt_bep20.png" alt="USDT BEP20 QR" style="width:160px;height:160px;border-radius:12px;border:1px solid rgba(255,255,255,.12)" /></div>
+            <div class="small" style="margin-top:8px">Network: <b>BEP20</b> only. Send <b>TXID</b> after payment.</div>
+          </div>
         </div>
 
         <div class="notice" style="margin-top:14px">
           <div style="font-weight:800;margin-bottom:6px">Contact</div>
+          <div class="small">Telegram: <a href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">@AlbertLaipi</a></div>
           <div class="small">LINE: <a id="lineLink" href="#">(to be added)</a></div>
           <div class="small">WeChat: <span id="wechatId">(to be added)</span></div>
           <div class="small">Facebook group: <a id="fbGroupLink" href="#">(to be added)</a></div>

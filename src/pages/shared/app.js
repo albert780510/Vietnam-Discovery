@@ -33,7 +33,7 @@ async function main(locale){
   const fbGroupLink = qs('#fbGroupLink');
   const wechatId = qs('#wechatId');
   if (lineLink) lineLink.textContent = (locale==='en'?'LINE: albert780510':'LINE：albert780510');
-  if (lineLink) lineLink.href = 'https://line.me/R/ti/p/@albert780510';
+  if (lineLink) lineLink.href = 'https://line.me/R/ti/p/albert780510';
   if (fbGroupLink) {
     fbGroupLink.textContent = (locale==='en'?'Facebook group':'Facebook 社團');
     fbGroupLink.href = 'https://www.facebook.com/share/1CFZKSjVzy/?mibextid=wwXIfr';
