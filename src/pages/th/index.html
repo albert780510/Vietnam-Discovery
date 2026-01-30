@@ -58,7 +58,11 @@
 
           <div>
             <label>วันที่คาดว่าจะเข้าประเทศ</label>
-            <input id="arrival" type="date" required />
+            <div class="dateWrap">
+              <input id="arrival" type="date" required />
+              <button type="button" class="iconBtn" data-open-date aria-label="Open calendar">📅</button>
+            </div>
+            <div class="help">Click the calendar icon to pick a date.</div>
           </div>
 
           <div class="row">

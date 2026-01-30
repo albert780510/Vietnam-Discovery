@@ -21,6 +21,13 @@ label{font-size:13px;color:var(--muted)}
 input,select,textarea{width:100%;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.25);color:var(--text);outline:none}
 input:focus,select:focus,textarea:focus{border-color:rgba(74,163,255,.7)}
 .help{font-size:12px;color:var(--muted)}
+
+/* Date picker UX */
+.dateWrap{position:relative}
+.dateWrap input[type="date"]{padding-right:44px}
+.iconBtn{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.iconBtn:hover{border-color:rgba(74,163,255,.7)}
+
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:700px){.row{grid-template-columns:1fr}}
 .btn{cursor:pointer;border:0;border-radius:12px;padding:12px 14px;background:linear-gradient(90deg,#2e7bff,#4aa3ff);color:#041022;font-weight:800}

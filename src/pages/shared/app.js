@@ -202,6 +202,17 @@ async function main(locale){
   const passportInput = qs('#passport');
   const photoInput = qs('#photo');
 
+  // Date picker helper
+  const arrivalInput = qs('#arrival');
+  const openDateBtn = qs('[data-open-date]');
+  if (openDateBtn && arrivalInput) {
+    openDateBtn.addEventListener('click', () => {
+      // showPicker is supported in Chromium; fallback to focus/click
+      if (typeof arrivalInput.showPicker === 'function') arrivalInput.showPicker();
+      else { arrivalInput.focus(); arrivalInput.click(); }
+    });
+  }
+
   passportInput.addEventListener('change', async () => {
     if (!passportInput.files?.[0]) return;
     await setStatus('info', isEn ? 'Checking passport bio page image…' : (isZhCn ? '正在检查护照资料页图片…' : '正在檢查護照資料頁圖片…'));

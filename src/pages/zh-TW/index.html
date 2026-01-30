@@ -58,7 +58,11 @@
 
           <div>
             <label>預計入境日期</label>
-            <input id="arrival" type="date" required />
+            <div class="dateWrap">
+              <input id="arrival" type="date" required />
+              <button type="button" class="iconBtn" data-open-date aria-label="Open calendar">📅</button>
+            </div>
+            <div class="help">點右側日曆選日期</div>
           </div>
 
           <div class="row">
