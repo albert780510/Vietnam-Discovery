@@ -3,10 +3,49 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="refresh" content="0; url=/zh-tw/" />
   <title>Vietnam Discovery Visa</title>
 </head>
 <body>
-  <p>Redirecting… <a href="/zh-tw/">繁中</a> | <a href="/zh-cn/">简体</a></p>
+  <p>Redirecting…</p>
+  <script>
+    (function(){
+      try {
+        const saved = localStorage.getItem('vd_lang');
+        const lang = (saved || navigator.language || '').toLowerCase();
+
+        function go(path){ window.location.replace(path); }
+
+        if (saved === 'zh-TW') return go('/zh-tw/');
+        if (saved === 'zh-CN') return go('/zh-cn/');
+        if (saved === 'en') return go('/en/');
+        if (saved === 'ko') return go('/ko/');
+        if (saved === 'ja') return go('/ja/');
+        if (saved === 'es') return go('/es/');
+        if (saved === 'ru') return go('/ru/');
+        if (saved === 'th') return go('/th/');
+        if (saved === 'ms') return go('/ms/');
+        if (saved === 'id') return go('/id/');
+
+        if (lang.startsWith('zh')) {
+          if (lang.includes('hant') || lang.includes('tw') || lang.includes('hk') || lang.includes('mo')) return go('/zh-tw/');
+          return go('/zh-cn/');
+        }
+        if (lang.startsWith('ko')) return go('/ko/');
+        if (lang.startsWith('ja')) return go('/ja/');
+        if (lang.startsWith('es')) return go('/es/');
+        if (lang.startsWith('ru')) return go('/ru/');
+        if (lang.startsWith('th')) return go('/th/');
+        if (lang.startsWith('ms')) return go('/ms/');
+        if (lang.startsWith('id')) return go('/id/');
+
+        return go('/en/');
+      } catch (e) {
+        window.location.replace('/en/');
+      }
+    })();
+  </script>
+  <noscript>
+    <p><a href="/en/">English</a> | <a href="/zh-tw/">繁中</a> | <a href="/zh-cn/">简体</a></p>
+  </noscript>
 </body>
 </html>

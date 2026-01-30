@@ -18,6 +18,48 @@ function qs(sel){return document.querySelector(sel)}
 
 async function main(locale){
   const pricing = await loadPricing();
+
+  const isZhCn = locale === 'zh-CN';
+  const isZhTw = locale === 'zh-TW';
+  const isEn = !isZhCn && !isZhTw;
+
+  // Language selector
+  const langSelect = qs('#langSelect');
+  if (langSelect) {
+    const languages = [
+      { code: 'en', label: 'English' , path: '/en/' },
+      { code: 'zh-TW', label: '繁體中文', path: '/zh-tw/' },
+      { code: 'zh-CN', label: '简体中文', path: '/zh-cn/' },
+      { code: 'ko', label: '한국어', path: '/ko/' },
+      { code: 'ja', label: '日本語', path: '/ja/' },
+      { code: 'es', label: 'Español', path: '/es/' },
+      { code: 'ru', label: 'Русский', path: '/ru/' },
+      { code: 'th', label: 'ไทย', path: '/th/' },
+      { code: 'ms', label: 'Bahasa Melayu', path: '/ms/' },
+      { code: 'id', label: 'Bahasa Indonesia', path: '/id/' }
+    ];
+
+    langSelect.innerHTML = '';
+    for (const l of languages) {
+      const opt = document.createElement('option');
+      opt.value = l.code;
+      opt.textContent = l.label;
+      langSelect.appendChild(opt);
+    }
+    langSelect.value = locale;
+    if (!langSelect.value) langSelect.value = isZhCn ? 'zh-CN' : (isZhTw ? 'zh-TW' : 'en');
+
+    localStorage.setItem('vd_lang', langSelect.value);
+
+    langSelect.addEventListener('change', () => {
+      const chosen = languages.find(x => x.code === langSelect.value);
+      if (chosen) {
+        localStorage.setItem('vd_lang', chosen.code);
+        window.location.href = chosen.path;
+      }
+    });
+  }
+
   const productSel = qs('#product');
   const productPrice = qs('#productPrice');
   const form = qs('#lead-form');
@@ -32,10 +74,10 @@ async function main(locale){
   const lineLink = qs('#lineLink');
   const fbGroupLink = qs('#fbGroupLink');
   const wechatId = qs('#wechatId');
-  if (lineLink) lineLink.textContent = (locale==='en'?'LINE: albert780510':'LINE：albert780510');
+  if (lineLink) lineLink.textContent = (isEn?'LINE: albert780510':'LINE：albert780510');
   if (lineLink) lineLink.href = 'https://line.me/R/ti/p/albert780510';
   if (fbGroupLink) {
-    fbGroupLink.textContent = (locale==='en'?'Facebook group':'Facebook 社團');
+    fbGroupLink.textContent = (isEn?'Facebook group':'Facebook 社團');
     fbGroupLink.href = 'https://www.facebook.com/share/1CFZKSjVzy/?mibextid=wwXIfr';
     fbGroupLink.target = '_blank';
     fbGroupLink.rel = 'noopener';
@@ -81,7 +123,7 @@ async function main(locale){
   for (const [key, p] of Object.entries(pricing.products)){
     const opt = document.createElement('option');
     opt.value = key;
-    const label = p.label[locale] || p.label['zh-TW'] || key;
+    const label = p.label[locale] || p.label['en'] || p.label['zh-TW'] || key;
     opt.textContent = `${label}（${fmtTwd(p.price)}）`;
     productSel.appendChild(opt);
   }
@@ -92,7 +134,7 @@ async function main(locale){
       productPrice.textContent = '';
       return;
     }
-    productPrice.textContent = locale==='zh-CN' ? `价格：${fmtTwd(p.price)}` : `價格：${fmtTwd(p.price)}`;
+    productPrice.textContent = isEn ? `Price: ${fmtTwd(p.price)}` : (isZhCn ? `价格：${fmtTwd(p.price)}` : `價格：${fmtTwd(p.price)}`);
   }
   updatePrice();
   productSel.addEventListener('change', updatePrice);
@@ -108,25 +150,25 @@ async function main(locale){
 
   passportInput.addEventListener('change', async () => {
     if (!passportInput.files?.[0]) return;
-    await setStatus('info', locale==='zh-CN' ? '正在检查护照资料页图片…' : '正在檢查護照資料頁圖片…');
+    await setStatus('info', isEn ? 'Checking passport bio page image…' : (isZhCn ? '正在检查护照资料页图片…' : '正在檢查護照資料頁圖片…'));
     const r = await validateImageFile(passportInput.files[0], { kind:'passport', minWidth: 900, minHeight: 600, maxMB: 8 });
     if (!r.ok) {
       passportInput.value = '';
-      await setStatus('danger', (locale==='zh-CN'?'护照资料页不符合要求：':'護照資料頁不符合要求：') + (r.message || r.reason));
+      await setStatus('danger', (isEn?'Passport bio page does not meet requirements: ':(isZhCn?'护照资料页不符合要求：':'護照資料頁不符合要求：')) + (r.message || r.reason));
     } else {
-      await setStatus('info', (locale==='zh-CN'?'护照资料页 OK。':'護照資料頁 OK。') + `（${r.meta.width}×${r.meta.height}）`);
+      await setStatus('info', (isEn?'Passport bio page OK. ':(isZhCn?'护照资料页 OK。':'護照資料頁 OK。')) + `（${r.meta.width}×${r.meta.height}）`);
     }
   });
 
   photoInput.addEventListener('change', async () => {
     if (!photoInput.files?.[0]) return;
-    await setStatus('info', locale==='zh-CN' ? '正在检查证件照…' : '正在檢查證件照…');
+    await setStatus('info', isEn ? 'Checking ID photo…' : (isZhCn ? '正在检查证件照…' : '正在檢查證件照…'));
     const r = await validateImageFile(photoInput.files[0], { kind:'photo', minWidth: 600, minHeight: 600, maxMB: 6 });
     if (!r.ok) {
       photoInput.value = '';
-      await setStatus('danger', (locale==='zh-CN'?'证件照不符合要求：':'證件照不符合要求：') + (r.message || r.reason));
+      await setStatus('danger', (isEn?'ID photo does not meet requirements: ':(isZhCn?'证件照不符合要求：':'證件照不符合要求：')) + (r.message || r.reason));
     } else {
-      await setStatus('info', (locale==='zh-CN'?'证件照 OK。':'證件照 OK。') + `（${r.meta.width}×${r.meta.height}）`);
+      await setStatus('info', (isEn?'ID photo OK. ':(isZhCn?'证件照 OK。':'證件照 OK。')) + `（${r.meta.width}×${r.meta.height}）`);
     }
   });
 
@@ -140,12 +182,12 @@ async function main(locale){
     const nationality = nationalityEl?.value || '';
     const entryGate = entryGateEl?.value || '';
 
-    const msgEmail = locale==='zh-CN'?'请输入有效邮箱。':(locale==='en'?'Please enter a valid email.':'請輸入有效 Email。');
-    const msgPhone = locale==='zh-CN'?'请输入联系电话。':(locale==='en'?'Please enter a phone number.':'請輸入聯絡電話。');
-    const msgAddr  = locale==='zh-CN'?'请填写英文地址。':(locale==='en'?'Please enter your address in English.':'請填寫英文地址。');
-    const msgNat   = locale==='zh-CN'?'请选择国籍。':(locale==='en'?'Please select nationality.':'請選擇國籍。');
-    const msgGate  = locale==='zh-CN'?'请选择入境口岸。':(locale==='en'?'Please select entry gate.':'請選擇入境口岸。');
-    const msgFiles = locale==='zh-CN'?'请上传护照资料页与证件照。':(locale==='en'?'Please upload passport bio page and ID photo.':'請上傳護照資料頁與證件照。');
+    const msgEmail = isEn ? 'Please enter a valid email.' : (isZhCn ? '请输入有效邮箱。' : '請輸入有效 Email。');
+    const msgPhone = isEn ? 'Please enter a phone number.' : (isZhCn ? '请输入联系电话。' : '請輸入聯絡電話。');
+    const msgAddr  = isEn ? 'Please enter your address in English.' : (isZhCn ? '请填写英文地址。' : '請填寫英文地址。');
+    const msgNat   = isEn ? 'Please select nationality.' : (isZhCn ? '请选择国籍。' : '請選擇國籍。');
+    const msgGate  = isEn ? 'Please select entry gate.' : (isZhCn ? '请选择入境口岸。' : '請選擇入境口岸。');
+    const msgFiles = isEn ? 'Please upload passport bio page and ID photo.' : (isZhCn ? '请上传护照资料页与证件照。' : '請上傳護照資料頁與證件照。');
 
     if (!email || !email.includes('@')) return setStatus('danger', msgEmail);
     if (!phone) return setStatus('danger', msgPhone);
@@ -157,7 +199,7 @@ async function main(locale){
 
     // MVP: create order ticket (no file upload to storage yet)
     form.querySelector('button[type=submit]').disabled = true;
-    await setStatus('info', locale==='zh-CN'?'正在建立订单…':'正在建立訂單…');
+    await setStatus('info', isEn ? 'Creating order…' : (isZhCn ? '正在建立订单…' : '正在建立訂單…'));
 
     const payload = {
       locale,
@@ -183,14 +225,17 @@ async function main(locale){
       // Show payment instruction
       const p = pricing.products[payload.product];
       const price = p?.price;
-      const msg = locale==='zh-CN'
-        ? `订单已建立：${data.orderId}\n应付金额：${fmtTwd(price)}\n\n下一步：请依网页显示的转账资讯完成付款，并回复转账末五码/截图。我们确认收款后会开始送件。`
-        : `訂單已建立：${data.orderId}\n應付金額：${fmtTwd(price)}\n\n下一步：請依網頁顯示的轉帳資訊完成付款，並回傳轉帳末五碼/截圖。我們確認收款後會開始送件。`;
+      const msg = isEn
+        ? `Order created: ${data.orderId}\nAmount: ${fmtTwd(price)}\n\nNext: please complete payment using the details shown on this page, then send us the transfer info / TXID. We will start processing after payment is confirmed.`
+        : (isZhCn
+          ? `订单已建立：${data.orderId}\n应付金额：${fmtTwd(price)}\n\n下一步：请依网页显示的转账资讯完成付款，并回复转账末五码/截图或 TXID。我们确认收款后会开始送件。`
+          : `訂單已建立：${data.orderId}\n應付金額：${fmtTwd(price)}\n\n下一步：請依網頁顯示的轉帳資訊完成付款，並回傳轉帳末五碼/截圖或 TXID。我們確認收款後會開始送件。`
+        );
       await setStatus('info', msg);
       qs('#orderId').textContent = data.orderId;
       qs('#paymentBox').style.display = 'block';
     } catch (err) {
-      await setStatus('danger', (locale==='zh-CN'?'建立订单失败：':'建立訂單失敗：') + err.message);
+      await setStatus('danger', (isEn?'Failed to create order: ':(isZhCn?'建立订单失败：':'建立訂單失敗：')) + err.message);
       form.querySelector('button[type=submit]').disabled = false;
     }
   });
