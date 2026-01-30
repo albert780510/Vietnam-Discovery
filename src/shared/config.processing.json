@@ -1,0 +1,40 @@
+{
+  "speeds": [
+    {
+      "id": "STD_5_7",
+      "days": "5-7",
+      "label": {
+        "en": "Standard (5–7 working days)",
+        "zh-TW": "一般（5–7 個工作天）",
+        "zh-CN": "普通（5–7 个工作日）"
+      }
+    },
+    {
+      "id": "D4",
+      "days": "4",
+      "label": {
+        "en": "Rush (4 working days)",
+        "zh-TW": "加急（4 個工作天）",
+        "zh-CN": "加急（4 个工作日）"
+      }
+    },
+    {
+      "id": "D3",
+      "days": "3",
+      "label": {
+        "en": "Rush (3 working days)",
+        "zh-TW": "加急（3 個工作天）",
+        "zh-CN": "加急（3 个工作日）"
+      }
+    },
+    {
+      "id": "D2",
+      "days": "2",
+      "label": {
+        "en": "Rush (2 working days)",
+        "zh-TW": "加急（2 個工作天）",
+        "zh-CN": "加急（2 个工作日）"
+      }
+    }
+  ]
+}

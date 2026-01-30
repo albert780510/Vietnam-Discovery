@@ -10,6 +10,10 @@ async function loadPricing() {
   return loadJson('/shared/config.pricing.json');
 }
 
+async function loadProcessing() {
+  return loadJson('/shared/config.processing.json');
+}
+
 function fmtMoney(amount, currency, locale){
   const n = Number(amount);
   if (!Number.isFinite(n)) return '';
@@ -29,7 +33,7 @@ function currencyForLocale(locale){
 function qs(sel){return document.querySelector(sel)}
 
 async function main(locale){
-  const pricing = await loadPricing();
+  const [pricing, processing] = await Promise.all([loadPricing(), loadProcessing()]);
 
   const isZhCn = locale === 'zh-CN';
   const isZhTw = locale === 'zh-TW';
@@ -73,6 +77,7 @@ async function main(locale){
   }
 
   const productSel = qs('#product');
+  const speedSel = qs('#speed');
   const productPrice = qs('#productPrice');
   const form = qs('#lead-form');
   const statusEl = qs('#status');
@@ -133,16 +138,36 @@ async function main(locale){
 
   const displayCurrency = currencyForLocale(locale);
 
+  // Populate processing speed selector (if present)
+  if (speedSel && processing?.speeds?.length) {
+    speedSel.innerHTML = '';
+    for (const s of processing.speeds) {
+      const opt = document.createElement('option');
+      opt.value = s.id;
+      opt.textContent = s.label?.[locale] || s.label?.['en'] || s.id;
+      speedSel.appendChild(opt);
+    }
+    speedSel.value = 'STD_5_7';
+  }
+
   // Populate products with price inline
   for (const [key, p] of Object.entries(pricing.products)){
     const opt = document.createElement('option');
     opt.value = key;
     const label = p.label[locale] || p.label['en'] || p.label['zh-TW'] || key;
-    const price = p.prices?.[displayCurrency];
+    const base = p.prices?.[displayCurrency];
     opt.textContent = isEn
-      ? `${label} (${fmtMoney(price, displayCurrency, locale)})`
-      : `${label}（${fmtMoney(price, displayCurrency, locale)}）`;
+      ? `${label} (${fmtMoney(base, displayCurrency, locale)})`
+      : `${label}（${fmtMoney(base, displayCurrency, locale)}）`;
     productSel.appendChild(opt);
+  }
+
+  function calcTotal(p){
+    const base = Number(p?.prices?.[displayCurrency] ?? NaN);
+    const speed = speedSel?.value || 'STD_5_7';
+    const addon = Number(p?.rushAddons?.[displayCurrency]?.[speed] ?? 0);
+    if (!Number.isFinite(base)) return { total: NaN, base: NaN, addon: 0, speed };
+    return { total: base + addon, base, addon, speed };
   }
 
   function updatePrice(){
@@ -151,13 +176,22 @@ async function main(locale){
       productPrice.textContent = '';
       return;
     }
-    const price = p.prices?.[displayCurrency];
-    productPrice.textContent = isEn
-      ? `Price: ${fmtMoney(price, displayCurrency, locale)}`
-      : (isZhCn ? `价格：${fmtMoney(price, displayCurrency, locale)}` : `價格：${fmtMoney(price, displayCurrency, locale)}`);
+    const { total, addon } = calcTotal(p);
+    const money = fmtMoney(total, displayCurrency, locale);
+    if (addon > 0) {
+      const addonMoney = fmtMoney(addon, displayCurrency, locale);
+      productPrice.textContent = isEn
+        ? `Price: ${money} (rush fee included: ${addonMoney})`
+        : (isZhCn ? `价格：${money}（含加急：${addonMoney}）` : `價格：${money}（含加急：${addonMoney}）`);
+    } else {
+      productPrice.textContent = isEn
+        ? `Price: ${money}`
+        : (isZhCn ? `价格：${money}` : `價格：${money}`);
+    }
   }
   updatePrice();
   productSel.addEventListener('change', updatePrice);
+  speedSel?.addEventListener('change', updatePrice);
 
   async function setStatus(kind, msg){
     statusEl.className = `notice ${kind==='danger'?'danger':''}`;
@@ -224,6 +258,7 @@ async function main(locale){
     const payload = {
       locale,
       product: productSel.value,
+      speed: speedSel?.value || 'STD_5_7',
       email,
       phone,
       address,
@@ -244,12 +279,12 @@ async function main(locale){
 
       // Show payment instruction
       const p = pricing.products[payload.product];
-      const price = p?.prices?.[displayCurrency];
+      const { total } = calcTotal(p);
       const msg = isEn
-        ? `Order created: ${data.orderId}\nAmount: ${fmtMoney(price, displayCurrency, locale)}\n\nNext: please complete payment using the details shown on this page, then send us the transfer info / TXID. We will start processing after payment is confirmed.`
+        ? `Order created: ${data.orderId}\nAmount: ${fmtMoney(total, displayCurrency, locale)}\n\nNext: please complete payment using the details shown on this page, then send us the transfer info / TXID. We will start processing the same day once payment info is received.`
         : (isZhCn
-          ? `订单已建立：${data.orderId}\n应付金额：${fmtMoney(price, displayCurrency, locale)}\n\n下一步：请依网页显示的转账资讯完成付款，并回复转账末五码/截图或 TXID。我们确认收款后会开始送件。`
-          : `訂單已建立：${data.orderId}\n應付金額：${fmtMoney(price, displayCurrency, locale)}\n\n下一步：請依網頁顯示的轉帳資訊完成付款，並回傳轉帳末五碼/截圖或 TXID。我們確認收款後會開始送件。`
+          ? `订单已建立：${data.orderId}\n应付金额：${fmtMoney(total, displayCurrency, locale)}\n\n下一步：请依网页显示的转账资讯完成付款，并回复转账末五码/截图或 TXID。我们收到付款资讯后，当天立刻处理。`
+          : `訂單已建立：${data.orderId}\n應付金額：${fmtMoney(total, displayCurrency, locale)}\n\n下一步：請依網頁顯示的轉帳資訊完成付款，並回傳轉帳末五碼/截圖或 TXID。我們收到付款資訊後，當天立刻處理。`
         );
       await setStatus('info', msg);
       qs('#orderId').textContent = data.orderId;
