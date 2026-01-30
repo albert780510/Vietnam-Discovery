@@ -227,6 +227,9 @@ async function main(locale){
       const currency = qs('#payCurrency')?.value || '';
       const note = qs('#payNote')?.value?.trim() || '';
 
+      const contactMethod = qs('#contactMethod')?.value || '';
+      const contactValue = qs('#contactValue')?.value?.trim() || '';
+
       const file = qs('#proofImage')?.files?.[0];
       let proofImage = '';
       if (file) {
@@ -244,6 +247,8 @@ async function main(locale){
 
       if (!orderId) return setStatus('danger', isEn ? 'Missing Order ID.' : (isZhCn ? '缺少订单编号。' : '缺少訂單編號。'));
       if (!method) return setStatus('danger', isEn ? 'Please choose a payment method.' : (isZhCn ? '请选择付款方式。' : '請選擇付款方式。'));
+      if (!contactMethod) return setStatus('danger', isEn ? 'Please choose your preferred contact method.' : (isZhCn ? '请选择你的联系方式类型。' : '請選擇你的聯絡方式類型。'));
+      if (!contactValue) return setStatus('danger', isEn ? 'Please enter your contact.' : (isZhCn ? '请填写你的联系方式。' : '請填寫你的聯絡方式。'));
 
       // minimal requirements
       if (method === 'USDT' && !txid) return setStatus('danger', isEn ? 'Please enter TXID.' : (isZhCn ? '请填写 TXID。' : '請填寫 TXID。'));
@@ -261,6 +266,8 @@ async function main(locale){
             locale,
             orderId,
             method,
+            contactMethod,
+            contactValue,
             txid: txid || undefined,
             last5: last5 || undefined,
             amount: amount || undefined,
