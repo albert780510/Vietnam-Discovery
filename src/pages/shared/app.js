@@ -14,21 +14,26 @@ function qs(sel){return document.querySelector(sel)}
 async function main(locale){
   const pricing = await loadPricing();
   const productSel = qs('#product');
-  const priceEl = qs('#price');
+  const productPrice = qs('#productPrice');
   const form = qs('#lead-form');
   const statusEl = qs('#status');
 
-  // Populate products
+  // Populate products with price inline
   for (const [key, p] of Object.entries(pricing.products)){
     const opt = document.createElement('option');
     opt.value = key;
-    opt.textContent = p.label[locale] || p.label['zh-TW'] || key;
+    const label = p.label[locale] || p.label['zh-TW'] || key;
+    opt.textContent = `${label}（${fmtTwd(p.price)}）`;
     productSel.appendChild(opt);
   }
 
   function updatePrice(){
     const p = pricing.products[productSel.value];
-    priceEl.textContent = p ? fmtTwd(p.price) : '—';
+    if (!p) {
+      productPrice.textContent = '';
+      return;
+    }
+    productPrice.textContent = locale==='zh-CN' ? `价格：${fmtTwd(p.price)}` : `價格：${fmtTwd(p.price)}`;
   }
   updatePrice();
   productSel.addEventListener('change', updatePrice);
