@@ -10,8 +10,20 @@ async function loadPricing() {
   return loadJson('/shared/config.pricing.json');
 }
 
-function fmtTwd(n){
-  return `NT$ ${Number(n).toLocaleString('zh-TW')}`;
+function fmtMoney(amount, currency, locale){
+  const n = Number(amount);
+  if (!Number.isFinite(n)) return '';
+  if (currency === 'TWD') return `NT$ ${n.toLocaleString('zh-TW')}`;
+  if (currency === 'CNY') return `CNY ${n.toLocaleString(locale === 'zh-CN' ? 'zh-CN' : 'en-US')}`;
+  if (currency === 'USDT') return `USDT ${n.toLocaleString('en-US')}`;
+  if (currency === 'VND') return `${n.toLocaleString('vi-VN')} VND`;
+  return `${currency} ${n}`;
+}
+
+function currencyForLocale(locale){
+  if (locale === 'zh-TW') return 'TWD';
+  if (locale === 'zh-CN') return 'CNY';
+  return 'USDT';
 }
 
 function qs(sel){return document.querySelector(sel)}
@@ -119,12 +131,17 @@ async function main(locale){
     }
   }
 
+  const displayCurrency = currencyForLocale(locale);
+
   // Populate products with price inline
   for (const [key, p] of Object.entries(pricing.products)){
     const opt = document.createElement('option');
     opt.value = key;
     const label = p.label[locale] || p.label['en'] || p.label['zh-TW'] || key;
-    opt.textContent = `${label}（${fmtTwd(p.price)}）`;
+    const price = p.prices?.[displayCurrency];
+    opt.textContent = isEn
+      ? `${label} (${fmtMoney(price, displayCurrency, locale)})`
+      : `${label}（${fmtMoney(price, displayCurrency, locale)}）`;
     productSel.appendChild(opt);
   }
 
@@ -134,7 +151,10 @@ async function main(locale){
       productPrice.textContent = '';
       return;
     }
-    productPrice.textContent = isEn ? `Price: ${fmtTwd(p.price)}` : (isZhCn ? `价格：${fmtTwd(p.price)}` : `價格：${fmtTwd(p.price)}`);
+    const price = p.prices?.[displayCurrency];
+    productPrice.textContent = isEn
+      ? `Price: ${fmtMoney(price, displayCurrency, locale)}`
+      : (isZhCn ? `价格：${fmtMoney(price, displayCurrency, locale)}` : `價格：${fmtMoney(price, displayCurrency, locale)}`);
   }
   updatePrice();
   productSel.addEventListener('change', updatePrice);
@@ -224,12 +244,12 @@ async function main(locale){
 
       // Show payment instruction
       const p = pricing.products[payload.product];
-      const price = p?.price;
+      const price = p?.prices?.[displayCurrency];
       const msg = isEn
-        ? `Order created: ${data.orderId}\nAmount: ${fmtTwd(price)}\n\nNext: please complete payment using the details shown on this page, then send us the transfer info / TXID. We will start processing after payment is confirmed.`
+        ? `Order created: ${data.orderId}\nAmount: ${fmtMoney(price, displayCurrency, locale)}\n\nNext: please complete payment using the details shown on this page, then send us the transfer info / TXID. We will start processing after payment is confirmed.`
         : (isZhCn
-          ? `订单已建立：${data.orderId}\n应付金额：${fmtTwd(price)}\n\n下一步：请依网页显示的转账资讯完成付款，并回复转账末五码/截图或 TXID。我们确认收款后会开始送件。`
-          : `訂單已建立：${data.orderId}\n應付金額：${fmtTwd(price)}\n\n下一步：請依網頁顯示的轉帳資訊完成付款，並回傳轉帳末五碼/截圖或 TXID。我們確認收款後會開始送件。`
+          ? `订单已建立：${data.orderId}\n应付金额：${fmtMoney(price, displayCurrency, locale)}\n\n下一步：请依网页显示的转账资讯完成付款，并回复转账末五码/截图或 TXID。我们确认收款后会开始送件。`
+          : `訂單已建立：${data.orderId}\n應付金額：${fmtMoney(price, displayCurrency, locale)}\n\n下一步：請依網頁顯示的轉帳資訊完成付款，並回傳轉帳末五碼/截圖或 TXID。我們確認收款後會開始送件。`
         );
       await setStatus('info', msg);
       qs('#orderId').textContent = data.orderId;
