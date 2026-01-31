@@ -1,49 +1,9 @@
-// Minimal client-side validation for passport page + ID photo.
-// NOTE: We can only do heuristics (size, blur, brightness). Reflection/occlusion can't be guaranteed.
+// Client-side image validation was removed (it produced too many false negatives).
+// Keep a stub so imports won't break.
 
-export async function validateImageFile(file, opts = {}) {
-  const {
-    minWidth = 600,
-    minHeight = 600,
-    maxMB = 6,
-    kind = 'photo' // 'photo' | 'passport'
-  } = opts;
-
+export async function validateImageFile(file) {
   if (!file) return { ok: false, reason: 'NO_FILE' };
-  const typeOk = ['image/jpeg', 'image/png', 'image/jpg'].includes(file.type);
-  if (!typeOk) return { ok: false, reason: 'TYPE', message: '只接受 JPG / PNG。' };
-
-  const sizeMB = file.size / (1024 * 1024);
-  if (sizeMB > maxMB) return { ok: false, reason: 'SIZE', message: `檔案太大（${sizeMB.toFixed(1)}MB），請小於 ${maxMB}MB。` };
-
-  const img = await fileToImage(file);
-  if (img.width < minWidth || img.height < minHeight) {
-    return { ok: false, reason: 'DIM', message: `解析度太低（${img.width}×${img.height}），請至少 ${minWidth}×${minHeight}。` };
-  }
-
-  // Basic quality checks via canvas
-  const { blurScore, brightness, contrast } = analyzeImage(img);
-
-  // Heuristic thresholds
-  if (blurScore < 40) {
-    return { ok: false, reason: 'BLUR', message: '圖片可能過於模糊，請重新拍攝/上傳較清晰的圖片。' };
-  }
-  if (brightness < 40) {
-    return { ok: false, reason: 'DARK', message: '圖片偏暗，請提高亮度或在光線充足處重新拍攝。' };
-  }
-  if (brightness > 220) {
-    return { ok: false, reason: 'BRIGHT', message: '圖片可能過曝（太亮），請避免反光、重新拍攝。' };
-  }
-  if (contrast < 25) {
-    return { ok: false, reason: 'LOW_CONTRAST', message: '圖片對比偏低（可能有霧/反光），建議重拍。' };
-  }
-
-  // Passport page: prefer higher resolution and less blur
-  if (kind === 'passport' && blurScore < 55) {
-    return { ok: false, reason: 'PASSPORT_BLUR', message: '護照資料頁可能不夠清晰，請重新拍攝（字要清楚可讀）。' };
-  }
-
-  return { ok: true, meta: { width: img.width, height: img.height, sizeMB, blurScore, brightness, contrast } };
+  return { ok: true };
 }
 
 function fileToImage(file) {

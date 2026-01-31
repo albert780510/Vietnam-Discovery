@@ -443,28 +443,15 @@ async function main(locale){
     });
   }
 
+  // Disabled: client-side image validation (it blocks too often in practice).
   passportInput.addEventListener('change', async () => {
     if (!passportInput.files?.[0]) return;
-    await setStatus('info', isEn ? 'Checking passport bio page image…' : (isZhCn ? '正在检查护照资料页图片…' : '正在檢查護照資料頁圖片…'));
-    const r = await validateImageFile(passportInput.files[0], { kind:'passport', minWidth: 900, minHeight: 600, maxMB: 8 });
-    if (!r.ok) {
-      passportInput.value = '';
-      await setStatus('danger', (isEn?'Passport bio page does not meet requirements: ':(isZhCn?'护照资料页不符合要求：':'護照資料頁不符合要求：')) + (r.message || r.reason));
-    } else {
-      await setStatus('info', (isEn?'Passport bio page OK. ':(isZhCn?'护照资料页 OK。':'護照資料頁 OK。')) + `（${r.meta.width}×${r.meta.height}）`);
-    }
+    await setStatus('info', isEn ? 'Passport bio page uploaded.' : (isZhCn ? '护照资料页已上传。' : '護照資料頁已上傳。'));
   });
 
   photoInput.addEventListener('change', async () => {
     if (!photoInput.files?.[0]) return;
-    await setStatus('info', isEn ? 'Checking ID photo…' : (isZhCn ? '正在检查证件照…' : '正在檢查證件照…'));
-    const r = await validateImageFile(photoInput.files[0], { kind:'photo', minWidth: 600, minHeight: 600, maxMB: 6 });
-    if (!r.ok) {
-      photoInput.value = '';
-      await setStatus('danger', (isEn?'ID photo does not meet requirements: ':(isZhCn?'证件照不符合要求：':'證件照不符合要求：')) + (r.message || r.reason));
-    } else {
-      await setStatus('info', (isEn?'ID photo OK. ':(isZhCn?'证件照 OK。':'證件照 OK。')) + `（${r.meta.width}×${r.meta.height}）`);
-    }
+    await setStatus('info', isEn ? 'ID photo uploaded.' : (isZhCn ? '证件照已上传。' : '證件照已上傳。'));
   });
 
   form.addEventListener('submit', async (e) => {
