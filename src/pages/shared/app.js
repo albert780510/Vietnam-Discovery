@@ -224,7 +224,19 @@ async function main(locale){
     if (!txidInput || !methodSel) return;
 
     const eth = window.ethereum;
-    if (!eth || typeof eth.request !== 'function') return; // MetaMask not available
+    if (!eth || typeof eth.request !== 'function') {
+      // MetaMask not available
+      const txidInput = qs('#txid');
+      const host = txidInput?.closest('div') || proofForm || document.body;
+      const hint = document.createElement('div');
+      hint.className = 'help';
+      hint.style.marginTop = '8px';
+      hint.textContent = isEn
+        ? 'Tip: Install/enable MetaMask to pay USDT automatically. Otherwise you can pay by copying the address + QR below.'
+        : (isZhCn ? '提示：若要自动打开小狐狸支付 USDT，请先安装/启用 MetaMask。否则可用下方地址/二维码自行转账。' : '提示：若要自動打開小狐狸支付 USDT，請先安裝/啟用 MetaMask。否則可用下方地址/QR 自行轉帳。');
+      host.appendChild(hint);
+      return;
+    }
 
     const host = txidInput.closest('div') || proofForm || document.body;
     const box = document.createElement('div');
@@ -294,21 +306,8 @@ async function main(locale){
 
     btn.addEventListener('click', async () => {
       try {
-        // Require customer contact before we open MetaMask so we can auto-submit after TX.
-        const cm = qs('#contactMethod')?.value || '';
-        const cv = qs('#contactValue')?.value?.trim() || '';
-        if (!cm) {
-          return setStatus('danger', isEn
-            ? 'Please choose your preferred contact method first.'
-            : (isZhCn ? '请先选择你的联系方式类型。' : '請先選擇你的聯絡方式類型。')
-          );
-        }
-        if (!cv) {
-          return setStatus('danger', isEn
-            ? 'Please enter your contact first.'
-            : (isZhCn ? '请先填写你的联系方式。' : '請先填寫你的聯絡方式。')
-          );
-        }
+        // Do not block MetaMask popup on missing contact fields.
+        // We will still require contact fields when the user submits payment proof.
 
         const p = pricing.products[productSel.value];
         const { total: usdtTotal } = calcTotalForCurrency(p, 'USDT');
