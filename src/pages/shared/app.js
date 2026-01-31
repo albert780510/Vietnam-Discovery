@@ -366,6 +366,38 @@ async function main(locale){
   // Payment proof submission
   const proofForm = qs('#paymentProofForm');
   if (proofForm) {
+    // Toggle payment info blocks based on selected method
+    const methodSel = qs('#payMethod');
+    const payInfoTwd = qs('#payInfoTwd');
+    const payInfoCny = qs('#payInfoCny');
+    const payInfoUsdt = qs('#payInfoUsdt');
+
+    // Add a class so CSS can control visibility
+    payInfoTwd?.classList.add('payInfo');
+    payInfoCny?.classList.add('payInfo');
+    payInfoUsdt?.classList.add('payInfo');
+
+    // Ensure QR images are not distorted
+    for (const imgSel of ['#payInfoCny img', '#payInfoUsdt img']) {
+      const img = qs(imgSel);
+      if (img) img.classList.add('payQr');
+    }
+
+    function setActive(el, on){
+      if (!el) return;
+      el.classList.toggle('active', !!on);
+    }
+
+    function updatePayInfo(){
+      const m = methodSel?.value || '';
+      setActive(payInfoTwd, m === 'TWD');
+      setActive(payInfoCny, m === 'CNY');
+      setActive(payInfoUsdt, m === 'USDT');
+    }
+
+    methodSel?.addEventListener('change', updatePayInfo);
+    updatePayInfo();
+
     setupMetaMaskPay();
     proofForm.addEventListener('submit', async (e) => {
       e.preventDefault();

@@ -35,6 +35,11 @@ input:focus,select:focus,textarea:focus{border-color:rgba(74,163,255,.7)}
 .notice{border-left:4px solid var(--accent);padding:10px 12px;background:rgba(74,163,255,.08);border-radius:12px;color:var(--muted)}
 .notice.danger{border-left-color:var(--danger);background:rgba(255,90,106,.08)}
 
+/* Payment info blocks */
+.payInfo{display:none}
+.payInfo.active{display:block}
+.payQr{max-width:220px;width:100%;height:auto;object-fit:contain;border-radius:12px;border:1px solid rgba(255,255,255,.12)}
+
 /* Contact section (footer-style) */
 .contactSection{margin-top:14px}
 .contactSection .small{line-height:1.5}
