@@ -452,14 +452,30 @@ async function main(locale){
       setActive(payInfoTwd, m === 'TWD');
       setActive(payInfoCny, m === 'CNY');
 
-      // Update payment info titles/text (localize CNY block that was inserted as English)
+      // Update CNY block contents (Alipay + WeChat Pay)
       if (payInfoCny) {
         const t = payInfoCny.querySelector('div[style*="font-weight:800"]');
-        const h = payInfoCny.querySelector('.small');
-        if (t) t.textContent = isEn ? 'Alipay (CNY)' : (isZhCn ? '支付宝（人民币 CNY）' : '支付寶（人民幣 CNY）');
+        const h = payInfoCny.querySelector('#payInfoCnyHint');
+        const grid = payInfoCny.querySelector('#payInfoCnyQr');
+
+        if (t) t.textContent = isEn ? 'CNY payment (Alipay / WeChat Pay)' : (isZhCn ? '人民币付款（支付宝 / 微信支付）' : '人民幣付款（支付寶 / 微信支付）');
         if (h) h.textContent = isEn
-          ? 'Scan to pay with Alipay, then upload the payment screenshot below.'
-          : (isZhCn ? '扫码使用支付宝付款。付款后请在下方上传付款截图。' : '掃碼使用支付寶付款。付款後請在下方上傳付款截圖。');
+          ? 'Scan one QR to pay, then upload the payment screenshot below.'
+          : (isZhCn ? '扫码付款（二选一），付款后请在下方上传付款截图。' : '掃碼付款（二選一），付款後請在下方上傳付款截圖。');
+
+        if (grid && !grid.dataset.ready) {
+          grid.dataset.ready = '1';
+          grid.innerHTML = `
+            <div class="payQrItem">
+              <div class="t">Alipay</div>
+              <img src="/shared/alipay_qr.jpg" alt="Alipay QR" class="payQr" loading="lazy" />
+            </div>
+            <div class="payQrItem">
+              <div class="t">WeChat Pay</div>
+              <img src="/shared/wechatpay_qr.jpg" alt="WeChat Pay QR" class="payQr" loading="lazy" />
+            </div>
+          `;
+        }
       }
 
       // Payment proof title/help (method-specific)
