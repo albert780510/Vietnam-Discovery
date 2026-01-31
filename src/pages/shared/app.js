@@ -635,6 +635,38 @@ async function main(locale){
     await setStatus('info', isEn ? 'ID photo uploaded.' : (isZhCn ? '证件照已上传。' : '證件照已上傳。'));
   });
 
+  // Simple lightbox for QR images (click to enlarge)
+  (function setupQrLightbox(){
+    if (document.querySelector('#vd-img-lightbox')) return;
+    const overlay = document.createElement('div');
+    overlay.id = 'vd-img-lightbox';
+    overlay.style.position = 'fixed';
+    overlay.style.inset = '0';
+    overlay.style.background = 'rgba(0,0,0,.72)';
+    overlay.style.display = 'none';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.zIndex = '9999';
+    overlay.innerHTML = `
+      <div style="max-width:92vw;max-height:92vh">
+        <img id="vd-img-lightbox-img" src="" alt="" style="max-width:92vw;max-height:92vh;width:auto;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,.18);background:#fff" />
+        <div style="text-align:center;color:rgba(255,255,255,.85);font-size:12px;margin-top:10px">${isEn?'Click anywhere to close':(isZhCn?'点击任意处关闭':'點任意處關閉')}</div>
+      </div>
+    `;
+    overlay.addEventListener('click', () => { overlay.style.display = 'none'; });
+    document.body.appendChild(overlay);
+
+    document.addEventListener('click', (e) => {
+      const img = e.target?.closest?.('img.payQr');
+      if (!img) return;
+      e.preventDefault();
+      const big = overlay.querySelector('#vd-img-lightbox-img');
+      big.src = img.getAttribute('src') || '';
+      big.alt = img.getAttribute('alt') || 'QR';
+      overlay.style.display = 'flex';
+    });
+  })();
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
