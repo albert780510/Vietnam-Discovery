@@ -5,7 +5,9 @@ export async function handler(event) {
     }
 
     const body = JSON.parse(event.body || '{}');
-    const required = ['orderId', 'method', 'locale', 'contactMethod', 'contactValue'];
+
+    // Contact fields are optional (email/phone are collected in the lead form).
+    const required = ['orderId', 'method', 'locale'];
     for (const k of required) {
       if (!body[k]) return { statusCode: 400, body: JSON.stringify({ error: `missing_${k}` }) };
     }
@@ -15,8 +17,10 @@ export async function handler(event) {
     const summary = {
       orderId: body.orderId,
       method: body.method,
-      contactMethod: body.contactMethod,
-      contactValue: body.contactValue,
+      email: body.email || null,
+      phone: body.phone || null,
+      contactMethod: body.contactMethod || null,
+      contactValue: body.contactValue || null,
       txid: body.txid || null,
       last5: body.last5 || null,
       amount: body.amount || null,
@@ -34,7 +38,9 @@ export async function handler(event) {
         `💸 Payment submitted`,
         `Order: ${summary.orderId}`,
         `Method: ${summary.method}`,
-        `Customer contact: ${summary.contactMethod} ${summary.contactValue}`,
+        summary.email ? `Email: ${summary.email}` : null,
+        summary.phone ? `Phone: ${summary.phone}` : null,
+        (summary.contactMethod || summary.contactValue) ? `Contact: ${(summary.contactMethod || '').trim()} ${(summary.contactValue || '').trim()}`.trim() : null,
         summary.amount ? `Amount: ${summary.amount} ${summary.currency || ''}`.trim() : null,
         summary.last5 ? `Last5: ${summary.last5}` : null,
         summary.txid ? `TXID: ${summary.txid}` : null,
