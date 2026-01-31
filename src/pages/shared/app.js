@@ -455,6 +455,10 @@ async function main(locale){
       // If paying in CNY, hide the TWD bank block entirely.
       if (payInfoTwd) payInfoTwd.style.display = (m === 'CNY') ? 'none' : '';
 
+      // Extra UI cleanup for CNY: they only need to upload a payment screenshot.
+      const payTotalEl = qs('#payTotal');
+      if (payTotalEl) payTotalEl.style.display = (m === 'CNY') ? 'none' : '';
+
       // Update CNY block contents (Alipay + WeChat Pay)
       if (payInfoCny) {
         const t = payInfoCny.querySelector('div[style*="font-weight:800"]');
@@ -529,15 +533,15 @@ async function main(locale){
       // Field visibility
       // USDT: show TXID; hide last5 + proof screenshot + amount
       // TWD: show last5 + proof screenshot + amount(optional); hide TXID
-      // CNY: show proof screenshot + amount(optional); hide TXID + last5
+      // CNY: show proof screenshot only; hide TXID + last5 + amount
       setHidden(txidRow, m !== 'USDT');
       setHidden(last5Row, m !== 'TWD');
       setHidden(proofRow, !(m === 'TWD' || m === 'CNY'));
-      setHidden(amountRow, m === 'USDT');
+      setHidden(amountRow, (m === 'USDT' || m === 'CNY'));
 
       // Required hints (UX only; submit handler still validates)
       if (txidInput) txidInput.required = (m === 'USDT');
-      if (last5Input) last5Input.required = false; // keep optional; we still recommend
+      if (last5Input) last5Input.required = (m === 'TWD');
       if (proofInput) proofInput.required = (m === 'TWD' || m === 'CNY');
     }
 
