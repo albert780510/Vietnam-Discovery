@@ -174,14 +174,26 @@ async function main(locale){
     return calcTotalForCurrency(p, displayCurrency);
   }
 
+  // Prominent total banner (especially for rush)
+  let totalBanner = qs('#totalBanner');
+  if (!totalBanner && productPrice) {
+    totalBanner = document.createElement('div');
+    totalBanner.id = 'totalBanner';
+    totalBanner.className = 'totalBanner';
+    productPrice.insertAdjacentElement('afterend', totalBanner);
+  }
+
   function updatePrice(){
     const p = pricing.products[productSel.value];
     if (!p) {
-      productPrice.textContent = '';
+      if (productPrice) productPrice.textContent = '';
+      if (totalBanner) totalBanner.style.display = 'none';
       return;
     }
     const { total, addon } = calcTotal(p);
     const money = fmtMoney(total, displayCurrency, locale);
+
+    // Small line (existing)
     if (addon > 0) {
       const addonMoney = fmtMoney(addon, displayCurrency, locale);
       productPrice.textContent = isEn
@@ -191,6 +203,24 @@ async function main(locale){
       productPrice.textContent = isEn
         ? `Price: ${money}`
         : (isZhCn ? `价格：${money}` : `價格：${money}`);
+    }
+
+    // Prominent banner
+    if (totalBanner) {
+      totalBanner.style.display = 'block';
+      if (addon > 0) {
+        const addonMoney = fmtMoney(addon, displayCurrency, locale);
+        totalBanner.innerHTML = isEn
+          ? `Total to pay: ${money}<span class="sub">Rush fee included: ${addonMoney}</span>`
+          : (isZhCn
+            ? `应付总金额：${money}<span class="sub">含加急：${addonMoney}</span>`
+            : `應付總金額：${money}<span class="sub">含加急：${addonMoney}</span>`
+          );
+      } else {
+        totalBanner.innerHTML = isEn
+          ? `Total to pay: ${money}`
+          : (isZhCn ? `应付总金额：${money}` : `應付總金額：${money}`);
+      }
     }
   }
   updatePrice();
@@ -577,12 +607,15 @@ async function main(locale){
 
       // Show payment instruction
       const p = pricing.products[payload.product];
-      const { total } = calcTotal(p);
+      const { total, addon } = calcTotal(p);
+      const totalMoney = fmtMoney(total, displayCurrency, locale);
+      const addonMoney = addon > 0 ? fmtMoney(addon, displayCurrency, locale) : '';
+
       const msg = isEn
-        ? `Order created: ${data.orderId}\nAmount: ${fmtMoney(total, displayCurrency, locale)}\n\nNext: please complete payment using the details shown on this page, then send us the transfer info / TXID. We will start processing the same day once payment info is received.`
+        ? `Order created: ${data.orderId}\nAmount: ${totalMoney}${addon>0?` (rush included: ${addonMoney})`:''}\n\nNext: please complete payment using the details shown on this page, then send us the transfer info / TXID. We will start processing the same day once payment info is received.`
         : (isZhCn
-          ? `订单已建立：${data.orderId}\n应付金额：${fmtMoney(total, displayCurrency, locale)}\n\n下一步：请依网页显示的转账资讯完成付款，并回复转账末五码/截图或 TXID。我们收到付款资讯后，当天立刻处理。`
-          : `訂單已建立：${data.orderId}\n應付金額：${fmtMoney(total, displayCurrency, locale)}\n\n下一步：請依網頁顯示的轉帳資訊完成付款，並回傳轉帳末五碼/截圖或 TXID。我們收到付款資訊後，當天立刻處理。`
+          ? `订单已建立：${data.orderId}\n应付金额：${totalMoney}${addon>0?`（含加急：${addonMoney}）`:''}\n\n下一步：请依网页显示的转账资讯完成付款，并回复转账末五码/截图或 TXID。我们收到付款资讯后，当天立刻处理。`
+          : `訂單已建立：${data.orderId}\n應付金額：${totalMoney}${addon>0?`（含加急：${addonMoney}）`:''}\n\n下一步：請依網頁顯示的轉帳資訊完成付款，並回傳轉帳末五碼/截圖或 TXID。我們收到付款資訊後，當天立刻處理。`
         );
       await setStatus('info', msg);
       qs('#orderId').textContent = data.orderId;
@@ -604,6 +637,7 @@ async function main(locale){
             <div class="vd-modal__title">${isEn ? 'Choose payment method' : (isZhCn ? '请选择付款方式' : '請選擇付款方式')}</div>
             <div class="vd-modal__body" style="white-space:normal">
               <div class="help" style="margin-bottom:10px">${isEn ? 'Pick one method to see the correct payment details and fields.' : (isZhCn ? '选择一种付款方式后，系统会显示对应的付款资讯与填写栏位。' : '選擇一種付款方式後，系統會顯示對應的付款資訊與填寫欄位。')}</div>
+              <div class="totalBanner" id="vd-pay-amount" style="margin:0 0 10px 0"></div>
               <select id="vd-pay-choice" style="width:100%;margin-top:4px">
                 <option value="">${isEn ? 'Select…' : (isZhCn ? '请选择…' : '請選擇…')}</option>
                 <option value="TWD">TWD bank transfer</option>
@@ -624,6 +658,14 @@ async function main(locale){
       const dlg = ensurePayDialog();
       const choice = dlg.querySelector('#vd-pay-choice');
 
+      // Update dialog to show the exact amount
+      const amountLine = dlg.querySelector('#vd-pay-amount');
+      if (amountLine) {
+        amountLine.textContent = isEn
+          ? `Amount to pay: ${totalMoney}`
+          : (isZhCn ? `应付金额：${totalMoney}` : `應付金額：${totalMoney}`);
+      }
+
       // Reset selection each new order
       if (choice) choice.value = '';
       dlg.showModal();
@@ -633,7 +675,26 @@ async function main(locale){
         if (!v) return; // user canceled
 
         // Reveal payment sections
-        if (paymentBox) paymentBox.style.display = 'block';
+        if (paymentBox) {
+          paymentBox.style.display = 'block';
+          // Show a prominent amount in the payment section
+          let el = paymentBox.querySelector('#payTotal');
+          if (!el) {
+            el = document.createElement('div');
+            el.id = 'payTotal';
+            el.className = 'totalBanner';
+            el.style.marginTop = '10px';
+            const orderP = paymentBox.querySelector('p.p');
+            if (orderP) orderP.insertAdjacentElement('afterend', el);
+            else paymentBox.prepend(el);
+          }
+          el.innerHTML = addon > 0
+            ? (isEn
+              ? `Total to pay: ${totalMoney}<span class="sub">Rush included: ${addonMoney}</span>`
+              : (isZhCn ? `应付总金额：${totalMoney}<span class="sub">含加急：${addonMoney}</span>` : `應付總金額：${totalMoney}<span class="sub">含加急：${addonMoney}</span>`)
+            )
+            : (isEn ? `Total to pay: ${totalMoney}` : (isZhCn ? `应付总金额：${totalMoney}` : `應付總金額：${totalMoney}`));
+        }
         if (proofBox) {
           proofBox.style.display = 'block';
           proofBox.dataset.orderId = data.orderId;

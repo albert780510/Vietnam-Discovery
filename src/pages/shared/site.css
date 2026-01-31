@@ -35,6 +35,10 @@ input:focus,select:focus,textarea:focus{border-color:rgba(74,163,255,.7)}
 .notice{border-left:4px solid var(--accent);padding:10px 12px;background:rgba(74,163,255,.08);border-radius:12px;color:var(--muted)}
 .notice.danger{border-left-color:var(--danger);background:rgba(255,90,106,.08)}
 
+/* Price emphasis */
+.totalBanner{margin-top:8px;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.10);background:rgba(25,195,125,.10);color:var(--text);font-weight:900}
+.totalBanner .sub{display:block;margin-top:4px;font-size:12px;font-weight:600;color:var(--muted)}
+
 /* Payment info blocks */
 .payInfo{display:none}
 .payInfo.active{display:block}
