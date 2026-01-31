@@ -768,8 +768,11 @@ async function main(locale){
           staticEl.textContent = isEn ? 'USDT' : 'USDT';
         }
 
-        // Ask user to choose MetaMask vs Exchange transfer first.
-        renderUsdtChooser();
+        // USDT mode is chosen in the earlier dialog (MetaMask vs Exchange). Do not show extra buttons here.
+
+        // Remove old chooser UI (we use the modal flow now)
+        const chooser = methodWrap?.querySelector?.('#vd-usdt-chooser');
+        if (chooser) chooser.remove();
 
         const metaBox = document.querySelector('#vd-metamask-box');
 
@@ -868,9 +871,20 @@ async function main(locale){
       if (payTitleEl) payTitleEl.textContent = isEn ? 'Payment confirmation' : (isZhCn ? '付款確認' : '付款確認');
       if (payHelpEl) {
         payHelpEl.textContent = (m === 'USDT')
-          ? (isEn
-            ? 'Choose MetaMask or Exchange transfer below.'
-            : (isZhCn ? '请先在下方选择：小狐狸付款 / 交易所转账。' : '請先在下方選擇：小狐狸付款 / 交易所轉帳。')
+          ? (usdtMode === 'metamask'
+            ? (isEn
+              ? 'MetaMask payment: click the button above to pay. After confirmation, we will auto-submit.'
+              : (isZhCn ? '小狐狸付款：请点击上方按钮付款，确认后会自动提交。' : '小狐狸付款：請點擊上方按鈕付款，確認後會自動提交。')
+            )
+            : (usdtMode === 'exchange'
+              ? (isEn
+                ? 'Exchange transfer: use the addresses below, then upload the withdrawal/transfer screenshot.'
+                : (isZhCn ? '交易所转账：请使用下方地址转账，并上传提币/转账截图。' : '交易所轉帳：請使用下方地址轉帳，並上傳提幣/轉帳截圖。')
+              )
+              : (isEn
+                ? 'USDT selected. Please choose MetaMask or Exchange transfer in the previous step.'
+                : (isZhCn ? '已选择 USDT，请回到上一步选择：MetaMask 或 交易所转账。' : '已選擇 USDT，請回到上一步選擇：MetaMask 或 交易所轉帳。')
+            )
           )
           : (m === 'TWD' || m === 'CNY')
             ? (isEn
