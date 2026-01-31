@@ -25,5 +25,14 @@ input:focus,select:focus,textarea:focus{border-color:rgba(74,163,255,.7)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 .notice{border-left:4px solid var(--accent);padding:10px 12px;background:rgba(74,163,255,.08);border-radius:12px;color:var(--muted)}
 .notice.danger{border-left-color:var(--danger);background:rgba(255,90,106,.08)}
+
+/* Modal (for obvious validation errors) */
+.vd-modal{border:0;padding:0;background:transparent;max-width:min(560px,calc(100vw - 32px))}
+.vd-modal::backdrop{background:rgba(0,0,0,.55)}
+.vd-modal__card{margin:0;border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px;background:rgba(16,26,51,.95);backdrop-filter:blur(6px);color:var(--text)}
+.vd-modal__title{font-weight:900;margin:0 0 8px;font-size:16px}
+.vd-modal__body{white-space:pre-wrap;color:var(--muted);line-height:1.6}
+.vd-modal__actions{display:flex;justify-content:flex-end;margin-top:14px}
+
 .footer{margin-top:18px;color:var(--muted);font-size:12px;line-height:1.6}
 .small{font-size:12px;color:var(--muted)}

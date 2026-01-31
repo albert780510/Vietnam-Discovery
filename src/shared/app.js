@@ -33,10 +33,58 @@ async function main(locale){
   updatePrice();
   productSel.addEventListener('change', updatePrice);
 
+  function ensureModal(){
+    let dlg = document.querySelector('#vd-modal');
+    if (dlg) return dlg;
+
+    dlg = document.createElement('dialog');
+    dlg.id = 'vd-modal';
+    dlg.className = 'vd-modal';
+    dlg.innerHTML = `
+      <form method="dialog" class="vd-modal__card">
+        <div class="vd-modal__title" id="vd-modal-title"></div>
+        <div class="vd-modal__body" id="vd-modal-body"></div>
+        <div class="vd-modal__actions">
+          <button class="btn" value="ok">OK</button>
+        </div>
+      </form>
+    `;
+    document.body.appendChild(dlg);
+
+    // Click outside to close
+    dlg.addEventListener('click', (e) => {
+      const card = dlg.querySelector('.vd-modal__card');
+      if (card && !card.contains(e.target)) dlg.close();
+    });
+
+    return dlg;
+  }
+
+  function showModal(kind, msg){
+    const title = kind === 'danger'
+      ? (locale==='zh-CN' ? '请注意' : '請注意')
+      : (locale==='zh-CN' ? '提示' : '提示');
+
+    // Fallback for old browsers
+    if (!('HTMLDialogElement' in window)) {
+      alert(`${title}\n\n${msg}`);
+      return;
+    }
+
+    const dlg = ensureModal();
+    dlg.querySelector('#vd-modal-title').textContent = title;
+    dlg.querySelector('#vd-modal-body').textContent = msg;
+    dlg.dataset.kind = kind;
+    dlg.showModal();
+  }
+
   async function setStatus(kind, msg){
     statusEl.className = `notice ${kind==='danger'?'danger':''}`;
     statusEl.textContent = msg;
     statusEl.style.display = 'block';
+
+    // Make critical issues very obvious
+    if (kind === 'danger') showModal(kind, msg);
   }
 
   const passportInput = qs('#passport');
