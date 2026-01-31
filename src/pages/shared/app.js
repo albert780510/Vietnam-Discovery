@@ -307,38 +307,38 @@ async function main(locale){
       </ul>
     `};
   }
-+
-+  async function imageFileToJpegDataUrl(file, { maxSide = 1400, quality = 0.86 } = {}){
-+    if (!file) return '';
-+    if (!String(file.type || '').startsWith('image/')) return '';
-+    // Basic size guard (before compression)
-+    const maxMB = 10;
-+    if (file.size > maxMB * 1024 * 1024) throw new Error('file_too_large');
-+
-+    const url = URL.createObjectURL(file);
-+    try {
-+      const img = await new Promise((resolve, reject) => {
-+        const im = new Image();
-+        im.onload = () => resolve(im);
-+        im.onerror = reject;
-+        im.src = url;
-+      });
-+      const w = img.naturalWidth || img.width;
-+      const h = img.naturalHeight || img.height;
-+      const scale = Math.min(1, maxSide / Math.max(w, h));
-+      const cw = Math.max(1, Math.round(w * scale));
-+      const ch = Math.max(1, Math.round(h * scale));
-+
-+      const canvas = document.createElement('canvas');
-+      canvas.width = cw;
-+      canvas.height = ch;
-+      const ctx = canvas.getContext('2d');
-+      ctx.drawImage(img, 0, 0, cw, ch);
-+      return canvas.toDataURL('image/jpeg', quality);
-+    } finally {
-+      URL.revokeObjectURL(url);
-+    }
-+  }
+
+  async function imageFileToJpegDataUrl(file, { maxSide = 1400, quality = 0.86 } = {}){
+    if (!file) return '';
+    if (!String(file.type || '').startsWith('image/')) return '';
+    // Basic size guard (before compression)
+    const maxMB = 10;
+    if (file.size > maxMB * 1024 * 1024) throw new Error('file_too_large');
+
+    const url = URL.createObjectURL(file);
+    try {
+      const img = await new Promise((resolve, reject) => {
+        const im = new Image();
+        im.onload = () => resolve(im);
+        im.onerror = reject;
+        im.src = url;
+      });
+      const w = img.naturalWidth || img.width;
+      const h = img.naturalHeight || img.height;
+      const scale = Math.min(1, maxSide / Math.max(w, h));
+      const cw = Math.max(1, Math.round(w * scale));
+      const ch = Math.max(1, Math.round(h * scale));
+
+      const canvas = document.createElement('canvas');
+      canvas.width = cw;
+      canvas.height = ch;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, cw, ch);
+      return canvas.toDataURL('image/jpeg', quality);
+    } finally {
+      URL.revokeObjectURL(url);
+    }
+  }
 
   const passportInput = qs('#passport');
   const photoInput = qs('#photo');
