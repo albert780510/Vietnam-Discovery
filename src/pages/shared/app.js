@@ -452,6 +452,9 @@ async function main(locale){
       setActive(payInfoTwd, m === 'TWD');
       setActive(payInfoCny, m === 'CNY');
 
+      // If paying in CNY, hide the TWD bank block entirely.
+      if (payInfoTwd) payInfoTwd.style.display = (m === 'CNY') ? 'none' : '';
+
       // Update CNY block contents (Alipay + WeChat Pay)
       if (payInfoCny) {
         const t = payInfoCny.querySelector('div[style*="font-weight:800"]');
@@ -468,13 +471,39 @@ async function main(locale){
           grid.innerHTML = `
             <div class="payQrItem">
               <div class="t">Alipay</div>
-              <img src="/shared/alipay_qr.jpg" alt="Alipay QR" class="payQr" loading="lazy" />
+              <img src="/shared/alipay_qr.jpg" alt="Alipay QR" class="payQr payQrZoom" loading="lazy" />
             </div>
             <div class="payQrItem">
               <div class="t">WeChat Pay</div>
-              <img src="/shared/wechatpay_qr.jpg" alt="WeChat Pay QR" class="payQr" loading="lazy" />
+              <img src="/shared/wechatpay_qr.jpg" alt="WeChat Pay QR" class="payQr payQrZoom" loading="lazy" />
             </div>
           `;
+
+          // Click-to-zoom for easier scanning
+          for (const img of grid.querySelectorAll('img.payQrZoom')) {
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', () => {
+              let dlg = document.querySelector('#vd-qr-zoom');
+              if (!dlg) {
+                dlg = document.createElement('dialog');
+                dlg.id = 'vd-qr-zoom';
+                dlg.className = 'vd-modal';
+                dlg.innerHTML = `
+                  <form method="dialog" class="vd-modal__card" style="max-width:min(640px,calc(100vw - 32px))">
+                    <div class="vd-modal__title">QR</div>
+                    <div class="vd-modal__body" style="padding:0">
+                      <img id="vd-qr-zoom-img" alt="QR" style="width:100%;height:auto;display:block;border-radius:12px" />
+                    </div>
+                    <div class="vd-modal__actions"><button class="btn" value="ok">OK</button></div>
+                  </form>
+                `;
+                document.body.appendChild(dlg);
+              }
+              const big = dlg.querySelector('#vd-qr-zoom-img');
+              if (big) big.src = img.src;
+              dlg.showModal();
+            });
+          }
         }
       }
 
