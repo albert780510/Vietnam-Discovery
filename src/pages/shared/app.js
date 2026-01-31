@@ -266,20 +266,8 @@ async function main(locale){
     const methodSel = qs('#payMethod');
     if (!txidInput || !methodSel) return;
 
-    const eth = window.ethereum;
-    if (!eth || typeof eth.request !== 'function') {
-      // MetaMask not available
-      const txidInput = qs('#txid');
-      const host = txidInput?.closest('div') || proofForm || document.body;
-      const hint = document.createElement('div');
-      hint.className = 'help';
-      hint.style.marginTop = '8px';
-      hint.textContent = isEn
-        ? 'Tip: Install/enable MetaMask to pay USDT automatically. Otherwise you can pay by copying the address + QR below.'
-        : (isZhCn ? '提示：若要自动打开小狐狸支付 USDT，请先安装/启用 MetaMask。否则可用下方地址/二维码自行转账。' : '提示：若要自動打開小狐狸支付 USDT，請先安裝/啟用 MetaMask。否則可用下方地址/QR 自行轉帳。');
-      host.appendChild(hint);
-      return;
-    }
+    // NOTE: On iOS, MetaMask only injects `window.ethereum` inside the MetaMask in-app browser.
+    // So we always show the button; if MetaMask isn't available, the button deep-links to MetaMask.
 
     // Mount the MetaMask CTA next to the payment method (not inside TXID field),
     // so we can hide the TXID input without hiding the button.
@@ -299,8 +287,11 @@ async function main(locale){
     help.className = 'help';
     help.style.marginTop = '6px';
     help.textContent = isEn
-      ? 'Requires MetaMask and BNB for gas (BSC network). After payment, the TXID will be filled automatically.'
-      : (isZhCn ? '需要小狐狸钱包，并确保在 BSC 网络且有少量 BNB 作为手续费。付款后会自动填入 TXID。' : '需要小狐狸錢包，並確保在 BSC 網路且有少量 BNB 作為手續費。付款後會自動填入 TXID。');
+      ? 'Requires MetaMask and a little BNB for gas (BSC). After payment, TXID will be filled automatically. On iPhone: open this page in the MetaMask app browser.'
+      : (isZhCn
+        ? '需要小狐狸钱包，并确保在 BSC 网络且有少量 BNB 作为手续费。付款后会自动填入 TXID。iPhone 请用 MetaMask App 内置浏览器打开本页。'
+        : '需要小狐狸錢包，並確保在 BSC 網路且有少量 BNB 作為手續費。付款後會自動填入 TXID。iPhone 請用 MetaMask App 內建瀏覽器開啟本頁。'
+      );
 
     box.appendChild(btn);
     box.appendChild(help);
@@ -319,7 +310,7 @@ async function main(locale){
       return '0x' + selector + addr + amt;
     }
 
-    async function ensureBsc(){
+    async function ensureBsc(eth){
       const chainId = await eth.request({ method: 'eth_chainId' });
       if (chainId === '0x38') return;
       try {
@@ -353,6 +344,18 @@ async function main(locale){
         // Do not block MetaMask popup on missing contact fields.
         // We will still require contact fields when the user submits payment proof.
 
+        const eth = window.ethereum;
+        if (!eth || typeof eth.request !== 'function') {
+          const dappUrl = `${location.host}${location.pathname}${location.search || ''}`;
+          const mmLink = `https://metamask.app.link/dapp/${dappUrl}`;
+          await setStatus('danger', isEn
+            ? 'MetaMask is not detected in this browser. Opening MetaMask…'
+            : (isZhCn ? '当前浏览器未检测到 MetaMask，正在打开 MetaMask…' : '目前瀏覽器未偵測到 MetaMask，正在打開 MetaMask…')
+          );
+          location.href = mmLink;
+          return;
+        }
+
         const p = pricing.products[productSel.value];
         const { total: usdtTotal } = calcTotalForCurrency(p, 'USDT');
         if (!Number.isFinite(usdtTotal)) {
@@ -374,7 +377,7 @@ async function main(locale){
         const from = accounts?.[0];
         if (!from) throw new Error('no_wallet_account');
 
-        await ensureBsc();
+        await ensureBsc(eth);
 
         // Receiver: Binance deposit address on BSC (BEP20)
         const receiver = '0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489';
