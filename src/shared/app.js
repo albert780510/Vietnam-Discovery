@@ -94,21 +94,7 @@ async function main(locale){
     if (!passportInput.files?.[0]) return;
 
     // 1) Fast client-side checks (speed + better UX)
-    await setStatus('info', locale==='zh-CN' ? '正在检查护照资料页图片…' : '正在檢查護照資料頁圖片…');
-    const r = await validateImageFile(passportInput.files[0], { kind:'passport', minWidth: 900, minHeight: 600, maxMB: 10 });
-    if (!r.ok) {
-      passportInput.value = '';
-      await setStatus('danger', (locale==='zh-CN'?'护照资料页不符合要求：':'護照資料頁不符合要求：') + (r.message || r.reason));
-      return;
-    }
-
-    // Show client-side warnings (but still proceed to MRZ)
-    if (r.warnings && r.warnings.length) {
-      await setStatus('info', (locale==='zh-CN' ? '提醒：' : '提醒：') + r.warnings.join('；'));
-    }
-
-    // Disabled: server-side MRZ OCR check (too many false negatives in practice)
-    // We only keep lightweight checks and a clear upload confirmation.
+    // Disabled: strict client-side passport validation (was blocking too often).
     await setStatus('info', locale==='zh-CN' ? '护照资料页已上传。' : '護照資料頁已上傳。');
     return;
 
@@ -142,14 +128,9 @@ async function main(locale){
 
   photoInput.addEventListener('change', async () => {
     if (!photoInput.files?.[0]) return;
-    await setStatus('info', locale==='zh-CN' ? '正在检查证件照…' : '正在檢查證件照…');
-    const r = await validateImageFile(photoInput.files[0], { kind:'photo', minWidth: 600, minHeight: 600, maxMB: 6 });
-    if (!r.ok) {
-      photoInput.value = '';
-      await setStatus('danger', (locale==='zh-CN'?'证件照不符合要求：':'證件照不符合要求：') + (r.message || r.reason));
-    } else {
-      await setStatus('info', (locale==='zh-CN'?'证件照 OK。':'證件照 OK。') + `（${r.meta.width}×${r.meta.height}）`);
-    }
+
+    // Disabled: strict client-side photo validation (too many false negatives).
+    await setStatus('info', locale==='zh-CN' ? '证件照已上传。' : '證件照已上傳。');
   });
 
   form.addEventListener('submit', async (e) => {
