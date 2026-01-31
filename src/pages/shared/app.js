@@ -870,31 +870,33 @@ async function main(locale){
       // Payment proof title/help (method-specific)
       if (payTitleEl) payTitleEl.textContent = isEn ? 'Payment confirmation' : (isZhCn ? '付款確認' : '付款確認');
       if (payHelpEl) {
-        payHelpEl.textContent = (m === 'USDT')
-          ? (usdtMode === 'metamask'
-            ? (isEn
+        let helpText = '';
+
+        if (m === 'USDT') {
+          if (usdtMode === 'metamask') {
+            helpText = isEn
               ? 'MetaMask payment: click the button above to pay. After confirmation, we will auto-submit.'
-              : (isZhCn ? '小狐狸付款：请点击上方按钮付款，确认后会自动提交。' : '小狐狸付款：請點擊上方按鈕付款，確認後會自動提交。')
-            )
-            : (usdtMode === 'exchange'
-              ? (isEn
-                ? 'Exchange transfer: use the addresses below, then upload the withdrawal/transfer screenshot.'
-                : (isZhCn ? '交易所转账：请使用下方地址转账，并上传提币/转账截图。' : '交易所轉帳：請使用下方地址轉帳，並上傳提幣/轉帳截圖。')
-              )
-              : (isEn
-                ? 'USDT selected. Please choose MetaMask or Exchange transfer in the previous step.'
-                : (isZhCn ? '已选择 USDT，请回到上一步选择：MetaMask 或 交易所转账。' : '已選擇 USDT，請回到上一步選擇：MetaMask 或 交易所轉帳。')
-            )
-          )
-          : (m === 'TWD' || m === 'CNY')
-            ? (isEn
-              ? 'After payment, upload a payment screenshot so we can confirm quickly.'
-              : (isZhCn ? '付款后请上传付款截图，以便我们快速核对。' : '付款後請上傳付款截圖，以便我們快速核對。')
-            )
-            : (isEn
-              ? 'Choose a payment method to see what to submit.'
-              : (isZhCn ? '请选择付款方式后再提交。' : '請選擇付款方式後再提交。')
-            );
+              : (isZhCn ? '小狐狸付款：请点击上方按钮付款，确认后会自动提交。' : '小狐狸付款：請點擊上方按鈕付款，確認後會自動提交。');
+          } else if (usdtMode === 'exchange') {
+            helpText = isEn
+              ? 'Exchange transfer: use the addresses below, then upload the withdrawal/transfer screenshot.'
+              : (isZhCn ? '交易所转账：请使用下方地址转账，并上传提币/转账截图。' : '交易所轉帳：請使用下方地址轉帳，並上傳提幣/轉帳截圖。');
+          } else {
+            helpText = isEn
+              ? 'USDT selected. Please choose MetaMask or Exchange transfer in the previous step.'
+              : (isZhCn ? '已选择 USDT，请回到上一步选择：MetaMask 或 交易所转账。' : '已選擇 USDT，請回到上一步選擇：MetaMask 或 交易所轉帳。');
+          }
+        } else if (m === 'TWD' || m === 'CNY') {
+          helpText = isEn
+            ? 'After payment, upload a payment screenshot so we can confirm quickly.'
+            : (isZhCn ? '付款后请上传付款截图，以便我们快速核对。' : '付款後請上傳付款截圖，以便我們快速核對。');
+        } else {
+          helpText = isEn
+            ? 'Choose a payment method to see what to submit.'
+            : (isZhCn ? '请选择付款方式后再提交。' : '請選擇付款方式後再提交。');
+        }
+
+        payHelpEl.textContent = helpText;
       }
 
       // Field visibility
