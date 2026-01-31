@@ -102,6 +102,11 @@ async function main(locale){
       return;
     }
 
+    // Show client-side warnings (but still proceed to MRZ)
+    if (r.warnings && r.warnings.length) {
+      await setStatus('info', (locale==='zh-CN' ? '提醒：' : '提醒：') + r.warnings.join('；'));
+    }
+
     // 2) Server-side MRZ check (reduces official-system rejections)
     await setStatus('info', locale==='zh-CN' ? '正在进行护照 MRZ 自动辨识（防退件）…' : '正在進行護照 MRZ 自動辨識（防退件）…');
     try {
