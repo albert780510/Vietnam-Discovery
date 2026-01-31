@@ -287,9 +287,7 @@ async function main(locale){
 
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'btn';
-    btn.style.padding = '10px 12px';
-    btn.style.fontSize = '14px';
+    btn.className = 'btn metamaskBtn';
     btn.textContent = isEn
       ? 'Pay USDT with MetaMask'
       : (isZhCn ? '用小狐狸钱包支付 USDT' : '用小狐狸錢包支付 USDT');
@@ -432,6 +430,10 @@ async function main(locale){
     const proofInput = qs('#proofImage');
     const amountInput = qs('#payAmount');
 
+    // In the HTML, payMethod select and TXID live in the same row, so we control them separately.
+    const methodWrap = methodSel?.closest('div');
+    const txidWrap = txidInput?.closest('div');
+
     const txidRow = txidInput?.closest('.row');
     const last5Row = last5Input?.closest('.row');
     const proofRow = proofInput?.closest('div');
@@ -454,6 +456,58 @@ async function main(locale){
 
       // If paying in CNY, hide the TWD bank block entirely.
       if (payInfoTwd) payInfoTwd.style.display = (m === 'CNY') ? 'none' : '';
+
+      // If paying in USDT, lock the payment method (no switching) and keep UI minimal.
+      if (m === 'USDT') {
+        // Hide the dropdown, keep a static label.
+        if (methodWrap) {
+          const sel = methodWrap.querySelector('select');
+          if (sel) sel.classList.add('hidden');
+          let staticEl = methodWrap.querySelector('#vd-method-static');
+          if (!staticEl) {
+            staticEl = document.createElement('div');
+            staticEl.id = 'vd-method-static';
+            staticEl.className = 'small';
+            staticEl.style.marginTop = '6px';
+            methodWrap.appendChild(staticEl);
+          }
+          staticEl.textContent = isEn ? 'USDT (BEP20)' : 'USDT（BEP20）';
+        }
+
+        // Hide TXID input by default (it will be filled automatically).
+        if (txidWrap) {
+          txidWrap.classList.add('hidden');
+          // Optional: allow manual TXID reveal
+          let link = txidRow?.querySelector('#vd-show-txid');
+          if (!link) {
+            link = document.createElement('a');
+            link.id = 'vd-show-txid';
+            link.href = '#';
+            link.className = 'small';
+            link.style.display = 'inline-block';
+            link.style.marginTop = '6px';
+            link.textContent = isEn ? 'Enter TXID manually' : (isZhCn ? '手动填写 TXID' : '手動填寫 TXID');
+            link.addEventListener('click', (e) => {
+              e.preventDefault();
+              txidWrap.classList.remove('hidden');
+              link.remove();
+            });
+            // Put the link under the method block
+            methodWrap?.appendChild(link);
+          }
+        }
+      } else {
+        // Non-USDT: show dropdown and remove static label
+        if (methodWrap) {
+          const sel = methodWrap.querySelector('select');
+          if (sel) sel.classList.remove('hidden');
+          const staticEl = methodWrap.querySelector('#vd-method-static');
+          if (staticEl) staticEl.remove();
+          const showTxid = methodWrap.querySelector('#vd-show-txid');
+          if (showTxid) showTxid.remove();
+        }
+        if (txidWrap) txidWrap.classList.remove('hidden');
+      }
 
       // Extra UI cleanup for CNY: they only need to upload a payment screenshot.
       const payTotalEl = qs('#payTotal');

@@ -32,6 +32,9 @@ input:focus,select:focus,textarea:focus{border-color:rgba(74,163,255,.7)}
 @media(max-width:700px){.row{grid-template-columns:1fr}}
 .btn{cursor:pointer;border:0;border-radius:12px;padding:12px 14px;background:linear-gradient(90deg,#2e7bff,#4aa3ff);color:#041022;font-weight:800}
 .btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* Make the MetaMask pay CTA extra prominent */
+.btn.metamaskBtn{width:100%;padding:14px 14px;font-size:15px}
 .notice{border-left:4px solid var(--accent);padding:10px 12px;background:rgba(74,163,255,.08);border-radius:12px;color:var(--muted)}
 .notice.danger{border-left-color:var(--danger);background:rgba(255,90,106,.08)}
 
