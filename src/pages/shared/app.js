@@ -376,7 +376,8 @@ async function main(locale){
 
         await ensureBsc();
 
-        const receiver = '0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489';
+        // Receiver (MetaMask address is chain-agnostic across EVM networks; we still force BSC for USDT contract)
+        const receiver = '0x331bF7aF400a173D4886312Bb2492458Cd1AE63c';
         const usdtContract = '0x55d398326f99059fF775485246999027B3197955';
         const decimals = 6n;
 
@@ -554,8 +555,8 @@ async function main(locale){
       if (payHelpEl) {
         payHelpEl.textContent = (m === 'USDT')
           ? (isEn
-            ? 'After payment, submit TXID so we can confirm quickly.'
-            : (isZhCn ? '付款后请提交 TXID，以便我们快速核对。' : '付款後請提交 TXID，以便我們快速核對。')
+            ? 'Use the MetaMask button below. TXID will be filled automatically.'
+            : (isZhCn ? '请使用下方小狐狸按钮付款，TXID 会自动填入。' : '請使用下方小狐狸按鈕付款，TXID 會自動填入。')
           )
           : (m === 'TWD' || m === 'CNY')
             ? (isEn
