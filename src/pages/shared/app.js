@@ -975,6 +975,10 @@ async function main(locale){
         let dlg = document.querySelector('#vd-pay-dialog');
         if (dlg) return dlg;
 
+        const moneyTwd = fmtMoney(tTwd.total, 'TWD', locale);
+        const moneyCny = fmtMoney(tCny.total, 'CNY', locale);
+        const moneyUsdt = fmtMoney(tUsdt.total, 'USDT', locale);
+
         dlg = document.createElement('dialog');
         dlg.id = 'vd-pay-dialog';
         dlg.className = 'vd-modal';
@@ -982,55 +986,68 @@ async function main(locale){
           <form method="dialog" class="vd-modal__card">
             <div class="vd-modal__title">${isEn ? 'Choose payment method' : (isZhCn ? '请选择付款方式' : '請選擇付款方式')}</div>
             <div class="vd-modal__body" style="white-space:normal">
-              <div class="help" style="margin-bottom:10px">${isEn ? 'Pick one method to see the correct payment details and fields.' : (isZhCn ? '选择一种付款方式后，系统会显示对应的付款资讯与填写栏位。' : '選擇一種付款方式後，系統會顯示對應的付款資訊與填寫欄位。')}</div>
-              <div class="totalBanner" id="vd-pay-amount" style="margin:0 0 10px 0"></div>
-              <select id="vd-pay-choice" style="width:100%;margin-top:4px">
-                <option value="">${isEn ? 'Select…' : (isZhCn ? '请选择…' : '請選擇…')}</option>
-                <option value="TWD">TWD bank transfer</option>
-                <option value="CNY">CNY (Alipay)</option>
-                <option value="USDT">USDT (MetaMask)</option>
-              </select>
+              <div class="help" style="margin-bottom:10px">${isEn ? 'Pick one method to continue.' : (isZhCn ? '请选择一种付款方式继续。' : '請選擇一種付款方式繼續。')}</div>
+              <div class="vd-usdt-choice" style="display:grid;gap:10px">
+                <button type="button" class="btn" data-method="TWD" style="width:100%">TWD bank transfer — ${moneyTwd}</button>
+                <button type="button" class="btn" data-method="CNY" style="width:100%">CNY (Alipay) — ${moneyCny}</button>
+                <button type="button" class="btn" data-method="USDT" style="width:100%">USDT — ${moneyUsdt}</button>
+              </div>
             </div>
             <div class="vd-modal__actions" style="gap:10px">
               <button class="btn" value="cancel">${isEn ? 'Cancel' : (isZhCn ? '取消' : '取消')}</button>
-              <button class="btn" id="vd-pay-confirm" value="ok">${isEn ? 'Continue' : (isZhCn ? '继续' : '繼續')}</button>
             </div>
           </form>
         `;
         document.body.appendChild(dlg);
+
+        // Close with the selected method
+        dlg.addEventListener('click', (e) => {
+          const btn = e.target?.closest?.('button[data-method]');
+          const v = btn?.getAttribute?.('data-method') || '';
+          if (!v) return;
+          dlg.returnValue = v;
+          dlg.close();
+        });
+
         return dlg;
       }
 
-      const dlg = ensurePayDialog();
-      const choice = dlg.querySelector('#vd-pay-choice');
+      function ensureUsdtDialog(){
+        let dlg = document.querySelector('#vd-usdt-dialog');
+        if (dlg) return dlg;
 
-      // Update dialog to show amount in the selected payment currency
-      const amountLine = dlg.querySelector('#vd-pay-amount');
-      function amountFor(method){
-        if (method === 'TWD') return fmtMoney(tTwd.total, 'TWD', locale);
-        if (method === 'CNY') return fmtMoney(tCny.total, 'CNY', locale);
-        if (method === 'USDT') return fmtMoney(tUsdt.total, 'USDT', locale);
-        return '';
+        dlg = document.createElement('dialog');
+        dlg.id = 'vd-usdt-dialog';
+        dlg.className = 'vd-modal';
+        dlg.innerHTML = `
+          <form method="dialog" class="vd-modal__card">
+            <div class="vd-modal__title">${isEn ? 'USDT payment' : (isZhCn ? 'USDT 付款' : 'USDT 付款')}</div>
+            <div class="vd-modal__body" style="white-space:normal">
+              <div class="help" style="margin-bottom:10px">${isEn ? 'Choose one option:' : (isZhCn ? '请选择一种方式：' : '請選擇一種方式：')}</div>
+              <div style="display:grid;gap:10px">
+                <button type="button" class="btn" data-usdt="metamask" style="width:100%">${isEn ? '1) USDT (MetaMask) — auto submit' : (isZhCn ? '1) USDT（MetaMask）— 自动提交' : '1) USDT（MetaMask）— 自動提交')}</button>
+                <button type="button" class="btn" data-usdt="exchange" style="width:100%">${isEn ? '2) Exchange transfer — show addresses + upload screenshot' : (isZhCn ? '2) 交易所转账 — 显示地址 + 上传截图' : '2) 交易所轉帳 — 顯示地址 + 上傳截圖')}</button>
+              </div>
+            </div>
+            <div class="vd-modal__actions" style="gap:10px">
+              <button class="btn" value="cancel">${isEn ? 'Back' : (isZhCn ? '返回' : '返回')}</button>
+            </div>
+          </form>
+        `;
+        document.body.appendChild(dlg);
+
+        dlg.addEventListener('click', (e) => {
+          const btn = e.target?.closest?.('button[data-usdt]');
+          const v = btn?.getAttribute?.('data-usdt') || '';
+          if (!v) return;
+          dlg.returnValue = v;
+          dlg.close();
+        });
+
+        return dlg;
       }
-      function updateDialogAmount(){
-        if (!amountLine) return;
-        const v = choice?.value || '';
-        const money = v ? amountFor(v) : '';
-        amountLine.textContent = money
-          ? (isEn ? `Amount to pay: ${money}` : (isZhCn ? `应付金额：${money}` : `應付金額：${money}`))
-          : (isEn ? 'Select a payment method to see the amount.' : (isZhCn ? '选择付款方式后显示应付金额。' : '選擇付款方式後顯示應付金額。'));
-      }
 
-      // Reset selection each new order
-      if (choice) choice.value = '';
-      choice?.addEventListener('change', updateDialogAmount, { once: false });
-      updateDialogAmount();
-      dlg.showModal();
-
-      dlg.addEventListener('close', () => {
-        const v = choice?.value || '';
-        if (!v) return; // user canceled
-
+      function applyPaymentChoice(v){
         // Reveal payment sections
         if (paymentBox) {
           paymentBox.style.display = 'block';
@@ -1083,6 +1100,40 @@ async function main(locale){
           payMethod.value = v;
           payMethod.dispatchEvent(new Event('change', { bubbles: true }));
         }
+      }
+
+      const dlg = ensurePayDialog();
+      dlg.showModal();
+
+      dlg.addEventListener('close', () => {
+        const v = dlg.returnValue || '';
+        if (!v) return; // user canceled
+
+        if (v === 'USDT') {
+          // USDT: show only two choices (MetaMask vs Exchange transfer)
+          const u = ensureUsdtDialog();
+          u.showModal();
+          u.addEventListener('close', () => {
+            const mode = u.returnValue || '';
+            if (!mode) return;
+            applyPaymentChoice('USDT');
+
+            // Tell the proof UI which USDT mode is used
+            try { window.__VD_setUsdtMode(mode); } catch (_) {}
+
+            if (mode === 'metamask') {
+              // Trigger MetaMask flow immediately
+              const btn = document.querySelector('#vd-metamask-box button');
+              btn?.click?.();
+            } else {
+              // Exchange transfer: show address blocks + require screenshot
+              // (UI is handled by updatePayUI/renderUsdtChooser)
+            }
+          }, { once: true });
+          return;
+        }
+
+        applyPaymentChoice(v);
       }, { once: true });
     } catch (err) {
       await setStatus('danger', (isEn?'Failed to create order: ':(isZhCn?'建立订单失败：':'建立訂單失敗：')) + err.message);
