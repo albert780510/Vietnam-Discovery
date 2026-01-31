@@ -442,12 +442,44 @@ async function main(locale){
       el.classList.toggle('hidden', !!hidden);
     }
 
+    const payTitleEl = qs('#paymentProof > div'); // first title div inside paymentProof
+    const payHelpEl = qs('#paymentProof .help');
+
     function updatePayUI(){
       const m = methodSel?.value || '';
 
       // Payment info blocks
       setActive(payInfoTwd, m === 'TWD');
       setActive(payInfoCny, m === 'CNY');
+
+      // Update payment info titles/text (localize CNY block that was inserted as English)
+      if (payInfoCny) {
+        const t = payInfoCny.querySelector('div[style*="font-weight:800"]');
+        const h = payInfoCny.querySelector('.small');
+        if (t) t.textContent = isEn ? 'Alipay (CNY)' : (isZhCn ? '支付宝（人民币 CNY）' : '支付寶（人民幣 CNY）');
+        if (h) h.textContent = isEn
+          ? 'Scan to pay with Alipay, then upload the payment screenshot below.'
+          : (isZhCn ? '扫码使用支付宝付款。付款后请在下方上传付款截图。' : '掃碼使用支付寶付款。付款後請在下方上傳付款截圖。');
+      }
+
+      // Payment proof title/help (method-specific)
+      if (payTitleEl) payTitleEl.textContent = isEn ? 'Payment confirmation' : (isZhCn ? '付款確認' : '付款確認');
+      if (payHelpEl) {
+        payHelpEl.textContent = (m === 'USDT')
+          ? (isEn
+            ? 'After payment, submit TXID so we can confirm quickly.'
+            : (isZhCn ? '付款后请提交 TXID，以便我们快速核对。' : '付款後請提交 TXID，以便我們快速核對。')
+          )
+          : (m === 'TWD' || m === 'CNY')
+            ? (isEn
+              ? 'After payment, upload a payment screenshot so we can confirm quickly.'
+              : (isZhCn ? '付款后请上传付款截图，以便我们快速核对。' : '付款後請上傳付款截圖，以便我們快速核對。')
+            )
+            : (isEn
+              ? 'Choose a payment method to see what to submit.'
+              : (isZhCn ? '请选择付款方式后再提交。' : '請選擇付款方式後再提交。')
+            );
+      }
 
       // Field visibility
       // USDT: show TXID; hide last5 + proof screenshot + amount
