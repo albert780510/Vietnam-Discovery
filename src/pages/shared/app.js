@@ -818,12 +818,13 @@ async function main(locale){
 
       const productId = productSel?.value || '';
       const speedId = speedSel?.value || '';
-      const productLabel = pricing?.products?.[productId]?.label?.[locale]
-        || pricing?.products?.[productId]?.label?.['en']
+      // For the ops group (Vietnamese staff), always send English labels.
+      const productLabel = pricing?.products?.[productId]?.label?.['en']
+        || pricing?.products?.[productId]?.label?.[locale]
         || pricing?.products?.[productId]?.label?.['zh-TW']
         || productId;
-      const speedLabel = processing?.speeds?.find(s => s.id === speedId)?.label?.[locale]
-        || processing?.speeds?.find(s => s.id === speedId)?.label?.['en']
+      const speedLabel = processing?.speeds?.find(s => s.id === speedId)?.label?.['en']
+        || processing?.speeds?.find(s => s.id === speedId)?.label?.[locale]
         || speedId;
 
       const payCurrency = (method === 'USDT') ? 'USDT' : ((method === 'CNY') ? 'CNY' : 'TWD');
