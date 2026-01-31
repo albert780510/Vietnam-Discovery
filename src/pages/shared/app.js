@@ -113,13 +113,21 @@ async function main(locale){
     });
   }
 
+  function visaFreeNote(days){
+    if (!days) return '';
+    if (isEn) return ` (Visa-free up to ${days} days)`;
+    if (isZhCn) return `（免签最多 ${days} 天）`;
+    return `（免簽最多 ${days} 天）`;
+  }
+
   // Populate nationalities (50+)
   if (nationalityEl && nationalityEl.tagName === 'SELECT') {
     const nationalities = await loadJson('/shared/config.nationalities.json');
     for (const n of nationalities) {
       const opt = document.createElement('option');
       opt.value = n.name_en;
-      opt.textContent = `${n.emoji} ${n.name_en}`;
+      const note = visaFreeNote(n.visa_free_days);
+      opt.textContent = `${n.emoji} ${n.name_en}${note}`;
       nationalityEl.appendChild(opt);
     }
   }

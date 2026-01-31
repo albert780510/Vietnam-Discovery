@@ -1,52 +1,521 @@
 [
-  {"code":"TW","name_en":"TAIWAN","emoji":"🇹🇼","label":{"zh-tw":"台灣","zh-cn":"台湾","en":"Taiwan"}},
-  {"code":"CN","name_en":"CHINA","emoji":"🇨🇳","label":{"zh-tw":"中國","zh-cn":"中国","en":"China"}},
-  {"code":"HK","name_en":"HONG KONG","emoji":"🇭🇰","label":{"zh-tw":"香港","zh-cn":"香港","en":"Hong Kong"}},
-  {"code":"MO","name_en":"MACAO","emoji":"🇲🇴","label":{"zh-tw":"澳門","zh-cn":"澳门","en":"Macao"}},
-  {"code":"SG","name_en":"SINGAPORE","emoji":"🇸🇬","label":{"zh-tw":"新加坡","zh-cn":"新加坡","en":"Singapore"}},
-  {"code":"MY","name_en":"MALAYSIA","emoji":"🇲🇾","label":{"zh-tw":"馬來西亞","zh-cn":"马来西亚","en":"Malaysia"}},
-  {"code":"TH","name_en":"THAILAND","emoji":"🇹🇭","label":{"zh-tw":"泰國","zh-cn":"泰国","en":"Thailand"}},
-  {"code":"JP","name_en":"JAPAN","emoji":"🇯🇵","label":{"zh-tw":"日本","zh-cn":"日本","en":"Japan"}},
-  {"code":"KR","name_en":"KOREA (REPUBLIC OF)","emoji":"🇰🇷","label":{"zh-tw":"韓國","zh-cn":"韩国","en":"Korea"}},
-  {"code":"US","name_en":"UNITED STATES","emoji":"🇺🇸","label":{"zh-tw":"美國","zh-cn":"美国","en":"United States"}},
-  {"code":"CA","name_en":"CANADA","emoji":"🇨🇦","label":{"zh-tw":"加拿大","zh-cn":"加拿大","en":"Canada"}},
-  {"code":"AU","name_en":"AUSTRALIA","emoji":"🇦🇺","label":{"zh-tw":"澳洲","zh-cn":"澳大利亚","en":"Australia"}},
-  {"code":"NZ","name_en":"NEW ZEALAND","emoji":"🇳🇿","label":{"zh-tw":"紐西蘭","zh-cn":"新西兰","en":"New Zealand"}},
-  {"code":"GB","name_en":"UNITED KINGDOM","emoji":"🇬🇧","label":{"zh-tw":"英國","zh-cn":"英国","en":"United Kingdom"}},
-  {"code":"FR","name_en":"FRANCE","emoji":"🇫🇷","label":{"zh-tw":"法國","zh-cn":"法国","en":"France"}},
-  {"code":"DE","name_en":"GERMANY","emoji":"🇩🇪","label":{"zh-tw":"德國","zh-cn":"德国","en":"Germany"}},
-  {"code":"NL","name_en":"NETHERLANDS","emoji":"🇳🇱","label":{"zh-tw":"荷蘭","zh-cn":"荷兰","en":"Netherlands"}},
-  {"code":"BE","name_en":"BELGIUM","emoji":"🇧🇪","label":{"zh-tw":"比利時","zh-cn":"比利时","en":"Belgium"}},
-  {"code":"CH","name_en":"SWITZERLAND","emoji":"🇨🇭","label":{"zh-tw":"瑞士","zh-cn":"瑞士","en":"Switzerland"}},
-  {"code":"AT","name_en":"AUSTRIA","emoji":"🇦🇹","label":{"zh-tw":"奧地利","zh-cn":"奥地利","en":"Austria"}},
-  {"code":"IT","name_en":"ITALY","emoji":"🇮🇹","label":{"zh-tw":"義大利","zh-cn":"意大利","en":"Italy"}},
-  {"code":"ES","name_en":"SPAIN","emoji":"🇪🇸","label":{"zh-tw":"西班牙","zh-cn":"西班牙","en":"Spain"}},
-  {"code":"PT","name_en":"PORTUGAL","emoji":"🇵🇹","label":{"zh-tw":"葡萄牙","zh-cn":"葡萄牙","en":"Portugal"}},
-  {"code":"SE","name_en":"SWEDEN","emoji":"🇸🇪","label":{"zh-tw":"瑞典","zh-cn":"瑞典","en":"Sweden"}},
-  {"code":"NO","name_en":"NORWAY","emoji":"🇳🇴","label":{"zh-tw":"挪威","zh-cn":"挪威","en":"Norway"}},
-  {"code":"DK","name_en":"DENMARK","emoji":"🇩🇰","label":{"zh-tw":"丹麥","zh-cn":"丹麦","en":"Denmark"}},
-  {"code":"FI","name_en":"FINLAND","emoji":"🇫🇮","label":{"zh-tw":"芬蘭","zh-cn":"芬兰","en":"Finland"}},
-  {"code":"IE","name_en":"IRELAND","emoji":"🇮🇪","label":{"zh-tw":"愛爾蘭","zh-cn":"爱尔兰","en":"Ireland"}},
-  {"code":"PL","name_en":"POLAND","emoji":"🇵🇱","label":{"zh-tw":"波蘭","zh-cn":"波兰","en":"Poland"}},
-  {"code":"CZ","name_en":"CZECH REPUBLIC","emoji":"🇨🇿","label":{"zh-tw":"捷克","zh-cn":"捷克","en":"Czech Republic"}},
-  {"code":"HU","name_en":"HUNGARY","emoji":"🇭🇺","label":{"zh-tw":"匈牙利","zh-cn":"匈牙利","en":"Hungary"}},
-  {"code":"GR","name_en":"GREECE","emoji":"🇬🇷","label":{"zh-tw":"希臘","zh-cn":"希腊","en":"Greece"}},
-  {"code":"TR","name_en":"TURKEY","emoji":"🇹🇷","label":{"zh-tw":"土耳其","zh-cn":"土耳其","en":"Turkey"}},
-  {"code":"AE","name_en":"UNITED ARAB EMIRATES","emoji":"🇦🇪","label":{"zh-tw":"阿聯酋","zh-cn":"阿联酋","en":"UAE"}},
-  {"code":"SA","name_en":"SAUDI ARABIA","emoji":"🇸🇦","label":{"zh-tw":"沙烏地","zh-cn":"沙特","en":"Saudi Arabia"}},
-  {"code":"IN","name_en":"INDIA","emoji":"🇮🇳","label":{"zh-tw":"印度","zh-cn":"印度","en":"India"}},
-  {"code":"PK","name_en":"PAKISTAN","emoji":"🇵🇰","label":{"zh-tw":"巴基斯坦","zh-cn":"巴基斯坦","en":"Pakistan"}},
-  {"code":"BD","name_en":"BANGLADESH","emoji":"🇧🇩","label":{"zh-tw":"孟加拉","zh-cn":"孟加拉","en":"Bangladesh"}},
-  {"code":"LK","name_en":"SRI LANKA","emoji":"🇱🇰","label":{"zh-tw":"斯里蘭卡","zh-cn":"斯里兰卡","en":"Sri Lanka"}},
-  {"code":"PH","name_en":"PHILIPPINES","emoji":"🇵🇭","label":{"zh-tw":"菲律賓","zh-cn":"菲律宾","en":"Philippines"}},
-  {"code":"ID","name_en":"INDONESIA","emoji":"🇮🇩","label":{"zh-tw":"印尼","zh-cn":"印度尼西亚","en":"Indonesia"}},
-  {"code":"KH","name_en":"CAMBODIA","emoji":"🇰🇭","label":{"zh-tw":"柬埔寨","zh-cn":"柬埔寨","en":"Cambodia"}},
-  {"code":"LA","name_en":"LAO PDR","emoji":"🇱🇦","label":{"zh-tw":"寮國","zh-cn":"老挝","en":"Laos"}},
-  {"code":"MM","name_en":"MYANMAR","emoji":"🇲🇲","label":{"zh-tw":"緬甸","zh-cn":"缅甸","en":"Myanmar"}},
-  {"code":"BR","name_en":"BRAZIL","emoji":"🇧🇷","label":{"zh-tw":"巴西","zh-cn":"巴西","en":"Brazil"}},
-  {"code":"MX","name_en":"MEXICO","emoji":"🇲🇽","label":{"zh-tw":"墨西哥","zh-cn":"墨西哥","en":"Mexico"}},
-  {"code":"AR","name_en":"ARGENTINA","emoji":"🇦🇷","label":{"zh-tw":"阿根廷","zh-cn":"阿根廷","en":"Argentina"}},
-  {"code":"ZA","name_en":"SOUTH AFRICA","emoji":"🇿🇦","label":{"zh-tw":"南非","zh-cn":"南非","en":"South Africa"}},
-  {"code":"EG","name_en":"EGYPT","emoji":"🇪🇬","label":{"zh-tw":"埃及","zh-cn":"埃及","en":"Egypt"}},
-  {"code":"OTHER","name_en":"OTHER","emoji":"🌐","label":{"zh-tw":"其他","zh-cn":"其他","en":"Other"}}
+  {
+    "code": "TW",
+    "name_en": "TAIWAN",
+    "emoji": "🇹🇼",
+    "label": {
+      "zh-tw": "台灣",
+      "zh-cn": "台湾",
+      "en": "Taiwan"
+    }
+  },
+  {
+    "code": "CN",
+    "name_en": "CHINA",
+    "emoji": "🇨🇳",
+    "label": {
+      "zh-tw": "中國",
+      "zh-cn": "中国",
+      "en": "China"
+    }
+  },
+  {
+    "code": "HK",
+    "name_en": "HONG KONG",
+    "emoji": "🇭🇰",
+    "label": {
+      "zh-tw": "香港",
+      "zh-cn": "香港",
+      "en": "Hong Kong"
+    }
+  },
+  {
+    "code": "MO",
+    "name_en": "MACAO",
+    "emoji": "🇲🇴",
+    "label": {
+      "zh-tw": "澳門",
+      "zh-cn": "澳门",
+      "en": "Macao"
+    }
+  },
+  {
+    "code": "SG",
+    "name_en": "SINGAPORE",
+    "emoji": "🇸🇬",
+    "label": {
+      "zh-tw": "新加坡",
+      "zh-cn": "新加坡",
+      "en": "Singapore"
+    },
+    "visa_free_days": 30
+  },
+  {
+    "code": "MY",
+    "name_en": "MALAYSIA",
+    "emoji": "🇲🇾",
+    "label": {
+      "zh-tw": "馬來西亞",
+      "zh-cn": "马来西亚",
+      "en": "Malaysia"
+    },
+    "visa_free_days": 30
+  },
+  {
+    "code": "TH",
+    "name_en": "THAILAND",
+    "emoji": "🇹🇭",
+    "label": {
+      "zh-tw": "泰國",
+      "zh-cn": "泰国",
+      "en": "Thailand"
+    },
+    "visa_free_days": 30
+  },
+  {
+    "code": "JP",
+    "name_en": "JAPAN",
+    "emoji": "🇯🇵",
+    "label": {
+      "zh-tw": "日本",
+      "zh-cn": "日本",
+      "en": "Japan"
+    },
+    "visa_free_days": 45
+  },
+  {
+    "code": "KR",
+    "name_en": "KOREA (REPUBLIC OF)",
+    "emoji": "🇰🇷",
+    "label": {
+      "zh-tw": "韓國",
+      "zh-cn": "韩国",
+      "en": "Korea"
+    },
+    "visa_free_days": 45
+  },
+  {
+    "code": "US",
+    "name_en": "UNITED STATES",
+    "emoji": "🇺🇸",
+    "label": {
+      "zh-tw": "美國",
+      "zh-cn": "美国",
+      "en": "United States"
+    }
+  },
+  {
+    "code": "CA",
+    "name_en": "CANADA",
+    "emoji": "🇨🇦",
+    "label": {
+      "zh-tw": "加拿大",
+      "zh-cn": "加拿大",
+      "en": "Canada"
+    }
+  },
+  {
+    "code": "AU",
+    "name_en": "AUSTRALIA",
+    "emoji": "🇦🇺",
+    "label": {
+      "zh-tw": "澳洲",
+      "zh-cn": "澳大利亚",
+      "en": "Australia"
+    }
+  },
+  {
+    "code": "NZ",
+    "name_en": "NEW ZEALAND",
+    "emoji": "🇳🇿",
+    "label": {
+      "zh-tw": "紐西蘭",
+      "zh-cn": "新西兰",
+      "en": "New Zealand"
+    }
+  },
+  {
+    "code": "GB",
+    "name_en": "UNITED KINGDOM",
+    "emoji": "🇬🇧",
+    "label": {
+      "zh-tw": "英國",
+      "zh-cn": "英国",
+      "en": "United Kingdom"
+    },
+    "visa_free_days": 45
+  },
+  {
+    "code": "FR",
+    "name_en": "FRANCE",
+    "emoji": "🇫🇷",
+    "label": {
+      "zh-tw": "法國",
+      "zh-cn": "法国",
+      "en": "France"
+    },
+    "visa_free_days": 45
+  },
+  {
+    "code": "DE",
+    "name_en": "GERMANY",
+    "emoji": "🇩🇪",
+    "label": {
+      "zh-tw": "德國",
+      "zh-cn": "德国",
+      "en": "Germany"
+    },
+    "visa_free_days": 45
+  },
+  {
+    "code": "NL",
+    "name_en": "NETHERLANDS",
+    "emoji": "🇳🇱",
+    "label": {
+      "zh-tw": "荷蘭",
+      "zh-cn": "荷兰",
+      "en": "Netherlands"
+    }
+  },
+  {
+    "code": "BE",
+    "name_en": "BELGIUM",
+    "emoji": "🇧🇪",
+    "label": {
+      "zh-tw": "比利時",
+      "zh-cn": "比利时",
+      "en": "Belgium"
+    }
+  },
+  {
+    "code": "CH",
+    "name_en": "SWITZERLAND",
+    "emoji": "🇨🇭",
+    "label": {
+      "zh-tw": "瑞士",
+      "zh-cn": "瑞士",
+      "en": "Switzerland"
+    }
+  },
+  {
+    "code": "AT",
+    "name_en": "AUSTRIA",
+    "emoji": "🇦🇹",
+    "label": {
+      "zh-tw": "奧地利",
+      "zh-cn": "奥地利",
+      "en": "Austria"
+    }
+  },
+  {
+    "code": "IT",
+    "name_en": "ITALY",
+    "emoji": "🇮🇹",
+    "label": {
+      "zh-tw": "義大利",
+      "zh-cn": "意大利",
+      "en": "Italy"
+    },
+    "visa_free_days": 45
+  },
+  {
+    "code": "ES",
+    "name_en": "SPAIN",
+    "emoji": "🇪🇸",
+    "label": {
+      "zh-tw": "西班牙",
+      "zh-cn": "西班牙",
+      "en": "Spain"
+    },
+    "visa_free_days": 45
+  },
+  {
+    "code": "PT",
+    "name_en": "PORTUGAL",
+    "emoji": "🇵🇹",
+    "label": {
+      "zh-tw": "葡萄牙",
+      "zh-cn": "葡萄牙",
+      "en": "Portugal"
+    }
+  },
+  {
+    "code": "SE",
+    "name_en": "SWEDEN",
+    "emoji": "🇸🇪",
+    "label": {
+      "zh-tw": "瑞典",
+      "zh-cn": "瑞典",
+      "en": "Sweden"
+    },
+    "visa_free_days": 45
+  },
+  {
+    "code": "NO",
+    "name_en": "NORWAY",
+    "emoji": "🇳🇴",
+    "label": {
+      "zh-tw": "挪威",
+      "zh-cn": "挪威",
+      "en": "Norway"
+    },
+    "visa_free_days": 45
+  },
+  {
+    "code": "DK",
+    "name_en": "DENMARK",
+    "emoji": "🇩🇰",
+    "label": {
+      "zh-tw": "丹麥",
+      "zh-cn": "丹麦",
+      "en": "Denmark"
+    },
+    "visa_free_days": 45
+  },
+  {
+    "code": "FI",
+    "name_en": "FINLAND",
+    "emoji": "🇫🇮",
+    "label": {
+      "zh-tw": "芬蘭",
+      "zh-cn": "芬兰",
+      "en": "Finland"
+    },
+    "visa_free_days": 45
+  },
+  {
+    "code": "IE",
+    "name_en": "IRELAND",
+    "emoji": "🇮🇪",
+    "label": {
+      "zh-tw": "愛爾蘭",
+      "zh-cn": "爱尔兰",
+      "en": "Ireland"
+    }
+  },
+  {
+    "code": "PL",
+    "name_en": "POLAND",
+    "emoji": "🇵🇱",
+    "label": {
+      "zh-tw": "波蘭",
+      "zh-cn": "波兰",
+      "en": "Poland"
+    }
+  },
+  {
+    "code": "CZ",
+    "name_en": "CZECH REPUBLIC",
+    "emoji": "🇨🇿",
+    "label": {
+      "zh-tw": "捷克",
+      "zh-cn": "捷克",
+      "en": "Czech Republic"
+    }
+  },
+  {
+    "code": "HU",
+    "name_en": "HUNGARY",
+    "emoji": "🇭🇺",
+    "label": {
+      "zh-tw": "匈牙利",
+      "zh-cn": "匈牙利",
+      "en": "Hungary"
+    }
+  },
+  {
+    "code": "GR",
+    "name_en": "GREECE",
+    "emoji": "🇬🇷",
+    "label": {
+      "zh-tw": "希臘",
+      "zh-cn": "希腊",
+      "en": "Greece"
+    }
+  },
+  {
+    "code": "TR",
+    "name_en": "TURKEY",
+    "emoji": "🇹🇷",
+    "label": {
+      "zh-tw": "土耳其",
+      "zh-cn": "土耳其",
+      "en": "Turkey"
+    }
+  },
+  {
+    "code": "AE",
+    "name_en": "UNITED ARAB EMIRATES",
+    "emoji": "🇦🇪",
+    "label": {
+      "zh-tw": "阿聯酋",
+      "zh-cn": "阿联酋",
+      "en": "UAE"
+    }
+  },
+  {
+    "code": "SA",
+    "name_en": "SAUDI ARABIA",
+    "emoji": "🇸🇦",
+    "label": {
+      "zh-tw": "沙烏地",
+      "zh-cn": "沙特",
+      "en": "Saudi Arabia"
+    }
+  },
+  {
+    "code": "IN",
+    "name_en": "INDIA",
+    "emoji": "🇮🇳",
+    "label": {
+      "zh-tw": "印度",
+      "zh-cn": "印度",
+      "en": "India"
+    }
+  },
+  {
+    "code": "PK",
+    "name_en": "PAKISTAN",
+    "emoji": "🇵🇰",
+    "label": {
+      "zh-tw": "巴基斯坦",
+      "zh-cn": "巴基斯坦",
+      "en": "Pakistan"
+    }
+  },
+  {
+    "code": "BD",
+    "name_en": "BANGLADESH",
+    "emoji": "🇧🇩",
+    "label": {
+      "zh-tw": "孟加拉",
+      "zh-cn": "孟加拉",
+      "en": "Bangladesh"
+    }
+  },
+  {
+    "code": "LK",
+    "name_en": "SRI LANKA",
+    "emoji": "🇱🇰",
+    "label": {
+      "zh-tw": "斯里蘭卡",
+      "zh-cn": "斯里兰卡",
+      "en": "Sri Lanka"
+    }
+  },
+  {
+    "code": "PH",
+    "name_en": "PHILIPPINES",
+    "emoji": "🇵🇭",
+    "label": {
+      "zh-tw": "菲律賓",
+      "zh-cn": "菲律宾",
+      "en": "Philippines"
+    },
+    "visa_free_days": 30
+  },
+  {
+    "code": "ID",
+    "name_en": "INDONESIA",
+    "emoji": "🇮🇩",
+    "label": {
+      "zh-tw": "印尼",
+      "zh-cn": "印度尼西亚",
+      "en": "Indonesia"
+    },
+    "visa_free_days": 30
+  },
+  {
+    "code": "KH",
+    "name_en": "CAMBODIA",
+    "emoji": "🇰🇭",
+    "label": {
+      "zh-tw": "柬埔寨",
+      "zh-cn": "柬埔寨",
+      "en": "Cambodia"
+    },
+    "visa_free_days": 30
+  },
+  {
+    "code": "LA",
+    "name_en": "LAO PDR",
+    "emoji": "🇱🇦",
+    "label": {
+      "zh-tw": "寮國",
+      "zh-cn": "老挝",
+      "en": "Laos"
+    },
+    "visa_free_days": 30
+  },
+  {
+    "code": "MM",
+    "name_en": "MYANMAR",
+    "emoji": "🇲🇲",
+    "label": {
+      "zh-tw": "緬甸",
+      "zh-cn": "缅甸",
+      "en": "Myanmar"
+    },
+    "visa_free_days": 30
+  },
+  {
+    "code": "BR",
+    "name_en": "BRAZIL",
+    "emoji": "🇧🇷",
+    "label": {
+      "zh-tw": "巴西",
+      "zh-cn": "巴西",
+      "en": "Brazil"
+    }
+  },
+  {
+    "code": "MX",
+    "name_en": "MEXICO",
+    "emoji": "🇲🇽",
+    "label": {
+      "zh-tw": "墨西哥",
+      "zh-cn": "墨西哥",
+      "en": "Mexico"
+    }
+  },
+  {
+    "code": "AR",
+    "name_en": "ARGENTINA",
+    "emoji": "🇦🇷",
+    "label": {
+      "zh-tw": "阿根廷",
+      "zh-cn": "阿根廷",
+      "en": "Argentina"
+    }
+  },
+  {
+    "code": "ZA",
+    "name_en": "SOUTH AFRICA",
+    "emoji": "🇿🇦",
+    "label": {
+      "zh-tw": "南非",
+      "zh-cn": "南非",
+      "en": "South Africa"
+    }
+  },
+  {
+    "code": "EG",
+    "name_en": "EGYPT",
+    "emoji": "🇪🇬",
+    "label": {
+      "zh-tw": "埃及",
+      "zh-cn": "埃及",
+      "en": "Egypt"
+    }
+  },
+  {
+    "code": "OTHER",
+    "name_en": "OTHER",
+    "emoji": "🌐",
+    "label": {
+      "zh-tw": "其他",
+      "zh-cn": "其他",
+      "en": "Other"
+    }
+  }
 ]
