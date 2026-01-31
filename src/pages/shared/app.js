@@ -607,15 +607,20 @@ async function main(locale){
 
       // Show payment instruction
       const p = pricing.products[payload.product];
+      const tTwd = calcTotalForCurrency(p, 'TWD');
+      const tCny = calcTotalForCurrency(p, 'CNY');
+      const tUsdt = calcTotalForCurrency(p, 'USDT');
+
+      // Default message uses locale currency for readability.
       const { total, addon } = calcTotal(p);
       const totalMoney = fmtMoney(total, displayCurrency, locale);
       const addonMoney = addon > 0 ? fmtMoney(addon, displayCurrency, locale) : '';
 
       const msg = isEn
-        ? `Order created: ${data.orderId}\nAmount: ${totalMoney}${addon>0?` (rush included: ${addonMoney})`:''}\n\nNext: please complete payment using the details shown on this page, then send us the transfer info / TXID. We will start processing the same day once payment info is received.`
+        ? `Order created: ${data.orderId}\nAmount: ${totalMoney}${addon>0?` (rush included: ${addonMoney})`:''}\n\nNext: please choose a payment method, then complete payment and submit proof/TXID.`
         : (isZhCn
-          ? `订单已建立：${data.orderId}\n应付金额：${totalMoney}${addon>0?`（含加急：${addonMoney}）`:''}\n\n下一步：请依网页显示的转账资讯完成付款，并回复转账末五码/截图或 TXID。我们收到付款资讯后，当天立刻处理。`
-          : `訂單已建立：${data.orderId}\n應付金額：${totalMoney}${addon>0?`（含加急：${addonMoney}）`:''}\n\n下一步：請依網頁顯示的轉帳資訊完成付款，並回傳轉帳末五碼/截圖或 TXID。我們收到付款資訊後，當天立刻處理。`
+          ? `订单已建立：${data.orderId}\n应付金额：${totalMoney}${addon>0?`（含加急：${addonMoney}）`:''}\n\n下一步：请选择付款方式后完成付款，并提交截图或 TXID。`
+          : `訂單已建立：${data.orderId}\n應付金額：${totalMoney}${addon>0?`（含加急：${addonMoney}）`:''}\n\n下一步：請先選擇付款方式後完成付款，並提交截圖或 TXID。`
         );
       await setStatus('info', msg);
       qs('#orderId').textContent = data.orderId;
@@ -658,16 +663,27 @@ async function main(locale){
       const dlg = ensurePayDialog();
       const choice = dlg.querySelector('#vd-pay-choice');
 
-      // Update dialog to show the exact amount
+      // Update dialog to show amount in the selected payment currency
       const amountLine = dlg.querySelector('#vd-pay-amount');
-      if (amountLine) {
-        amountLine.textContent = isEn
-          ? `Amount to pay: ${totalMoney}`
-          : (isZhCn ? `应付金额：${totalMoney}` : `應付金額：${totalMoney}`);
+      function amountFor(method){
+        if (method === 'TWD') return fmtMoney(tTwd.total, 'TWD', locale);
+        if (method === 'CNY') return fmtMoney(tCny.total, 'CNY', locale);
+        if (method === 'USDT') return fmtMoney(tUsdt.total, 'USDT', locale);
+        return '';
+      }
+      function updateDialogAmount(){
+        if (!amountLine) return;
+        const v = choice?.value || '';
+        const money = v ? amountFor(v) : '';
+        amountLine.textContent = money
+          ? (isEn ? `Amount to pay: ${money}` : (isZhCn ? `应付金额：${money}` : `應付金額：${money}`))
+          : (isEn ? 'Select a payment method to see the amount.' : (isZhCn ? '选择付款方式后显示应付金额。' : '選擇付款方式後顯示應付金額。'));
       }
 
       // Reset selection each new order
       if (choice) choice.value = '';
+      choice?.addEventListener('change', updateDialogAmount, { once: false });
+      updateDialogAmount();
       dlg.showModal();
 
       dlg.addEventListener('close', () => {
@@ -677,7 +693,23 @@ async function main(locale){
         // Reveal payment sections
         if (paymentBox) {
           paymentBox.style.display = 'block';
-          // Show a prominent amount in the payment section
+
+          // Show a prominent amount in the payment section, in the chosen payment currency
+          const money = v === 'USDT'
+            ? fmtMoney(tUsdt.total, 'USDT', locale)
+            : (v === 'CNY'
+              ? fmtMoney(tCny.total, 'CNY', locale)
+              : fmtMoney(tTwd.total, 'TWD', locale)
+            );
+
+          const addonChosen = v === 'USDT' ? tUsdt.addon : (v === 'CNY' ? tCny.addon : tTwd.addon);
+          const addonMoneyChosen = addonChosen > 0
+            ? (v === 'USDT'
+              ? fmtMoney(addonChosen, 'USDT', locale)
+              : (v === 'CNY' ? fmtMoney(addonChosen, 'CNY', locale) : fmtMoney(addonChosen, 'TWD', locale))
+            )
+            : '';
+
           let el = paymentBox.querySelector('#payTotal');
           if (!el) {
             el = document.createElement('div');
@@ -688,12 +720,13 @@ async function main(locale){
             if (orderP) orderP.insertAdjacentElement('afterend', el);
             else paymentBox.prepend(el);
           }
-          el.innerHTML = addon > 0
+
+          el.innerHTML = addonChosen > 0
             ? (isEn
-              ? `Total to pay: ${totalMoney}<span class="sub">Rush included: ${addonMoney}</span>`
-              : (isZhCn ? `应付总金额：${totalMoney}<span class="sub">含加急：${addonMoney}</span>` : `應付總金額：${totalMoney}<span class="sub">含加急：${addonMoney}</span>`)
+              ? `Total to pay: ${money}<span class="sub">Rush included: ${addonMoneyChosen}</span>`
+              : (isZhCn ? `应付总金额：${money}<span class="sub">含加急：${addonMoneyChosen}</span>` : `應付總金額：${money}<span class="sub">含加急：${addonMoneyChosen}</span>`)
             )
-            : (isEn ? `Total to pay: ${totalMoney}` : (isZhCn ? `应付总金额：${totalMoney}` : `應付總金額：${totalMoney}`));
+            : (isEn ? `Total to pay: ${money}` : (isZhCn ? `应付总金额：${money}` : `應付總金額：${money}`));
         }
         if (proofBox) {
           proofBox.style.display = 'block';
