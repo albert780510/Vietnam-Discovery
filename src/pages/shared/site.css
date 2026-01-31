@@ -42,9 +42,6 @@ input:focus,select:focus,textarea:focus{border-color:rgba(74,163,255,.7)}
 
 .hidden{display:none !important}
 
-/* USDT MetaMask flow works; hide on-page address/QR fallback */
-#payInfoUsdt{display:none !important}
-
 /* Contact section (footer-style) */
 .contactSection{margin-top:14px}
 .contactSection .small{line-height:1.5}

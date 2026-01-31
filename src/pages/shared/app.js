@@ -586,14 +586,65 @@ async function main(locale){
         );
       await setStatus('info', msg);
       qs('#orderId').textContent = data.orderId;
-      qs('#paymentBox').style.display = 'block';
 
-      // Payment proof submission UI
+      // Show a payment method chooser first; only then reveal the corresponding payment info + fields.
+      const payMethod = qs('#payMethod');
+      const paymentBox = qs('#paymentBox');
       const proofBox = qs('#paymentProof');
-      if (proofBox) {
-        proofBox.style.display = 'block';
-        proofBox.dataset.orderId = data.orderId;
+
+      function ensurePayDialog(){
+        let dlg = document.querySelector('#vd-pay-dialog');
+        if (dlg) return dlg;
+
+        dlg = document.createElement('dialog');
+        dlg.id = 'vd-pay-dialog';
+        dlg.className = 'vd-modal';
+        dlg.innerHTML = `
+          <form method="dialog" class="vd-modal__card">
+            <div class="vd-modal__title">${isEn ? 'Choose payment method' : (isZhCn ? '请选择付款方式' : '請選擇付款方式')}</div>
+            <div class="vd-modal__body" style="white-space:normal">
+              <div class="help" style="margin-bottom:10px">${isEn ? 'Pick one method to see the correct payment details and fields.' : (isZhCn ? '选择一种付款方式后，系统会显示对应的付款资讯与填写栏位。' : '選擇一種付款方式後，系統會顯示對應的付款資訊與填寫欄位。')}</div>
+              <select id="vd-pay-choice" style="width:100%;margin-top:4px">
+                <option value="">${isEn ? 'Select…' : (isZhCn ? '请选择…' : '請選擇…')}</option>
+                <option value="TWD">TWD bank transfer</option>
+                <option value="CNY">CNY (Alipay)</option>
+                <option value="USDT">USDT (MetaMask)</option>
+              </select>
+            </div>
+            <div class="vd-modal__actions" style="gap:10px">
+              <button class="btn" value="cancel">${isEn ? 'Cancel' : (isZhCn ? '取消' : '取消')}</button>
+              <button class="btn" id="vd-pay-confirm" value="ok">${isEn ? 'Continue' : (isZhCn ? '继续' : '繼續')}</button>
+            </div>
+          </form>
+        `;
+        document.body.appendChild(dlg);
+        return dlg;
       }
+
+      const dlg = ensurePayDialog();
+      const choice = dlg.querySelector('#vd-pay-choice');
+
+      // Reset selection each new order
+      if (choice) choice.value = '';
+      dlg.showModal();
+
+      dlg.addEventListener('close', () => {
+        const v = choice?.value || '';
+        if (!v) return; // user canceled
+
+        // Reveal payment sections
+        if (paymentBox) paymentBox.style.display = 'block';
+        if (proofBox) {
+          proofBox.style.display = 'block';
+          proofBox.dataset.orderId = data.orderId;
+        }
+
+        // Set method then trigger UI update (listeners are already attached)
+        if (payMethod) {
+          payMethod.value = v;
+          payMethod.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }, { once: true });
     } catch (err) {
       await setStatus('danger', (isEn?'Failed to create order: ':(isZhCn?'建立订单失败：':'建立訂單失敗：')) + err.message);
       form.querySelector('button[type=submit]').disabled = false;

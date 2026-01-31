@@ -56,12 +56,12 @@
           </div>
 
           <div>
-            <label>预计入境日期</label>
+            <label>预计入境日期 <span class="small">(YYYY-MM-DD)</span></label>
             <div class="dateWrap">
               <input id="arrival" type="date" required />
               <button type="button" class="iconBtn" data-open-date aria-label="Open calendar">📅</button>
             </div>
-            <div class="help">点右侧日历选择日期</div>
+            <div class="help">格式：YYYY-MM-DD（点右侧日历选择日期）</div>
           </div>
 
           <div class="row">
@@ -101,9 +101,15 @@
         <div class="card" id="paymentBox" style="display:none;margin-top:14px">
           <div style="font-weight:800">下一步：付款</div>
           <p class="p">订单编号：<span id="orderId" style="font-weight:800"></span></p>
-          <div class="notice" style="margin-bottom:10px">
+          <div class="notice" id="payInfoTwd" style="margin-bottom:10px">
             <div style="font-weight:800;margin-bottom:6px">人民币付款（支付宝）</div>
-            <div class="small">请使用支付宝扫码付款（建议备注：订单编号）。</div>
+            
+          <div class="notice" id="payInfoCny" style="margin-bottom:10px">
+            <div style="font-weight:800;margin-bottom:6px">Alipay (CNY)</div>
+            <div class="small" style="margin-top:6px">Scan to pay with Alipay, then upload the payment screenshot below.</div>
+            <div class="small" style="margin-top:8px"><img src="/shared/alipay_qr.jpg" alt="Alipay QR" style="width:220px;height:auto;border-radius:12px;border:1px solid rgba(255,255,255,.12)" /></div>
+          </div>
+<div class="small">请使用支付宝扫码付款（建议备注：订单编号）。</div>
             <div class="small" style="margin-top:8px"><img src="/shared/alipay_qr.jpg" alt="Alipay QR" style="width:180px;height:180px;border-radius:12px;border:1px solid rgba(255,255,255,.12)" /></div>
             <div class="small" style="margin-top:8px">付款后请在本页提交：<b>截图</b>（或转账记录）。</div>
           </div>
@@ -154,15 +160,7 @@
             <button class="btn" type="submit">提交付款信息</button>
           </form>
         </div>
-          <div class="notice">
-            <div style="font-weight:800;margin-bottom:6px">USDT（BEP20 / 币安链）</div>
-            <div class="small">地址：<span style="font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489</span></div>
-            <div class="small" style="margin-top:6px">幣安實名kyc二級認證合格地址</div>
-            <div class="small" style="margin-top:8px"><img src="/shared/usdt_bep20.png" alt="USDT BEP20 QR" style="width:160px;height:160px;border-radius:12px;border:1px solid rgba(255,255,255,.12)" /></div>
-            <div class="small" style="margin-top:8px">仅接受 <b>BEP20</b> 网络。付款后请回传 <b>TXID</b>。</div>
-          </div>
         </div>
-
         <div class="notice contactSection" style="margin-top:14px">
           <div style="font-weight:800;margin-bottom:6px">联系我们</div>
           <div class="small">官方網站：<a href="https://vietnamdiscovery.info" target="_blank" rel="noopener">vietnamdiscovery.info</a></div>
