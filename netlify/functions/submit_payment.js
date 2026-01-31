@@ -12,6 +12,14 @@ export async function handler(event) {
       if (!body[k]) return { statusCode: 400, body: JSON.stringify({ error: `missing_${k}` }) };
     }
 
+    function parseDataUrl(dataUrl) {
+      const m = String(dataUrl || '').match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/);
+      if (!m) return null;
+      const [, mime, b64] = m;
+      const buf = Buffer.from(b64, 'base64');
+      return { mime, buf };
+    }
+
     // MVP storage: no database yet.
     // We return ok and (optionally) forward to Telegram if env vars are provided.
     const summary = {
@@ -28,6 +36,8 @@ export async function handler(event) {
       currency: body.currency || null,
       locale: body.locale,
       note: body.note || null,
+      hasPassportImage: Boolean(body.passportImage),
+      hasIdPhotoImage: Boolean(body.idPhotoImage),
       hasProofImage: Boolean(body.proofImage)
     };
 
@@ -49,29 +59,50 @@ export async function handler(event) {
         summary.note ? `Note: ${summary.note}` : null
       ].filter(Boolean);
 
+      const caption = lines.join('\n');
+
+      // Collect up to 3 images: passport bio, ID photo, payment proof
+      const images = [];
+      if (body.passportImage) {
+        const p = parseDataUrl(body.passportImage);
+        if (p) images.push({ key: 'passport', filename: 'passport.jpg', ...p });
+      }
+      if (body.idPhotoImage) {
+        const p = parseDataUrl(body.idPhotoImage);
+        if (p) images.push({ key: 'idphoto', filename: 'idphoto.jpg', ...p });
+      }
       if (body.proofImage) {
-        // proofImage: data URL (image/*;base64,....)
-        const m = String(body.proofImage).match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/);
-        if (m) {
-          const [, mime, b64] = m;
-          const buf = Buffer.from(b64, 'base64');
-          const fd = new FormData();
-          fd.append('chat_id', chatId);
-          fd.append('caption', lines.join('\n'));
-          fd.append('photo', new Blob([buf], { type: mime }), 'proof.jpg');
-          await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, { method: 'POST', body: fd });
-        } else {
-          await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: 'POST',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ chat_id: chatId, text: lines.join('\n') })
-          });
+        const p = parseDataUrl(body.proofImage);
+        if (p) images.push({ key: 'proof', filename: 'proof.jpg', ...p });
+      }
+
+      if (images.length >= 2) {
+        // Post as an album so the group receives all images together.
+        const media = images.map((img, idx) => {
+          const item = { type: 'photo', media: `attach://${img.key}` };
+          if (idx === 0) item.caption = caption;
+          return item;
+        });
+
+        const fd = new FormData();
+        fd.append('chat_id', chatId);
+        fd.append('media', JSON.stringify(media));
+        for (const img of images) {
+          fd.append(img.key, new Blob([img.buf], { type: img.mime }), img.filename);
         }
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMediaGroup`, { method: 'POST', body: fd });
+      } else if (images.length === 1) {
+        const img = images[0];
+        const fd = new FormData();
+        fd.append('chat_id', chatId);
+        fd.append('caption', caption);
+        fd.append('photo', new Blob([img.buf], { type: img.mime }), img.filename);
+        await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, { method: 'POST', body: fd });
       } else {
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ chat_id: chatId, text: lines.join('\n') })
+          body: JSON.stringify({ chat_id: chatId, text: caption })
         });
       }
     }

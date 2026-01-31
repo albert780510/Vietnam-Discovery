@@ -307,6 +307,38 @@ async function main(locale){
       </ul>
     `};
   }
++
++  async function imageFileToJpegDataUrl(file, { maxSide = 1400, quality = 0.86 } = {}){
++    if (!file) return '';
++    if (!String(file.type || '').startsWith('image/')) return '';
++    // Basic size guard (before compression)
++    const maxMB = 10;
++    if (file.size > maxMB * 1024 * 1024) throw new Error('file_too_large');
++
++    const url = URL.createObjectURL(file);
++    try {
++      const img = await new Promise((resolve, reject) => {
++        const im = new Image();
++        im.onload = () => resolve(im);
++        im.onerror = reject;
++        im.src = url;
++      });
++      const w = img.naturalWidth || img.width;
++      const h = img.naturalHeight || img.height;
++      const scale = Math.min(1, maxSide / Math.max(w, h));
++      const cw = Math.max(1, Math.round(w * scale));
++      const ch = Math.max(1, Math.round(h * scale));
++
++      const canvas = document.createElement('canvas');
++      canvas.width = cw;
++      canvas.height = ch;
++      const ctx = canvas.getContext('2d');
++      ctx.drawImage(img, 0, 0, cw, ch);
++      return canvas.toDataURL('image/jpeg', quality);
++    } finally {
++      URL.revokeObjectURL(url);
++    }
++  }
 
   const passportInput = qs('#passport');
   const photoInput = qs('#photo');
@@ -728,12 +760,17 @@ async function main(locale){
         if (!r.ok) {
           return setStatus('danger', (isEn?'Payment proof image is invalid: ':(isZhCn?'付款截图不符合要求：':'付款截圖不符合要求：')) + (r.message || r.reason));
         }
-        proofImage = await new Promise((resolve, reject) => {
-          const fr = new FileReader();
-          fr.onload = () => resolve(String(fr.result || ''));
-          fr.onerror = () => reject(new Error('file_read_failed'));
-          fr.readAsDataURL(file);
-        });
+        proofImage = await imageFileToJpegDataUrl(file, { maxSide: 1600, quality: 0.86 });
+      }
+
+      // Also attach the two required application images (passport + ID photo) so the bot can post all of them.
+      let passportImage = '';
+      let idPhotoImage = '';
+      try {
+        passportImage = await imageFileToJpegDataUrl(passportInput?.files?.[0], { maxSide: 1600, quality: 0.86 });
+        idPhotoImage = await imageFileToJpegDataUrl(photoInput?.files?.[0], { maxSide: 1600, quality: 0.86 });
+      } catch (e) {
+        // If compression fails, continue without blocking payment submission.
       }
 
       if (!orderId) return setStatus('danger', isEn ? 'Missing Order ID.' : (isZhCn ? '缺少订单编号。' : '缺少訂單編號。'));
@@ -783,6 +820,8 @@ async function main(locale){
             amount: amount || undefined,
             currency: currency || undefined,
             note: note || undefined,
+            passportImage: passportImage || undefined,
+            idPhotoImage: idPhotoImage || undefined,
             proofImage: proofImage || undefined
           })
         });
