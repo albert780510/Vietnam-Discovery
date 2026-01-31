@@ -100,37 +100,23 @@
 
         <div class="card" id="paymentBox" style="display:none;margin-top:14px">
           <div style="font-weight:800">下一步：付款</div>
-          <p class="p">订单编号：<span id="orderId" style="font-weight:800"></span></p>
+          <p class="p">订单编号： <span id="orderId" style="font-weight:800"></span></p>
+
           <div class="notice" id="payInfoTwd" style="margin-bottom:10px">
-            <div style="font-weight:800;margin-bottom:6px">人民币付款（支付宝）</div>
-            
+            <div style="font-weight:800;margin-bottom:6px">转账（台币）</div>
+            <div class="small">银行：玉山银行（代码 808）</div>
+            <div class="small">账号：0152979250648</div>
+            <div class="small">户名：赖瑞鸿</div>
+            <div class="small" style="margin-top:8px">转账后请回传：<b>末五码 + 转账时间 + 截图（可选）</b>（建议备注填：订单编号）</div>
+          </div>
+
           <div class="notice" id="payInfoCny" style="margin-bottom:10px">
-            <div style="font-weight:800;margin-bottom:6px">Alipay (CNY)</div>
-            <div class="small" style="margin-top:6px">Scan to pay with Alipay, then upload the payment screenshot below.</div>
-                        <div class="payQrGrid">
-              <div class="payQrItem">
-                <div class="t">Alipay</div>
-                <img src="/shared/alipay_qr.jpg" alt="Alipay QR" class="payQr" loading="lazy" />
-              </div>
-              <div class="payQrItem">
-                <div class="t">WeChat Pay</div>
-                <img src="/shared/wechatpay_qr.jpg" alt="WeChat Pay QR" class="payQr" loading="lazy" />
-              </div>
-            </div>
+            <div style="font-weight:800;margin-bottom:6px">人民币付款（支付宝 / 微信支付）</div>
+            <div class="small" id="payInfoCnyHint"></div>
+            <div class="payQrGrid" id="payInfoCnyQr"></div>
           </div>
-<div class="small">请使用支付宝扫码付款（建议备注：订单编号）。</div>
-                        <div class="payQrGrid">
-              <div class="payQrItem">
-                <div class="t">Alipay</div>
-                <img src="/shared/alipay_qr.jpg" alt="Alipay QR" class="payQr" loading="lazy" />
-              </div>
-              <div class="payQrItem">
-                <div class="t">WeChat Pay</div>
-                <img src="/shared/wechatpay_qr.jpg" alt="WeChat Pay QR" class="payQr" loading="lazy" />
-              </div>
-            </div>
-            <div class="small" style="margin-top:8px">付款后请在本页提交：<b>截图</b>（或转账记录）。</div>
-          </div>
+        </div>
+
 
         <div class="card" id="paymentProof" style="display:none;margin-top:14px">
           <div style="font-weight:800">付款确认</div>

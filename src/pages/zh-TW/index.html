@@ -100,29 +100,23 @@
 
         <div class="card" id="paymentBox" style="display:none;margin-top:14px">
           <div style="font-weight:800">下一步：付款</div>
-          <p class="p">訂單編號：<span id="orderId" style="font-weight:800"></span></p>
+          <p class="p">訂單編號： <span id="orderId" style="font-weight:800"></span></p>
+
           <div class="notice" id="payInfoTwd" style="margin-bottom:10px">
             <div style="font-weight:800;margin-bottom:6px">轉帳（台幣）</div>
-            
-          <div class="notice" id="payInfoCny" style="margin-bottom:10px">
-            <div style="font-weight:800;margin-bottom:6px">Alipay (CNY)</div>
-            <div class="small" style="margin-top:6px">Scan to pay with Alipay, then upload the payment screenshot below.</div>
-                        <div class="payQrGrid">
-              <div class="payQrItem">
-                <div class="t">Alipay</div>
-                <img src="/shared/alipay_qr.jpg" alt="Alipay QR" class="payQr" loading="lazy" />
-              </div>
-              <div class="payQrItem">
-                <div class="t">WeChat Pay</div>
-                <img src="/shared/wechatpay_qr.jpg" alt="WeChat Pay QR" class="payQr" loading="lazy" />
-              </div>
-            </div>
-          </div>
-<div class="small">銀行：玉山銀行（代碼 808）</div>
+            <div class="small">銀行：玉山銀行（代碼 808）</div>
             <div class="small">帳號：0152979250648</div>
             <div class="small">戶名：賴瑞鴻</div>
             <div class="small" style="margin-top:8px">轉帳後請回傳：<b>末五碼 + 轉帳時間 + 截圖（可選）</b>（建議備註填：訂單編號）</div>
           </div>
+
+          <div class="notice" id="payInfoCny" style="margin-bottom:10px">
+            <div style="font-weight:800;margin-bottom:6px">人民幣付款（支付宝 / 微信支付）</div>
+            <div class="small" id="payInfoCnyHint"></div>
+            <div class="payQrGrid" id="payInfoCnyQr"></div>
+          </div>
+        </div>
+
 
         <div class="card" id="paymentProof" style="display:none;margin-top:14px">
           <div style="font-weight:800">付款確認</div>

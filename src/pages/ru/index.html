@@ -103,13 +103,22 @@
         <div class="card" id="paymentBox" style="display:none;margin-top:14px">
           <div style="font-weight:800">Далее: Оплата</div>
           <p class="p">Номер заказа: <span id="orderId" style="font-weight:800"></span></p>
-          <div class="notice" id="payInfoUsdt">
-            <div style="font-weight:800;margin-bottom:6px">USDT (BEP20 / BNB Smart Chain)</div>
-            <div class="small">Адрес: <span style="font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489</span></div>
-            <div class="small" style="margin-top:6px">幣安實名kyc二級認證合格地址</div>
-            <div class="small" style="margin-top:8px"><img src="/shared/usdt_bep20.png" alt="USDT BEP20 QR" style="width:220px;height:auto;border-radius:12px;border:1px solid rgba(255,255,255,.12)" /></div>
-            <div class="small" style="margin-top:8px">Только сеть <b>BEP20</b>. После оплаты пришлите <b>TXID</b>.</div>
+
+          <div class="notice" id="payInfoTwd" style="margin-bottom:10px">
+            <div style="font-weight:800;margin-bottom:6px">Банковский перевод (TWD)</div>
+            <div class="small">Банк: E.SUN Bank (808)</div>
+            <div class="small">Счет: 0152979250648</div>
+            <div class="small">Получатель: 賴瑞鴻</div>
+            <div class="small" style="margin-top:8px">После перевода отправьте: <b>последние 5 цифр + время + скриншот (по желанию)</b>. (Рекомендуем: номер заказа)</div>
           </div>
+
+          <div class="notice" id="payInfoCny" style="margin-bottom:10px">
+            <div style="font-weight:800;margin-bottom:6px">Оплата CNY (Alipay / WeChat Pay)</div>
+            <div class="small" id="payInfoCnyHint"></div>
+            <div class="payQrGrid" id="payInfoCnyQr"></div>
+          </div>
+        </div>
+
 
         <div class="card" id="paymentProof" style="display:none;margin-top:14px">
           <div style="font-weight:800">Payment confirmation</div>
