@@ -175,12 +175,19 @@ async function main(locale){
   }
 
   // Prominent total banner (especially for rush)
+  // UX: show in order: Product -> Processing speed -> Total.
+  if (productPrice) productPrice.style.display = 'none';
+
   let totalBanner = qs('#totalBanner');
-  if (!totalBanner && productPrice) {
+  if (!totalBanner) {
     totalBanner = document.createElement('div');
     totalBanner.id = 'totalBanner';
     totalBanner.className = 'totalBanner';
-    productPrice.insertAdjacentElement('afterend', totalBanner);
+
+    // Prefer placing it right below the processing speed block.
+    const speedBlock = speedSel?.closest('div');
+    if (speedBlock) speedBlock.insertAdjacentElement('afterend', totalBanner);
+    else if (productPrice) productPrice.insertAdjacentElement('afterend', totalBanner);
   }
 
   function updatePrice(){
