@@ -209,6 +209,19 @@ async function main(locale){
   // Date picker helper
   const arrivalInput = qs('#arrival');
   const openDateBtn = qs('[data-open-date]');
+  if (arrivalInput) {
+    // Prevent selecting dates before today.
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const min = `${yyyy}-${mm}-${dd}`;
+    arrivalInput.min = min;
+
+    // If an old value is already set (< min), clear it.
+    if (arrivalInput.value && arrivalInput.value < min) arrivalInput.value = '';
+  }
   if (openDateBtn && arrivalInput) {
     openDateBtn.addEventListener('click', () => {
       // showPicker is supported in Chromium; fallback to focus/click
