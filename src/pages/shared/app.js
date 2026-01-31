@@ -975,9 +975,7 @@ async function main(locale){
         let dlg = document.querySelector('#vd-pay-dialog');
         if (dlg) return dlg;
 
-        const moneyTwd = fmtMoney(tTwd.total, 'TWD', locale);
-        const moneyCny = fmtMoney(tCny.total, 'CNY', locale);
-        const moneyUsdt = fmtMoney(tUsdt.total, 'USDT', locale);
+        // Do not show amounts in this first chooser; only show currency/method.
 
         dlg = document.createElement('dialog');
         dlg.id = 'vd-pay-dialog';
@@ -988,9 +986,9 @@ async function main(locale){
             <div class="vd-modal__body" style="white-space:normal">
               <div class="help" style="margin-bottom:10px">${isEn ? 'Pick one method to continue.' : (isZhCn ? '请选择一种付款方式继续。' : '請選擇一種付款方式繼續。')}</div>
               <div class="vd-usdt-choice" style="display:grid;gap:10px">
-                <button type="button" class="btn" data-method="TWD" style="width:100%">TWD bank transfer — ${moneyTwd}</button>
-                <button type="button" class="btn" data-method="CNY" style="width:100%">CNY (Alipay) — ${moneyCny}</button>
-                <button type="button" class="btn" data-method="USDT" style="width:100%">USDT — ${moneyUsdt}</button>
+                <button type="button" class="btn" data-method="TWD" style="width:100%">TWD bank transfer</button>
+                <button type="button" class="btn" data-method="CNY" style="width:100%">CNY (Alipay)</button>
+                <button type="button" class="btn" data-method="USDT" style="width:100%">USDT</button>
               </div>
             </div>
             <div class="vd-modal__actions" style="gap:10px">
