@@ -1,0 +1,23 @@
+# Vietnam Discovery - FB groups to monitor (from Groups feed)
+# One URL per line.
+https://www.facebook.com/groups/vietnam.travel.planning/
+https://www.facebook.com/groups/1337051013126769/
+https://www.facebook.com/groups/vietnamtravelguideofficial/
+https://www.facebook.com/groups/965232570229773/
+https://www.facebook.com/groups/wonderfultravels/
+https://www.facebook.com/groups/333477338223892/
+https://www.facebook.com/groups/1284785532068026/
+https://www.facebook.com/groups/1459049914933289/
+https://www.facebook.com/groups/1052046625496718/
+https://www.facebook.com/groups/vietnamtravelguide2025/
+https://www.facebook.com/groups/vietnamexplorer/
+https://www.facebook.com/groups/2023084437979246/
+https://www.facebook.com/groups/434497629081609/
+https://www.facebook.com/groups/vivutravel/
+https://www.facebook.com/groups/1395601184311351/
+https://www.facebook.com/groups/3502760519818170/
+https://www.facebook.com/groups/511899683761489/
+https://www.facebook.com/groups/duclamtravel/
+https://www.facebook.com/groups/339773032889222/
+https://www.facebook.com/groups/410869924228497/
+https://www.facebook.com/groups/708353931399235/
