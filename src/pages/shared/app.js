@@ -376,8 +376,8 @@ async function main(locale){
 
         await ensureBsc();
 
-        // Receiver (MetaMask address is chain-agnostic across EVM networks; we still force BSC for USDT contract)
-        const receiver = '0x331bF7aF400a173D4886312Bb2492458Cd1AE63c';
+        // Receiver: Binance deposit address on BSC (BEP20)
+        const receiver = '0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489';
         const usdtContract = '0x55d398326f99059fF775485246999027B3197955';
         const decimals = 6n;
 
@@ -451,6 +451,78 @@ async function main(locale){
     const payTitleEl = qs('#paymentProof > div'); // first title div inside paymentProof
     const payHelpEl = qs('#paymentProof .help');
 
+    // USDT advanced (exchange transfer) toggle
+    const USDT_ADDR_BEP20 = '0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489';
+    const USDT_ADDR_TRC20 = 'TSDNH14KfKRNotV6aHd7u22G2kxUhWAX7w';
+    let usdtMode = 'metamask'; // metamask | exchange
+
+    function renderUsdtAdvanced(){
+      if (!methodWrap) return;
+      let box = methodWrap.querySelector('#vd-usdt-advanced');
+      if (!box) {
+        box = document.createElement('div');
+        box.id = 'vd-usdt-advanced';
+        box.style.marginTop = '10px';
+        box.innerHTML = `
+          <div class="small" style="margin-top:8px">
+            <details>
+              <summary style="cursor:pointer">${isEn?'Exchange transfer (advanced)':'交易所轉帳（進階）'}</summary>
+              <div style="margin-top:10px" class="small">
+                <div style="margin-bottom:8px;color:rgba(255,255,255,.85)">
+                  ${isEn
+                    ? 'If you withdraw from an exchange, fees may be deducted. We must receive the full amount (exact received).'
+                    : (isZhCn
+                      ? '如果从交易所提币，可能会扣手续费。我们必须实收足额（以实收为准）。'
+                      : '如果從交易所提幣，可能會扣手續費。我們必須實收足額（以實收為準）。'
+                    )}
+                </div>
+                <div style="margin-bottom:10px">
+                  <label style="display:flex;gap:8px;align-items:center">
+                    <input type="radio" name="usdtMode" value="metamask" checked />
+                    <span>${isEn?'Use MetaMask button (recommended)':'使用小狐狸按鈕付款（推薦）'}</span>
+                  </label>
+                  <label style="display:flex;gap:8px;align-items:center;margin-top:6px">
+                    <input type="radio" name="usdtMode" value="exchange" />
+                    <span>${isEn?'I will transfer from an exchange (requires screenshot)':'我要用交易所轉帳（需要截圖）'}</span>
+                  </label>
+                </div>
+
+                <div class="small" style="padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.12)">
+                  <div style="font-weight:800;margin-bottom:6px">USDT Address</div>
+                  <div style="margin-bottom:8px"><span style="opacity:.8">BEP20 (BSC):</span><br/><code style="user-select:all">${USDT_ADDR_BEP20}</code></div>
+                  <div style="margin-bottom:8px"><span style="opacity:.8">TRC20 (TRON):</span><br/><code style="user-select:all">${USDT_ADDR_TRC20}</code></div>
+                  <div style="opacity:.75">
+                    ${isEn
+                      ? 'Important: use the correct network. If the received amount is short, you must top up the difference.'
+                      : (isZhCn
+                        ? '重要：请选择正确的网络。若实收不足，需要补足差额。'
+                        : '重要：請選擇正確的網路。若實收不足，需要補足差額。'
+                      )}
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+        `;
+        methodWrap.appendChild(box);
+
+        // radio wiring
+        box.addEventListener('change', (e) => {
+          const v = e?.target?.value;
+          if (v === 'metamask' || v === 'exchange') {
+            usdtMode = v;
+            updatePayUI();
+          }
+        });
+      }
+
+      // Ensure radios reflect current state
+      const rMeta = box.querySelector('input[name=usdtMode][value=metamask]');
+      const rEx = box.querySelector('input[name=usdtMode][value=exchange]');
+      if (rMeta) rMeta.checked = (usdtMode === 'metamask');
+      if (rEx) rEx.checked = (usdtMode === 'exchange');
+    }
+
     function updatePayUI(){
       const m = methodSel?.value || '';
 
@@ -475,23 +547,26 @@ async function main(locale){
             staticEl.style.marginTop = '6px';
             methodWrap.appendChild(staticEl);
           }
-          staticEl.textContent = isEn ? 'USDT (BEP20)' : 'USDT（BEP20）';
+          staticEl.textContent = isEn ? 'USDT' : 'USDT';
         }
 
-        // Hide TXID input by default (it will be filled automatically).
-        if (txidWrap) txidWrap.classList.add('hidden');
+        // Render advanced exchange option + addresses
+        renderUsdtAdvanced();
 
-        // No manual TXID entry by default; keep UI minimal.
-        // (If we ever need a fallback, we can re-enable a small "Enter TXID" link.)
+        // TXID: MetaMask mode hides (auto-filled). Exchange mode can keep hidden; we rely on screenshot.
+        if (txidWrap) txidWrap.classList.toggle('hidden', usdtMode === 'metamask');
       } else {
-        // Non-USDT: show dropdown and remove static label
+        // Non-USDT: show dropdown and remove static label + advanced section
         if (methodWrap) {
           const sel = methodWrap.querySelector('select');
           if (sel) sel.classList.remove('hidden');
           const staticEl = methodWrap.querySelector('#vd-method-static');
           if (staticEl) staticEl.remove();
+          const adv = methodWrap.querySelector('#vd-usdt-advanced');
+          if (adv) adv.remove();
         }
         if (txidWrap) txidWrap.classList.remove('hidden');
+        usdtMode = 'metamask';
       }
 
       // Extra UI cleanup for CNY: they only need to upload a payment screenshot.
@@ -570,18 +645,21 @@ async function main(locale){
       }
 
       // Field visibility
-      // USDT: show TXID; hide last5 + proof screenshot + amount
+      // USDT (MetaMask): hide TXID input (auto-fill), no screenshot
+      // USDT (Exchange transfer): require screenshot
       // TWD: show last5 + proof screenshot + amount(optional); hide TXID
       // CNY: show proof screenshot only; hide TXID + last5 + amount
       setHidden(txidRow, m !== 'USDT');
       setHidden(last5Row, m !== 'TWD');
-      setHidden(proofRow, !(m === 'TWD' || m === 'CNY'));
+
+      const usdtNeedsProof = (m === 'USDT' && usdtMode === 'exchange');
+      setHidden(proofRow, !(m === 'TWD' || m === 'CNY' || usdtNeedsProof));
       setHidden(amountRow, (m === 'USDT' || m === 'CNY'));
 
       // Required hints (UX only; submit handler still validates)
-      if (txidInput) txidInput.required = (m === 'USDT');
+      if (txidInput) txidInput.required = false;
       if (last5Input) last5Input.required = (m === 'TWD');
-      if (proofInput) proofInput.required = (m === 'TWD' || m === 'CNY');
+      if (proofInput) proofInput.required = (m === 'TWD' || m === 'CNY' || usdtNeedsProof);
     }
 
     methodSel?.addEventListener('change', updatePayUI);
@@ -622,7 +700,11 @@ async function main(locale){
       if (!email && !phone) return setStatus('danger', isEn ? 'Missing contact info (email/phone).' : (isZhCn ? '缺少联系方式（Email/电话）。' : '缺少聯絡方式（Email/電話）。'));
 
       // minimal requirements
-      if (method === 'USDT' && !txid) return setStatus('danger', isEn ? 'Please enter TXID.' : (isZhCn ? '请填写 TXID。' : '請填寫 TXID。'));
+      // USDT: TXID is auto-filled if using MetaMask. If transferring from an exchange, screenshot is required.
+      const usdtModeSel = qs('input[name=usdtMode]:checked')?.value;
+      const isUsdtExchange = (method === 'USDT' && usdtModeSel === 'exchange');
+
+      if (isUsdtExchange && !file) return setStatus('danger', isEn ? 'Please upload an exchange withdrawal screenshot.' : (isZhCn ? '请上传交易所提币截图。' : '請上傳交易所提幣截圖。'));
       if ((method === 'TWD' || method === 'CNY') && !file) return setStatus('danger', isEn ? 'Please upload a payment screenshot.' : (isZhCn ? '请上传付款截图。' : '請上傳付款截圖。'));
 
       const submitBtn = proofForm.querySelector('button[type=submit]');
@@ -639,6 +721,7 @@ async function main(locale){
             method,
             email: email || undefined,
             phone: phone || undefined,
+            usdtMode: (qs('input[name=usdtMode]:checked')?.value || undefined),
             txid: txid || undefined,
             last5: last5 || undefined,
             amount: amount || undefined,

@@ -17,6 +17,7 @@ export async function handler(event) {
     const summary = {
       orderId: body.orderId,
       method: body.method,
+      usdtMode: body.usdtMode || null,
       email: body.email || null,
       phone: body.phone || null,
       contactMethod: body.contactMethod || null,
@@ -40,6 +41,7 @@ export async function handler(event) {
         `Method: ${summary.method}`,
         summary.email ? `Email: ${summary.email}` : null,
         summary.phone ? `Phone: ${summary.phone}` : null,
+        summary.usdtMode ? `USDT mode: ${summary.usdtMode}` : null,
         (summary.contactMethod || summary.contactValue) ? `Contact: ${(summary.contactMethod || '').trim()} ${(summary.contactValue || '').trim()}`.trim() : null,
         summary.amount ? `Amount: ${summary.amount} ${summary.currency || ''}`.trim() : null,
         summary.last5 ? `Last5: ${summary.last5}` : null,
