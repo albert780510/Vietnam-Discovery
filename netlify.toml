@@ -8,4 +8,10 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# During MVP iteration we want users to always pick up latest JS/CSS.
+[[headers]]
+  for = "/shared/*"
+  [headers.values]
+    Cache-Control = "no-store"
+
 # Note: enable site-level env vars later for notifications / storage.
