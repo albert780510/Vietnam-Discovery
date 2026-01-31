@@ -107,8 +107,12 @@ async function main(locale){
       await setStatus('info', (locale==='zh-CN' ? '提醒：' : '提醒：') + r.warnings.join('；'));
     }
 
-    // 2) Server-side MRZ check (reduces official-system rejections)
-    await setStatus('info', locale==='zh-CN' ? '正在进行护照 MRZ 自动辨识（防退件）…' : '正在進行護照 MRZ 自動辨識（防退件）…');
+    // Disabled: server-side MRZ OCR check (too many false negatives in practice)
+    // We only keep lightweight checks and a clear upload confirmation.
+    await setStatus('info', locale==='zh-CN' ? '护照资料页已上传。' : '護照資料頁已上傳。');
+    return;
+
+    // (previous MRZ code kept below for reference)
     try {
       const fd = new FormData();
       fd.append('file', passportInput.files[0]);
