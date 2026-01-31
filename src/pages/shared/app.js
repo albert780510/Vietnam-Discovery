@@ -288,12 +288,19 @@ async function main(locale){
       );
 
     const contactsLabel = isEn ? 'Contact' : (isZhCn ? '联络方式' : '聯絡方式');
-    const lineLabel = isEn ? 'LINE' : 'LINE';
+    const lineLabel = 'LINE';
+    const tgLabel = 'Telegram';
+    const waLabel = 'WhatsApp';
+    const zaloLabel = 'Zalo';
     const fbLabel = isEn ? 'Facebook Group' : (isZhCn ? 'Facebook 群组' : 'Facebook 社團');
     const wechatLabel = isEn ? 'WeChat' : (isZhCn ? '微信' : '微信');
 
     // Keep it simple: show what we already display on the page.
     const line = 'albert780510';
+    const tg = '@AlbertLaipi';
+    const tgUrl = 'https://t.me/AlbertLaipi';
+    const waUrl = 'https://wa.me/qr/WMWEEYWG32N7H1';
+    const zaloUrl = 'https://zaloapp.com/qr/p/1m345knav588v';
     const fbUrl = 'https://www.facebook.com/share/1CFZKSjVzy/?mibextid=wwXIfr';
     const wechat = 's20389741';
 
@@ -302,6 +309,9 @@ async function main(locale){
       <div style="margin-top:6px;font-weight:700">${contactsLabel}</div>
       <ul style="margin:8px 0 0;padding-left:18px">
         <li>${lineLabel}: <a href="https://line.me/R/ti/p/${line}" target="_blank" rel="noopener" style="color:#9ad7ff">${line}</a></li>
+        <li>${tgLabel}: <a href="${tgUrl}" target="_blank" rel="noopener" style="color:#9ad7ff">${tg}</a></li>
+        <li>${waLabel}: <a href="${waUrl}" target="_blank" rel="noopener" style="color:#9ad7ff">${waLabel}</a></li>
+        <li>${zaloLabel}: <a href="${zaloUrl}" target="_blank" rel="noopener" style="color:#9ad7ff">${zaloLabel}</a></li>
         <li>${fbLabel}: <a href="${fbUrl}" target="_blank" rel="noopener" style="color:#9ad7ff">Vietnam Discovery</a></li>
         <li>${wechatLabel}: <span style="color:rgba(255,255,255,.92)">${wechat}</span></li>
       </ul>
