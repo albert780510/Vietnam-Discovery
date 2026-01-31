@@ -814,6 +814,10 @@ async function main(locale){
           proofBox.dataset.orderId = data.orderId;
         }
 
+        // If paying CNY, do not show TWD bank details under the order id.
+        const payInfoTwdEl = paymentBox?.querySelector('#payInfoTwd');
+        if (payInfoTwdEl) payInfoTwdEl.style.display = (v === 'CNY') ? 'none' : '';
+
         // Set method then trigger UI update (listeners are already attached)
         if (payMethod) {
           payMethod.value = v;
