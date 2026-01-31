@@ -459,6 +459,28 @@ async function main(locale){
       }, 0);
     }
 
+    async function waitForTxSuccess(eth, txHash, { timeoutMs = 45000, intervalMs = 2000 } = {}){
+      const start = Date.now();
+      while (Date.now() - start < timeoutMs) {
+        let receipt = null;
+        try {
+          receipt = await eth.request({ method: 'eth_getTransactionReceipt', params: [txHash] });
+        } catch (_) {
+          // ignore and keep polling
+        }
+
+        if (receipt) {
+          // status: '0x1' success, '0x0' failed
+          const status = String(receipt.status || '').toLowerCase();
+          if (status === '0x1') return { ok: true, receipt };
+          if (status === '0x0') return { ok: false, receipt };
+        }
+
+        await new Promise(r => setTimeout(r, intervalMs));
+      }
+      return { ok: null, receipt: null };
+    }
+
     btn.addEventListener('click', async () => {
       try {
         // Do not block MetaMask popup on missing contact fields.
@@ -520,10 +542,30 @@ async function main(locale){
         if (txHash) {
           txidInput.value = String(txHash);
           await setStatus('info', isEn
-            ? `Payment sent. TXID filled. Submitting payment info…\n${txHash}`
-            : (isZhCn ? `已发送付款，TXID 已自动填入。正在自动提交付款信息…\n${txHash}` : `已發送付款，TXID 已自動填入。正在自動提交付款資訊…\n${txHash}`)
+            ? `Transaction sent. Waiting for confirmation…\n${txHash}`
+            : (isZhCn ? `交易已发送，等待链上确认…\n${txHash}` : `交易已發送，等待鏈上確認…\n${txHash}`)
           );
-          autoSubmitProof();
+
+          const r = await waitForTxSuccess(eth, txHash, { timeoutMs: 45000, intervalMs: 2000 });
+          if (r.ok === true) {
+            await setStatus('info', isEn
+              ? `Confirmed. Submitting payment info…\n${txHash}`
+              : (isZhCn ? `已确认，正在自动提交付款信息…\n${txHash}` : `已確認，正在自動提交付款資訊…\n${txHash}`)
+            );
+            autoSubmitProof();
+          } else if (r.ok === false) {
+            // Do NOT submit payment info to group if on-chain status is failed.
+            await setStatus('danger', isEn
+              ? 'MetaMask transaction failed (on-chain). Please top up gas (BNB) and try again.'
+              : (isZhCn ? '小狐狸交易失败（链上失败）。请先补充 BNB 手续费后再重试。' : '小狐狸交易失敗（鏈上失敗）。請先補充 BNB 手續費後再重試。')
+            );
+          } else {
+            // Timed out waiting for receipt; don't auto-submit to avoid false positives.
+            await setStatus('info', isEn
+              ? `Transaction submitted but not confirmed yet. Please wait and then submit payment info manually if needed.\n${txHash}`
+              : (isZhCn ? `交易已送出但尚未确认。请稍等，必要时再手动提交付款信息。\n${txHash}` : `交易已送出但尚未確認。請稍等，必要時再手動提交付款資訊。\n${txHash}`)
+            );
+          }
         }
       } catch (err) {
         await setStatus('danger', (isEn?'MetaMask payment failed: ':(isZhCn?'小狐狸付款失败：':'小狐狸付款失敗：')) + (err?.message || String(err)));
