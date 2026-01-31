@@ -384,14 +384,45 @@ async function main(locale){
       el.classList.toggle('active', !!on);
     }
 
-    function updatePayInfo(){
-      const m = methodSel?.value || '';
-      setActive(payInfoTwd, m === 'TWD');
-      setActive(payInfoCny, m === 'CNY');
+    const txidInput = qs('#txid');
+    const last5Input = qs('#last5');
+    const proofInput = qs('#proofImage');
+    const amountInput = qs('#payAmount');
+
+    const txidRow = txidInput?.closest('.row');
+    const last5Row = last5Input?.closest('.row');
+    const proofRow = proofInput?.closest('div');
+    const amountRow = amountInput?.closest('.row');
+
+    function setHidden(el, hidden){
+      if (!el) return;
+      el.classList.toggle('hidden', !!hidden);
     }
 
-    methodSel?.addEventListener('change', updatePayInfo);
-    updatePayInfo();
+    function updatePayUI(){
+      const m = methodSel?.value || '';
+
+      // Payment info blocks
+      setActive(payInfoTwd, m === 'TWD');
+      setActive(payInfoCny, m === 'CNY');
+
+      // Field visibility
+      // USDT: show TXID; hide last5 + proof screenshot + amount
+      // TWD: show last5 + proof screenshot + amount(optional); hide TXID
+      // CNY: show proof screenshot + amount(optional); hide TXID + last5
+      setHidden(txidRow, m !== 'USDT');
+      setHidden(last5Row, m !== 'TWD');
+      setHidden(proofRow, !(m === 'TWD' || m === 'CNY'));
+      setHidden(amountRow, m === 'USDT');
+
+      // Required hints (UX only; submit handler still validates)
+      if (txidInput) txidInput.required = (m === 'USDT');
+      if (last5Input) last5Input.required = false; // keep optional; we still recommend
+      if (proofInput) proofInput.required = (m === 'TWD' || m === 'CNY');
+    }
+
+    methodSel?.addEventListener('change', updatePayUI);
+    updatePayUI();
 
     setupMetaMaskPay();
     proofForm.addEventListener('submit', async (e) => {
