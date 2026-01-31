@@ -233,6 +233,81 @@ async function main(locale){
     statusEl.style.display = 'block';
   }
 
+  // Simple modal (used for important confirmations like payment submission)
+  function showModal({ title, bodyHtml }){
+    let overlay = document.querySelector('#vd-modal');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'vd-modal';
+      overlay.style.position = 'fixed';
+      overlay.style.inset = '0';
+      overlay.style.background = 'rgba(0,0,0,.66)';
+      overlay.style.display = 'none';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.style.zIndex = '10000';
+      overlay.innerHTML = `
+        <div id="vd-modal-card" style="width:min(560px,92vw);border-radius:16px;border:1px solid rgba(255,255,255,.14);background:rgba(12,16,28,.98);box-shadow:0 18px 60px rgba(0,0,0,.45);padding:18px 16px;color:#fff">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+            <div>
+              <div id="vd-modal-title" style="font-size:16px;font-weight:700;line-height:1.3"></div>
+              <div style="height:8px"></div>
+            </div>
+            <button id="vd-modal-close" type="button" class="btn" style="padding:8px 10px;min-height:auto">${isEn ? 'Close' : (isZhCn ? '关闭' : '關閉')}</button>
+          </div>
+          <div id="vd-modal-body" style="color:rgba(255,255,255,.9);font-size:14px;line-height:1.55"></div>
+        </div>
+      `;
+      overlay.addEventListener('click', (e) => {
+        // Click outside card closes
+        if (e.target === overlay) overlay.style.display = 'none';
+      });
+      document.body.appendChild(overlay);
+      overlay.querySelector('#vd-modal-close')?.addEventListener('click', () => {
+        overlay.style.display = 'none';
+      });
+    }
+
+    const titleEl = overlay.querySelector('#vd-modal-title');
+    const bodyEl = overlay.querySelector('#vd-modal-body');
+    if (titleEl) titleEl.textContent = title || '';
+    if (bodyEl) bodyEl.innerHTML = bodyHtml || '';
+    overlay.style.display = 'flex';
+  }
+
+  function paymentSubmittedModalHtml(){
+    const title = isEn
+      ? 'Payment info submitted'
+      : (isZhCn ? '付款信息已提交' : '付款資訊已提交');
+
+    const msg = isEn
+      ? 'We will start processing the same day once confirmed. If you have any questions, please contact us below to confirm.'
+      : (isZhCn
+        ? '我们确认后当天立刻处理。如有疑问，请通过以下联系方式联系确认。'
+        : '我們確認後當天立刻處理。如有疑問，請透過以下聯絡方式確認。'
+      );
+
+    const contactsLabel = isEn ? 'Contact' : (isZhCn ? '联络方式' : '聯絡方式');
+    const lineLabel = isEn ? 'LINE' : 'LINE';
+    const fbLabel = isEn ? 'Facebook Group' : (isZhCn ? 'Facebook 群组' : 'Facebook 社團');
+    const wechatLabel = isEn ? 'WeChat' : (isZhCn ? '微信' : '微信');
+
+    // Keep it simple: show what we already display on the page.
+    const line = 'albert780510';
+    const fbUrl = 'https://www.facebook.com/share/1CFZKSjVzy/?mibextid=wwXIfr';
+    const wechat = 's20389741';
+
+    return { title, bodyHtml: `
+      <div style="padding:8px 0 12px">${msg}</div>
+      <div style="margin-top:6px;font-weight:700">${contactsLabel}</div>
+      <ul style="margin:8px 0 0;padding-left:18px">
+        <li>${lineLabel}: <a href="https://line.me/R/ti/p/${line}" target="_blank" rel="noopener" style="color:#9ad7ff">${line}</a></li>
+        <li>${fbLabel}: <a href="${fbUrl}" target="_blank" rel="noopener" style="color:#9ad7ff">Vietnam Discovery</a></li>
+        <li>${wechatLabel}: <span style="color:rgba(255,255,255,.92)">${wechat}</span></li>
+      </ul>
+    `};
+  }
+
   const passportInput = qs('#passport');
   const photoInput = qs('#photo');
 
@@ -457,72 +532,15 @@ async function main(locale){
     const payTitleEl = qs('#paymentProof > div'); // first title div inside paymentProof
     const payHelpEl = qs('#paymentProof .help');
 
-    // USDT advanced (exchange transfer) toggle
-    const USDT_ADDR_BEP20 = '0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489';
-    const USDT_ADDR_TRC20 = 'TSDNH14KfKRNotV6aHd7u22G2kxUhWAX7w';
+    // USDT mode is chosen via modal wizard (see create-order flow below).
     let usdtMode = null; // null | metamask | exchange
-
-    function renderUsdtChooser(){
-      if (!methodWrap) return;
-      let box = methodWrap.querySelector('#vd-usdt-chooser');
-      if (!box) {
-        box = document.createElement('div');
-        box.id = 'vd-usdt-chooser';
-        box.style.marginTop = '10px';
-        box.innerHTML = `
-          <div class="small" style="margin-top:6px;color:rgba(255,255,255,.85)">
-            ${isEn
-              ? 'Choose how you want to pay:'
-              : (isZhCn ? '请选择付款方式：' : '請選擇付款方式：')}
-          </div>
-          <div class="vd-usdt-choice" style="margin-top:10px;display:grid;gap:10px">
-            <button type="button" class="btn" data-usdt-mode="metamask" style="width:100%">
-              ${isEn ? 'Pay with MetaMask (recommended)' : (isZhCn ? '用小狐狸钱包支付（推荐）' : '用小狐狸錢包支付（推薦）')}
-            </button>
-            <button type="button" class="contactBtn" data-usdt-mode="exchange" style="width:100%">
-              ${isEn ? 'Exchange transfer (requires screenshot)' : (isZhCn ? '交易所转账（需要截图）' : '交易所轉帳（需要截圖）')}
-            </button>
-          </div>
-        `;
-        methodWrap.appendChild(box);
-
-        box.addEventListener('click', (e) => {
-          const btn = e.target?.closest?.('[data-usdt-mode]');
-          const v = btn?.dataset?.usdtMode;
-          if (v === 'metamask' || v === 'exchange') {
-            usdtMode = v;
-            updatePayUI();
-          }
-        });
-      }
+    function setUsdtMode(v){
+      usdtMode = (v === 'metamask' || v === 'exchange') ? v : null;
+      updatePayUI();
     }
 
-    function renderUsdtExchangeInfo(){
-      if (!methodWrap) return;
-      let box = methodWrap.querySelector('#vd-usdt-exchange');
-      if (!box) {
-        box = document.createElement('div');
-        box.id = 'vd-usdt-exchange';
-        box.style.marginTop = '10px';
-        box.innerHTML = `
-          <div class="small" style="padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.12)">
-            <div style="font-weight:800;margin-bottom:6px">${isEn?'USDT transfer addresses':'USDT 轉帳地址'}</div>
-            <div style="margin-bottom:8px"><span style="opacity:.8">BEP20 (BSC):</span><br/><code style="user-select:all">${USDT_ADDR_BEP20}</code></div>
-            <div style="margin-bottom:8px"><span style="opacity:.8">TRC20 (TRON):</span><br/><code style="user-select:all">${USDT_ADDR_TRC20}</code></div>
-            <div style="opacity:.8;margin-top:6px">
-              ${isEn
-                ? 'Important: exchange withdrawals may deduct fees. We must receive the full amount (exact received).'
-                : (isZhCn
-                  ? '重要：交易所提币可能会扣手续费。我们必须实收足额（以实收为准）。'
-                  : '重要：交易所提幣可能會扣手續費。我們必須實收足額（以實收為準）。'
-                )}
-            </div>
-          </div>
-        `;
-        methodWrap.appendChild(box);
-      }
-      return box;
-    }
+    // Expose setter so the payment wizard can control the mode.
+    window.__VD_setUsdtMode = setUsdtMode;
 
     function updatePayUI(){
       const m = methodSel?.value || '';
@@ -775,6 +793,8 @@ async function main(locale){
           ? 'Payment info submitted. We will start processing the same day once confirmed.'
           : (isZhCn ? '付款信息已提交，我们确认后当天立刻处理。' : '付款資訊已提交，我們確認後當天立刻處理。')
         );
+        // Better UX: show a modal so users don't miss the confirmation.
+        try { showModal(paymentSubmittedModalHtml()); } catch (_) {}
         if (submitBtn) submitBtn.disabled = false;
       } catch (err) {
         await setStatus('danger', (isEn?'Failed to submit payment info: ':(isZhCn?'提交付款信息失败：':'提交付款資訊失敗：')) + err.message);
