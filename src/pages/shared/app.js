@@ -811,6 +811,26 @@ async function main(locale){
 
       const email = qs('#email')?.value?.trim() || '';
       const phone = qs('#phone')?.value?.trim() || '';
+      const address = qs('#address')?.value?.trim() || '';
+      const arrival = qs('#arrival')?.value || '';
+      const nationality = qs('#nationality')?.value || '';
+      const entryGate = qs('#entryGate')?.value || '';
+
+      const productId = productSel?.value || '';
+      const speedId = speedSel?.value || '';
+      const productLabel = pricing?.products?.[productId]?.label?.[locale]
+        || pricing?.products?.[productId]?.label?.['en']
+        || pricing?.products?.[productId]?.label?.['zh-TW']
+        || productId;
+      const speedLabel = processing?.speeds?.find(s => s.id === speedId)?.label?.[locale]
+        || processing?.speeds?.find(s => s.id === speedId)?.label?.['en']
+        || speedId;
+
+      const payCurrency = (method === 'USDT') ? 'USDT' : ((method === 'CNY') ? 'CNY' : 'TWD');
+      const p = pricing.products?.[productId];
+      const totalObj = p ? calcTotalForCurrency(p, payCurrency) : { total: NaN, addon: 0 };
+      const totalAmount = Number.isFinite(totalObj.total) ? String(totalObj.total) : '';
+      const rushAddon = Number.isFinite(totalObj.addon) ? String(totalObj.addon) : '';
 
       const file = qs('#proofImage')?.files?.[0];
       let proofImage = '';
@@ -871,14 +891,27 @@ async function main(locale){
             locale,
             orderId,
             method,
-            email: email || undefined,
-            phone: phone || undefined,
             usdtMode: usdtModeSel || undefined,
             txid: txid || undefined,
             last5: last5 || undefined,
             amount: amount || undefined,
             currency: currency || undefined,
             note: note || undefined,
+
+            nationality: nationality || undefined,
+            productId: productId || undefined,
+            productLabel: productLabel || undefined,
+            speedId: speedId || undefined,
+            speedLabel: speedLabel || undefined,
+            totalAmount: totalAmount || undefined,
+            totalCurrency: payCurrency || undefined,
+            rushAddon: rushAddon || undefined,
+            email: email || undefined,
+            phone: phone || undefined,
+            address: address || undefined,
+            arrival: arrival || undefined,
+            entryGate: entryGate || undefined,
+
             passportImage: passportImage || undefined,
             idPhotoImage: idPhotoImage || undefined,
             proofImage: proofImage || undefined
