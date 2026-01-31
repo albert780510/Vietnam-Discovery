@@ -633,6 +633,114 @@ async function main(locale){
     // Expose setter so the payment wizard can control the mode.
     window.__VD_setUsdtMode = setUsdtMode;
 
+    function renderUsdtChooser(){
+      if (!methodWrap) return null;
+      let box = methodWrap.querySelector('#vd-usdt-chooser');
+      if (!box) {
+        box = document.createElement('div');
+        box.id = 'vd-usdt-chooser';
+        box.style.marginTop = '10px';
+        box.innerHTML = `
+          <div class="small" style="margin-top:6px;color:rgba(255,255,255,.85)">
+            ${isEn
+              ? 'USDT: choose one option:'
+              : (isZhCn ? 'USDT：请选择一种方式：' : 'USDT：請選擇一種方式：')}
+          </div>
+          <div style="margin-top:10px;display:grid;gap:10px">
+            <button type="button" class="btn" data-usdt-mode="metamask" style="width:100%">
+              ${isEn ? 'USDT (MetaMask) — auto submit' : (isZhCn ? 'USDT（MetaMask）— 自动提交' : 'USDT（MetaMask）— 自動提交')}
+            </button>
+            <button type="button" class="btn" data-usdt-mode="exchange" style="width:100%">
+              ${isEn ? 'Exchange transfer — show addresses + upload screenshot' : (isZhCn ? '交易所转账 — 显示地址 + 上传截图' : '交易所轉帳 — 顯示地址 + 上傳截圖')}
+            </button>
+          </div>
+        `;
+        methodWrap.appendChild(box);
+
+        box.addEventListener('click', (e) => {
+          const btn = e.target?.closest?.('button[data-usdt-mode]');
+          const v = btn?.getAttribute?.('data-usdt-mode');
+          if (!v) return;
+          setUsdtMode(v);
+
+          if (v === 'metamask') {
+            // Start MetaMask flow immediately
+            const mmBtn = document.querySelector('#vd-metamask-box button');
+            mmBtn?.click?.();
+          }
+        });
+      }
+      return box;
+    }
+
+    function renderUsdtExchangeInfo(){
+      if (!methodWrap) return null;
+      let ex = methodWrap.querySelector('#vd-usdt-exchange');
+      if (ex) return ex;
+
+      const BEP20_ADDR = '0xc0a7a1f638983bb8dcb64b5249d8f9ecaa6d4489';
+      const TRC20_ADDR = 'TSDNH14KfKRNotV6aHd7u22G2kxUhWAX7w';
+
+      ex = document.createElement('div');
+      ex.id = 'vd-usdt-exchange';
+      ex.style.marginTop = '10px';
+      ex.className = 'notice';
+
+      const warnTitle = isEn ? 'IMPORTANT (network fee)' : (isZhCn ? '重要提醒（手续费）' : '重要提醒（手續費）');
+      const warnBody = isEn
+        ? 'Please send the EXACT amount. You must pay the network fee yourself. We must receive the full amount, otherwise we cannot process the order.'
+        : (isZhCn
+          ? '请务必转入“足额”。手续费请由您自行承担，我们必须实收足额，否则无法处理订单。'
+          : '請務必轉入「足額」。手續費請由您自行承擔，我們必須實收足額，否則無法處理訂單。'
+        );
+
+      const copyTxt = isEn ? 'Copy' : (isZhCn ? '复制' : '複製');
+
+      ex.innerHTML = `
+        <div style="font-weight:800;margin-bottom:8px">${isEn ? 'USDT address (Exchange transfer)' : (isZhCn ? 'USDT 地址（交易所转账）' : 'USDT 地址（交易所轉帳）')}</div>
+        <div class="notice danger" style="display:block;margin:0 0 10px 0">
+          <div style="font-weight:800">${warnTitle}</div>
+          <div style="margin-top:6px">${warnBody}</div>
+        </div>
+
+        <div style="display:grid;gap:10px">
+          <div style="border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px">
+            <div style="font-weight:700">USDT (BEP20 / BSC)</div>
+            <div class="small" style="word-break:break-all;margin-top:6px">${BEP20_ADDR}</div>
+            <button type="button" class="btn" data-copy="${BEP20_ADDR}" style="margin-top:8px">${copyTxt}</button>
+          </div>
+
+          <div style="border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px">
+            <div style="font-weight:700">USDT (TRC20 / TRON)</div>
+            <div class="small" style="word-break:break-all;margin-top:6px">${TRC20_ADDR}</div>
+            <button type="button" class="btn" data-copy="${TRC20_ADDR}" style="margin-top:8px">${copyTxt}</button>
+          </div>
+        </div>
+
+        <div class="help" style="margin-top:10px">
+          ${isEn
+            ? 'After transfer, please upload a screenshot below (exchange withdrawal/transfer record).'
+            : (isZhCn ? '转账后请在下方上传截图（交易所提币/转账记录）。' : '轉帳後請在下方上傳截圖（交易所提幣/轉帳記錄）。')}
+        </div>
+      `;
+
+      ex.addEventListener('click', async (e) => {
+        const btn = e.target?.closest?.('button[data-copy]');
+        const text = btn?.getAttribute?.('data-copy');
+        if (!text) return;
+        try {
+          await navigator.clipboard.writeText(text);
+          btn.textContent = isEn ? 'Copied' : (isZhCn ? '已复制' : '已複製');
+          setTimeout(() => { btn.textContent = copyTxt; }, 1200);
+        } catch (_) {
+          // fallback: do nothing
+        }
+      });
+
+      methodWrap.appendChild(ex);
+      return ex;
+    }
+
     function updatePayUI(){
       const m = methodSel?.value || '';
 
