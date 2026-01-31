@@ -555,7 +555,7 @@ async function main(locale){
     const txidInput = qs('#txid');
     const last5Input = qs('#last5');
     const proofInput = qs('#proofImage');
-    const amountInput = qs('#payAmount');
+    const amountInput = null; // removed (no longer needed)
 
     // In the HTML, payMethod select and TXID live in the same row, so we control them separately.
     const methodWrap = methodSel?.closest('div');
@@ -564,7 +564,7 @@ async function main(locale){
     const txidRow = txidInput?.closest('.row');
     const last5Row = last5Input?.closest('.row');
     const proofRow = proofInput?.closest('div');
-    const amountRow = amountInput?.closest('.row');
+    const amountRow = null;
 
     function setHidden(el, hidden){
       if (!el) return;
@@ -756,7 +756,7 @@ async function main(locale){
       const method = qs('#payMethod')?.value || '';
       const txid = qs('#txid')?.value?.trim() || '';
       const last5 = qs('#last5')?.value?.trim() || '';
-      const amount = qs('#payAmount')?.value?.trim() || '';
+      const amount = '';
       const currency = qs('#payCurrency')?.value || '';
       const note = qs('#payNote')?.value?.trim() || '';
 
