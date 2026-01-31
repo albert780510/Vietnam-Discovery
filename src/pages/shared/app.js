@@ -281,7 +281,10 @@ async function main(locale){
       return;
     }
 
-    const host = txidInput.closest('div') || proofForm || document.body;
+    // Mount the MetaMask CTA next to the payment method (not inside TXID field),
+    // so we can hide the TXID input without hiding the button.
+    const methodWrap = methodSel?.closest('div');
+    const host = methodWrap || proofForm || document.body;
     const box = document.createElement('div');
     box.style.marginTop = '8px';
 
@@ -475,27 +478,10 @@ async function main(locale){
         }
 
         // Hide TXID input by default (it will be filled automatically).
-        if (txidWrap) {
-          txidWrap.classList.add('hidden');
-          // Optional: allow manual TXID reveal
-          let link = txidRow?.querySelector('#vd-show-txid');
-          if (!link) {
-            link = document.createElement('a');
-            link.id = 'vd-show-txid';
-            link.href = '#';
-            link.className = 'small';
-            link.style.display = 'inline-block';
-            link.style.marginTop = '6px';
-            link.textContent = isEn ? 'Enter TXID manually' : (isZhCn ? '手动填写 TXID' : '手動填寫 TXID');
-            link.addEventListener('click', (e) => {
-              e.preventDefault();
-              txidWrap.classList.remove('hidden');
-              link.remove();
-            });
-            // Put the link under the method block
-            methodWrap?.appendChild(link);
-          }
-        }
+        if (txidWrap) txidWrap.classList.add('hidden');
+
+        // No manual TXID entry by default; keep UI minimal.
+        // (If we ever need a fallback, we can re-enable a small "Enter TXID" link.)
       } else {
         // Non-USDT: show dropdown and remove static label
         if (methodWrap) {
@@ -503,8 +489,6 @@ async function main(locale){
           if (sel) sel.classList.remove('hidden');
           const staticEl = methodWrap.querySelector('#vd-method-static');
           if (staticEl) staticEl.remove();
-          const showTxid = methodWrap.querySelector('#vd-show-txid');
-          if (showTxid) showTxid.remove();
         }
         if (txidWrap) txidWrap.classList.remove('hidden');
       }
