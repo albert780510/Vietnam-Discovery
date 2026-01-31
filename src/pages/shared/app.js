@@ -370,18 +370,14 @@ async function main(locale){
     const methodSel = qs('#payMethod');
     const payInfoTwd = qs('#payInfoTwd');
     const payInfoCny = qs('#payInfoCny');
-    const payInfoUsdt = qs('#payInfoUsdt');
 
     // Add a class so CSS can control visibility
     payInfoTwd?.classList.add('payInfo');
     payInfoCny?.classList.add('payInfo');
-    payInfoUsdt?.classList.add('payInfo');
 
     // Ensure QR images are not distorted
-    for (const imgSel of ['#payInfoCny img', '#payInfoUsdt img']) {
-      const img = qs(imgSel);
-      if (img) img.classList.add('payQr');
-    }
+    const img = qs('#payInfoCny img');
+    if (img) img.classList.add('payQr');
 
     function setActive(el, on){
       if (!el) return;
@@ -392,7 +388,6 @@ async function main(locale){
       const m = methodSel?.value || '';
       setActive(payInfoTwd, m === 'TWD');
       setActive(payInfoCny, m === 'CNY');
-      setActive(payInfoUsdt, m === 'USDT');
     }
 
     methodSel?.addEventListener('change', updatePayInfo);
