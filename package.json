@@ -1,0 +1,10 @@
+{
+  "name": "visa-site",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "busboy": "^1.6.0",
+    "sharp": "^0.33.5",
+    "tesseract.js": "^5.0.5"
+  }
+}

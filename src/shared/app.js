@@ -44,13 +44,42 @@ async function main(locale){
 
   passportInput.addEventListener('change', async () => {
     if (!passportInput.files?.[0]) return;
+
+    // 1) Fast client-side checks (speed + better UX)
     await setStatus('info', locale==='zh-CN' ? '正在检查护照资料页图片…' : '正在檢查護照資料頁圖片…');
-    const r = await validateImageFile(passportInput.files[0], { kind:'passport', minWidth: 900, minHeight: 600, maxMB: 8 });
+    const r = await validateImageFile(passportInput.files[0], { kind:'passport', minWidth: 900, minHeight: 600, maxMB: 10 });
     if (!r.ok) {
       passportInput.value = '';
       await setStatus('danger', (locale==='zh-CN'?'护照资料页不符合要求：':'護照資料頁不符合要求：') + (r.message || r.reason));
-    } else {
-      await setStatus('info', (locale==='zh-CN'?'护照资料页 OK。':'護照資料頁 OK。') + `（${r.meta.width}×${r.meta.height}）`);
+      return;
+    }
+
+    // 2) Server-side MRZ check (reduces official-system rejections)
+    await setStatus('info', locale==='zh-CN' ? '正在进行护照 MRZ 自动辨识（防退件）…' : '正在進行護照 MRZ 自動辨識（防退件）…');
+    try {
+      const fd = new FormData();
+      fd.append('file', passportInput.files[0]);
+      const res = await fetch('/.netlify/functions/validate_passport', { method: 'POST', body: fd });
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data?.message || data?.error || 'validate_passport_failed');
+      if (!data.ok) {
+        passportInput.value = '';
+        await setStatus('danger', (locale==='zh-CN'?'护照资料页不符合要求：':'護照資料頁不符合要求：') + (data.message || data.reason));
+        return;
+      }
+
+      const warn = (data.warnings && data.warnings.length)
+        ? (locale==='zh-CN' ? '\n\n提醒：' : '\n\n提醒：') + data.warnings.join('；')
+        : '';
+
+      await setStatus('info', (locale==='zh-CN'?'护照资料页 OK（MRZ 可辨识）。':'護照資料頁 OK（MRZ 可辨識）。') + `（${r.meta.width}×${r.meta.height}）` + warn);
+    } catch (err) {
+      // If validation endpoint fails, don't hard-block (avoid false negatives due to infra).
+      await setStatus('info', (locale==='zh-CN'
+        ? '护照资料页已通过基本检查，但 MRZ 线上辨识暂时不可用；建议确保最底部两行清楚可读。'
+        : '護照資料頁已通過基本檢查，但 MRZ 線上辨識暫時不可用；建議確保最底部兩行清楚可讀。'
+      ));
     }
   });
 

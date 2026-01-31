@@ -4,3 +4,9 @@ src/shared/config.nationalities.json
 
 # Local Netlify folder
 .netlify
+
+# Node deps
+node_modules
+
+# Locks (optional - keep package-lock if you want reproducible builds)
+deno.lock
