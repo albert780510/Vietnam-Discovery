@@ -14,19 +14,19 @@
   <header class="sticky top-0 z-50">
     <div class="mx-auto max-w-6xl px-4 pt-4">
       <div class="flex items-center justify-between rounded-2xl border border-black/5 bg-white/70 px-4 py-3 shadow-soft backdrop-blur">
-        <div class="flex items-center gap-3">
+        <a href="/zh-cn/" class="flex items-center gap-3" aria-label="Go to home">
           <img src="/shared/logo.jpg" alt="Vietnam Discovery" class="h-9 w-9 rounded-xl border border-black/5 bg-white p-1" />
           <div class="flex items-center gap-2">
             <span class="text-sm font-extrabold tracking-tight">Vietnam Discovery</span>
             <span class="rounded-full bg-brand-2/40 px-3 py-1 text-xs font-extrabold text-brand-1">官网</span>
           </div>
-        </div>
+        </a>
 
         <nav class="hidden items-center gap-2 md:flex" aria-label="Navigation">
           <a href="/zh-cn/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">首页</a>
-          <a href="#services" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">服务</a>
-          <a href="/zh-cn/evisa/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">eVisa</a>
-          <a href="#contact" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">联系</a>
+          <a href="/zh-cn/#services" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">服务</a>
+          <a href="/zh-cn/evisa/" target="_blank" rel="noopener" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">eVisa</a>
+          <a href="/zh-cn/#contact" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">联系</a>
         </nav>
 
         <div class="flex items-center gap-2">
@@ -46,49 +46,63 @@
         </div>
         <div class="h-[520px] md:h-[460px]"></div>
       </div>
-    </section>
 
-    <section class="mt-6" aria-label="Primary actions">
-      <div class="grid gap-3 md:grid-cols-2">
-        <a href="#contact" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95">立即咨询 / 获取报价</a>
-        <a href="/zh-cn/evisa/" class="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-5 py-4 text-base font-extrabold text-zinc-900 shadow-card hover:bg-brand-4">越南 eVisa 代办 →</a>
+      <div class="mx-auto mt-8 max-w-3xl text-center">
+        <h1 class="text-4xl font-extrabold tracking-tight md:text-5xl">越南本地旅行与签证，
+          <span class="text-zinc-900">一站式搞定。</span>
+        </h1>
+        <p class="mx-auto mt-4 max-w-2xl text-base font-medium leading-7 text-zinc-600">
+          本地团队协助：旅行行程、机场接送/包车、商务考察与越南 eVisa 代办。支持中文/英文/越南文沟通，流程透明。
+        </p>
+
+        <div class="mt-6 grid gap-3 md:grid-cols-2">
+          <a href="/zh-cn/#contact" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95">立即咨询 / 获取报价</a>
+          <a href="/zh-cn/evisa/" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-5 py-4 text-base font-extrabold text-zinc-900 shadow-card hover:bg-brand-4">越南 eVisa 代办 →</a>
+        </div>
+
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-bold text-zinc-500">
+          <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>本地团队</span>
+          <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>流程透明</span>
+          <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>多语支持</span>
+          <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>回复快速</span>
+        </div>
       </div>
     </section>
 
-    <section id="services" class="mt-10" aria-label="Services">
+    <section id="services" class="mt-12" aria-label="Services">
       <div>
         <h2 class="text-2xl font-extrabold tracking-tight">服务项目</h2>
         <p class="mt-2 text-sm font-medium text-zinc-600">主打旅行与签证，一站式整合，流程清楚。</p>
       </div>
 
-      <div class="mt-5 grid gap-4 md:grid-cols-2">
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
         <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
           <h3 class="text-base font-extrabold">Tours｜旅行行程</h3>
           <p class="mt-2 text-sm text-zinc-600">胡志明 / 河内 / 岘港｜自由行规划、小团、客制深度。</p>
-          <div class="mt-4"><a href="#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">私信询价</a></div>
+          <div class="mt-4"><a href="/zh-cn/#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">私信询价</a></div>
         </article>
 
         <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
           <h3 class="text-base font-extrabold">Car & Airport Transfer｜机场接送 / 包车</h3>
           <p class="mt-2 text-sm text-zinc-600">机场接送、市区包车、跨城移动。可按人数/行李/路线报价。</p>
-          <div class="mt-4"><a href="#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">询价</a></div>
+          <div class="mt-4"><a href="/zh-cn/#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">询价</a></div>
         </article>
 
         <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
           <h3 class="text-base font-extrabold">Business Trip｜商务考察</h3>
           <p class="mt-2 text-sm text-zinc-600">翻译、车辆、拜访安排、在地资源对接（按需求客制）。</p>
-          <div class="mt-4"><a href="#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">先讲需求</a></div>
+          <div class="mt-4"><a href="/zh-cn/#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">先讲需求</a></div>
         </article>
 
         <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
           <h3 class="text-base font-extrabold">Vietnam eVisa｜越南签证代办</h3>
           <p class="mt-2 text-sm text-zinc-600">上传护照/照片 → 我们检查整理 → 送件 → 回传结果。</p>
-          <div class="mt-4"><a href="/zh-cn/evisa/" class="inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-brand-1 to-brand-5 px-4 py-3 text-sm font-extrabold text-white hover:opacity-95">前往申请</a></div>
+          <div class="mt-4"><a href="/zh-cn/evisa/" target="_blank" rel="noopener" class="inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-brand-1 to-brand-5 px-4 py-3 text-sm font-extrabold text-white hover:opacity-95">前往申请</a></div>
         </article>
       </div>
     </section>
 
-    <section id="contact" class="mt-10" aria-label="Contact">
+    <section id="contact" class="mt-12" aria-label="Contact">
       <div class="rounded-2xl border border-black/5 bg-white p-6 shadow-card">
         <h2 class="text-xl font-extrabold tracking-tight">联系我们</h2>
         <p class="mt-1 text-sm font-medium text-zinc-600">支持英文 / 中文 / 越南文沟通。</p>

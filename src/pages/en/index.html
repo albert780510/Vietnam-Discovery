@@ -14,19 +14,19 @@
   <header class="sticky top-0 z-50">
     <div class="mx-auto max-w-6xl px-4 pt-4">
       <div class="flex items-center justify-between rounded-2xl border border-black/5 bg-white/70 px-4 py-3 shadow-soft backdrop-blur">
-        <div class="flex items-center gap-3">
+        <a href="/en/" class="flex items-center gap-3" aria-label="Go to home">
           <img src="/shared/logo.jpg" alt="Vietnam Discovery" class="h-9 w-9 rounded-xl border border-black/5 bg-white p-1" />
           <div class="flex items-center gap-2">
             <span class="text-sm font-extrabold tracking-tight">Vietnam Discovery</span>
             <span class="rounded-full bg-brand-2/40 px-3 py-1 text-xs font-extrabold text-brand-1">Official</span>
           </div>
-        </div>
+        </a>
 
         <nav class="hidden items-center gap-2 md:flex" aria-label="Navigation">
           <a href="/en/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">Home</a>
-          <a href="#services" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">Services</a>
-          <a href="/en/evisa/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">eVisa</a>
-          <a href="#contact" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">Contact</a>
+          <a href="/en/#services" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">Services</a>
+          <a href="/en/evisa/" target="_blank" rel="noopener" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">eVisa</a>
+          <a href="/en/#contact" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">Contact</a>
         </nav>
 
         <div class="flex items-center gap-2">
@@ -46,49 +46,63 @@
         </div>
         <div class="h-[520px] md:h-[460px]"></div>
       </div>
-    </section>
 
-    <section class="mt-6" aria-label="Primary actions">
-      <div class="grid gap-3 md:grid-cols-2">
-        <a href="#contact" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95">Get a quote</a>
-        <a href="/en/evisa/" class="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-5 py-4 text-base font-extrabold text-zinc-900 shadow-card hover:bg-brand-4">Vietnam eVisa →</a>
+      <div class="mx-auto mt-8 max-w-3xl text-center">
+        <h1 class="text-4xl font-extrabold tracking-tight md:text-5xl">Local Vietnam travel & visa help,
+          <span class="text-zinc-900">done right.</span>
+        </h1>
+        <p class="mx-auto mt-4 max-w-2xl text-base font-medium leading-7 text-zinc-600">
+          Tours, airport transfer/private car, business trip support, and Vietnam eVisa assistance. Clear process, local team, fast replies.
+        </p>
+
+        <div class="mt-6 grid gap-3 md:grid-cols-2">
+          <a href="/en/#contact" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95">Get a quote</a>
+          <a href="/en/evisa/" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-5 py-4 text-base font-extrabold text-zinc-900 shadow-card hover:bg-brand-4">Vietnam eVisa →</a>
+        </div>
+
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-bold text-zinc-500">
+          <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>Local team</span>
+          <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>Transparent process</span>
+          <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>Multi‑language</span>
+          <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>Fast reply</span>
+        </div>
       </div>
     </section>
 
-    <section id="services" class="mt-10" aria-label="Services">
+    <section id="services" class="mt-12" aria-label="Services">
       <div>
         <h2 class="text-2xl font-extrabold tracking-tight">Services</h2>
-        <p class="mt-2 text-sm font-medium text-zinc-600">One‑stop local support. Clear process. Fast replies.</p>
+        <p class="mt-2 text-sm font-medium text-zinc-600">One‑stop local support. Clear process. Premium experience.</p>
       </div>
 
-      <div class="mt-5 grid gap-4 md:grid-cols-2">
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
         <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
           <h3 class="text-base font-extrabold">Tours</h3>
           <p class="mt-2 text-sm text-zinc-600">Ho Chi Minh City / Hanoi / Da Nang. Private & small group options.</p>
-          <div class="mt-4"><a href="#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">Message for pricing</a></div>
+          <div class="mt-4"><a href="/en/#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">Message for pricing</a></div>
         </article>
 
         <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
           <h3 class="text-base font-extrabold">Airport transfer / Private car</h3>
           <p class="mt-2 text-sm text-zinc-600">Airport pickup, city rides, intercity trips. Quote by route & group size.</p>
-          <div class="mt-4"><a href="#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">Get a quote</a></div>
+          <div class="mt-4"><a href="/en/#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">Get a quote</a></div>
         </article>
 
         <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
           <h3 class="text-base font-extrabold">Business trip support</h3>
           <p class="mt-2 text-sm text-zinc-600">Translation, transportation, scheduling, and local coordination.</p>
-          <div class="mt-4"><a href="#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">Tell us your needs</a></div>
+          <div class="mt-4"><a href="/en/#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">Tell us your needs</a></div>
         </article>
 
         <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
           <h3 class="text-base font-extrabold">Vietnam eVisa assistance</h3>
           <p class="mt-2 text-sm text-zinc-600">Upload passport/photo → we review → submit → deliver results.</p>
-          <div class="mt-4"><a href="/en/evisa/" class="inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-brand-1 to-brand-5 px-4 py-3 text-sm font-extrabold text-white hover:opacity-95">Apply now</a></div>
+          <div class="mt-4"><a href="/en/evisa/" target="_blank" rel="noopener" class="inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-brand-1 to-brand-5 px-4 py-3 text-sm font-extrabold text-white hover:opacity-95">Apply now</a></div>
         </article>
       </div>
     </section>
 
-    <section id="contact" class="mt-10" aria-label="Contact">
+    <section id="contact" class="mt-12" aria-label="Contact">
       <div class="rounded-2xl border border-black/5 bg-white p-6 shadow-card">
         <h2 class="text-xl font-extrabold tracking-tight">Contact</h2>
         <p class="mt-1 text-sm font-medium text-zinc-600">English / Chinese / Vietnamese supported.</p>
