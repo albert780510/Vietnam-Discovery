@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vietnam eVisa Assistance | Vietnam Discovery</title>
+  <title>Vietnam Discovery | Local Tours & eVisa</title>
+  <meta name="description" content="Vietnam Discovery: local tours, airport transfer/private car, business trips, and Vietnam eVisa assistance. English/Chinese/Vietnamese supported." />
   <link rel="stylesheet" href="/shared/site.css" />
 </head>
 <body>
@@ -12,7 +13,7 @@
       <div class="brand">
         <img src="/shared/logo.jpg" alt="Vietnam Discovery" />
         <span>Vietnam Discovery</span>
-        <span class="badge">Vietnam eVisa Assistance</span>
+        <span class="badge">Official</span>
       </div>
       <div class="small">
         <select id="langSelect" aria-label="Language"></select>
@@ -21,174 +22,74 @@
 
     <div class="grid">
       <div class="card">
-        <div class="h1"><span class="nowrap">Vietnam eVisa Assistance</span> (fast & reliable)</div>
-        <p class="p">Apply for a Vietnam eVisa: upload your passport bio page and ID photo, and leave your contact details (address/phone). We help review and prepare your application to reduce rejection risk.</p>
+        <div class="h1">Local Vietnam travel services</div>
+        <p class="p">We provide <b>tours</b>, <b>airport transfer/private car</b>, <b>business trips</b>, and <b>Vietnam eVisa assistance</b>. Fast replies, transparent process, and multilingual support.</p>
 
-        <div class="notice" id="status" style="display:none"></div>
-
-
-<form id="lead-form">
-          <div>
-            <label>Visa type</label>
-            <select id="product"></select>
-            <div class="help" id="productPrice" style="margin-top:6px"></div>
-          </div>
-
-          <div style="margin-top:10px">
-            <label>Processing time (Submission day is not counted as the first business day)</label>
-            <select id="speed"></select>
-            <div class="help" style="margin-top:6px">We start processing the same day once payment info is received.</div>
-          </div>
-
-          <div class="row">
-            <div>
-              <label>Email</label>
-              <input id="email" type="email" placeholder="name@example.com" required />
-            </div>
-            <div>
-              <label>Phone</label>
-              <input id="phone" type="tel" placeholder="+1 000 000 0000" required />
-            </div>
-          </div>
-
-          <div>
-            <label>Address (English)</label>
-            <textarea id="address" rows="2" placeholder="Street, District, City, Country" required></textarea>
-            <div class="help">Vietnam eVisa forms usually require an English address. If yours is in another language, paste it and click <a id="translateAddress" href="#" target="_blank" rel="noopener">Translate to English</a>.</div>
-          </div>
-
-          <div>
-            <label>Arrival date <span class="small">(YYYY-MM-DD)</span></label>
-            <div class="dateWrap">
-              <input id="arrival" type="date" required />
-              <button type="button" class="iconBtn" data-open-date aria-label="Open calendar">📅</button>
-            </div>
-            <div class="help">Format: YYYY-MM-DD. Tip: click the calendar icon.</div>
-          </div>
-
-          <div class="row">
-            <div>
-              <label>Nationality</label>
-              <select id="nationality" required><option value="">Select…</option></select>
-              <div class="help">Flag + English name.</div>
-            </div>
-            <div>
-              <label>Entry gate</label>
-              <select id="entryGate" required><option value="">Select…</option></select>
-              <div class="help">Choose your planned entry airport/gate.</div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div>
-              <label>Passport bio page (photo)</label>
-              <input id="passport" type="file" accept="image/*" required />
-              <div class="help">Good lighting, no glare, text must be readable.</div>
-            </div>
-            <div>
-              <label>ID photo (photo)</label>
-              <input id="photo" type="file" accept="image/*" required />
-              <div class="help">We do basic quality checks (blur/too dark/overexposed).</div>
-            </div>
-          </div>
-
-          <div>
-            <label>Notes (optional)</label>
-            <textarea id="notes" rows="3" placeholder="Urgent? Flight info? …"></textarea>
-          </div>
-
-          <button class="btn" type="submit">Create order & get bank transfer details</button>
-        </form>
-
-        <div class="card" id="paymentBox" style="display:none;margin-top:14px">
-          <div style="font-weight:800">Next: Payment</div>
-          <p class="p">Order ID: <span id="orderId" style="font-weight:800"></span></p>
-
-          <div class="notice" id="payInfoTwd" style="margin-bottom:10px">
-            <div style="font-weight:800;margin-bottom:6px">Bank transfer (TWD)</div>
-            <div class="small">Bank: E.SUN Bank (808)</div>
-            <div class="small">Account: 0152979250648</div>
-            <div class="small">Name: 賴瑞鴻</div>
-            <div class="small" style="margin-top:8px">After transfer, please send: <b>last 5 digits + time + screenshot (optional)</b>. (Recommend note: Order ID)</div>
-          </div>
-
-          <div class="notice" id="payInfoCny" style="margin-bottom:10px">
-            <div style="font-weight:800;margin-bottom:6px">CNY payment (Alipay / WeChat Pay)</div>
-            <div class="small" id="payInfoCnyHint"></div>
-            <div class="payQrGrid" id="payInfoCnyQr"></div>
-          </div>
+        <div class="row" style="margin-top:12px">
+          <a class="btn" href="#contact">Get a quote</a>
+          <a class="btn" href="/en/evisa/" style="background:#111827">Vietnam eVisa →</a>
         </div>
 
+        <div style="margin-top:18px" class="help">Quick links: <a href="/en/evisa/">eVisa</a> · <a href="#tours">Tours</a> · <a href="#transfer">Transfer</a> · <a href="#business">Business</a></div>
+      </div>
 
-        <div class="card" id="paymentProof" style="display:none;margin-top:14px">
-          <div style="font-weight:800">Payment confirmation</div>
-          <div class="help" style="margin-top:6px">If the received amount is short (fees/underpayment), we will not start processing. Please contact support.</div>
-          <form id="paymentProofForm" style="margin-top:10px">
-            <div class="row">
-              <div>
-                <label>Payment method</label>
-                <select id="payMethod" required>
-                  <option value="">Select…</option>
-                  <option value="USDT">USDT (BEP20)</option>
-                  <option value="TWD">TWD bank transfer</option>
-                  <option value="CNY">CNY (Alipay)</option>
-                </select>
-              </div>
-              <div>
-                <label>TXID (USDT only)</label>
-                <input id="txid" type="text" placeholder="0x..." />
-              </div>
-            </div>
-
-            
-            <div class="row">
-              <div>
-                <label>Last 5 digits (bank transfer)</label>
-                <input id="last5" type="text" placeholder="12345" />
-              </div>
-            </div>
-            <input id="payCurrency" type="hidden" value="" />
-
-            <div>
-              <label>Payment screenshot (for bank transfer / Alipay)</label>
-              <input id="proofImage" type="file" accept="image/*" />
-              <div class="help">Upload a screenshot of your transfer / payment record.</div>
-            </div>
-
-            <div>
-              <label>Note (optional)</label>
-              <textarea id="payNote" rows="2" placeholder=""></textarea>
-            </div>
-
-            <button class="btn" type="submit">Submit payment info</button>
-          </form>
-        </div>
-        </div>
-
-        <div class="notice contactSection" style="margin-top:14px">
-          <div style="font-weight:800;margin-bottom:6px">Contact us</div>
-          <div class="small">(English / 中文 / Tiếng Việt OK)</div>
-          <div class="small">Website：<a href="https://vietnam-discovery.netlify.app" target="_blank" rel="noopener">vietnam-discovery.netlify.app</a></div>
-          <div class="contactGrid" style="margin-top:10px">
-            <a class="contactBtn" href="https://u.wechat.com/MJ65zWUs3hWEz_cJ-s_WIQI?s=2" target="_blank" rel="noopener">WeChat</a>
-            <a class="contactBtn" href="https://line.me/R/ti/p/@oth1852d" target="_blank" rel="noopener">LINE: @oth1852d</a>
-            <a class="contactBtn" href="https://wa.me/qr/WMWEEYWG32N7H1" target="_blank" rel="noopener">WhatsApp</a>
-            <a class="contactBtn" href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">Telegram: @AlbertLaipi</a>
-            <a class="contactBtn" href="https://zaloapp.com/qr/p/1m345knav588v" target="_blank" rel="noopener">Zalo</a>
+      <div class="card" id="services">
+        <div style="font-weight:900;font-size:18px;margin-bottom:10px">Services</div>
+        <div class="grid" style="grid-template-columns:1fr;gap:12px">
+          <div class="card" id="tours">
+            <div style="font-weight:900">Tours</div>
+            <div class="small" style="margin-top:6px">Ho Chi Minh City / Hanoi / Da Nang. Private & small group options.</div>
+            <div style="margin-top:10px"><a class="contactBtn" href="#contact">Message for pricing</a></div>
+          </div>
+          <div class="card" id="transfer">
+            <div style="font-weight:900">Airport transfer / Private car</div>
+            <div class="small" style="margin-top:6px">Airport pickup, city rides, intercity trips. Quote by route & group size.</div>
+            <div style="margin-top:10px"><a class="contactBtn" href="#contact">Get a quote</a></div>
+          </div>
+          <div class="card" id="business">
+            <div style="font-weight:900">Business trip support</div>
+            <div class="small" style="margin-top:6px">Translation, transportation, meeting scheduling, and local coordination.</div>
+            <div style="margin-top:10px"><a class="contactBtn" href="#contact">Tell us your needs</a></div>
+          </div>
+          <div class="card">
+            <div style="font-weight:900">Vietnam eVisa assistance</div>
+            <div class="small" style="margin-top:6px">Upload passport/photo → we review & submit → receive results.</div>
+            <div style="margin-top:10px"><a class="contactBtn" href="/en/evisa/">Apply now</a></div>
           </div>
         </div>
+      </div>
 
-        <div class="footer">
-          <div><b>Privacy:</b> Your uploads are used only for visa application and support. We delete data after service completion (MVP uses manual processing).</div>
-          <div style="margin-top:6px">© Vietnam Discovery</div>
+      <div class="card">
+        <div style="font-weight:900;font-size:18px;margin-bottom:10px">Why us</div>
+        <ul class="small" style="line-height:1.7">
+          <li><b>Local team</b> in Vietnam</li>
+          <li><b>Transparent</b> process & expectations</li>
+          <li><b>Multilingual</b> support (EN/中文/VI)</li>
+          <li><b>Fast replies</b> via LINE/WhatsApp/Telegram/Zalo</li>
+        </ul>
+      </div>
+
+      <div class="notice contactSection" id="contact">
+        <div style="font-weight:800;margin-bottom:6px">Contact</div>
+        <div class="small">(English / Chinese / Vietnamese supported)</div>
+        <div class="small">Website: <a href="https://vietnam-discovery.netlify.app" target="_blank" rel="noopener">vietnam-discovery.netlify.app</a></div>
+        <div class="contactGrid" style="margin-top:10px">
+          <a class="contactBtn" href="https://line.me/R/ti/p/@oth1852d" target="_blank" rel="noopener">LINE: @oth1852d</a>
+          <a class="contactBtn" href="https://wa.me/qr/WMWEEYWG32N7H1" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="contactBtn" href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">Telegram: @AlbertLaipi</a>
+          <a class="contactBtn" href="https://zaloapp.com/qr/p/1m345knav588v" target="_blank" rel="noopener">Zalo</a>
         </div>
+      </div>
+
+      <div class="footer">
+        <div class="small">© Vietnam Discovery</div>
       </div>
     </div>
   </div>
 
-  <script type="module" src="/shared/app.js"></script>
   <script type="module">
-    window.__VD_init('en');
+    import { initLangSelect } from '/shared/lang.js';
+    initLangSelect('en');
   </script>
 </body>
 </html>

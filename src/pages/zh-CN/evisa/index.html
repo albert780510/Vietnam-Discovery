@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>越南 eVisa 代办｜Vietnam Discovery</title>
+  <link rel="stylesheet" href="/shared/site.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">
+        <img src="/shared/logo.jpg" alt="Vietnam Discovery" />
+        <span>Vietnam Discovery</span>
+        <span class="badge">eVisa</span>
+      </div>
+      <div class="small">
+        <select id="langSelect" aria-label="Language"></select>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="h1"><span class="nowrap">越南 eVisa 代办</span>（透明、快速、本地协助）</div>
+        <p class="p">办理越南签证：请上传护照资料页与证件照，并留下联系方式（地址/电话）。我们协助整理、检查与送件，降低退件风险。</p>
+
+        <div class="notice" id="status" style="display:none"></div>
+        <form id="lead-form">
+          <div>
+            <label>签证类型</label>
+            <select id="product"></select>
+            <div class="help" id="productPrice" style="margin-top:6px"></div>
+          </div>
+
+          <div style="margin-top:10px">
+            <label>处理时间（送件当日不算第一个工作日）</label>
+            <select id="speed"></select>
+            <div class="help" style="margin-top:6px">收到付款信息后，当天立刻处理。</div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Email（用于回复与寄送结果）</label>
+              <input id="email" type="email" placeholder="name@example.com" required />
+            </div>
+            <div>
+              <label>联系电话</label>
+              <input id="phone" type="tel" placeholder="138-0000-0000" required />
+            </div>
+          </div>
+
+          <div>
+            <label>联系地址（英文）</label>
+            <textarea id="address" rows="2" placeholder="Street, District, City, Country" required></textarea>
+            <div class="help">越南 eVisa 申请表通常需要填写地址与电话，请用英文填写。若你只有其他语言地址，可先贴上，再点 <a id="translateAddress" href="#" target="_blank" rel="noopener">一键翻译成英文</a>。</div>
+          </div>
+
+          <div>
+            <label>预计入境日期 <span class="small">(YYYY-MM-DD)</span></label>
+            <div class="dateWrap">
+              <input id="arrival" type="date" required />
+              <button type="button" class="iconBtn" data-open-date aria-label="Open calendar">📅</button>
+            </div>
+            <div class="help">格式：YYYY-MM-DD（点右侧日历选日期）</div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>国籍</label>
+              <select id="nationality" required><option value="">请选择</option></select>
+              <div class="help">将显示国旗 + 英文国名。</div>
+            </div>
+            <div>
+              <label>入境口岸</label>
+              <select id="entryGate" required><option value="">请选择</option></select>
+              <div class="help">请选择你预计入境的机场/口岸。</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>护照资料页（照片）</label>
+              <input id="passport" type="file" accept="image/*" required />
+              <div class="help">建议：光线充足、文字清楚可读、不要反光。</div>
+            </div>
+            <div>
+              <label>证件照（照片）</label>
+              <input id="photo" type="file" accept="image/*" required />
+              <div class="help">系统会做基本质量检查（模糊/过暗/过曝）。</div>
+            </div>
+          </div>
+
+          <div>
+            <label>备注（选填）</label>
+            <textarea id="notes" rows="3" placeholder="例如：是否需要加急、航班信息…"></textarea>
+          </div>
+
+          <button class="btn" type="submit">创建订单并获取付款信息</button>
+        </form>
+
+        <div class="card" id="paymentBox" style="display:none;margin-top:14px">
+          <div style="font-weight:800">下一步：付款</div>
+          <p class="p">订单编号： <span id="orderId" style="font-weight:800"></span></p>
+
+          <div class="notice" id="payInfoTwd" style="margin-bottom:10px">
+            <div style="font-weight:800;margin-bottom:6px">转账（台币）</div>
+            <div class="small">银行：玉山银行（代码 808）</div>
+            <div class="small">账号：0152979250648</div>
+            <div class="small">户名：赖瑞鸿</div>
+            <div class="small" style="margin-top:8px">转账后请回传：<b>末五码 + 转账时间 + 截图（可选）</b>（建议备注填：订单编号）</div>
+          </div>
+
+          <div class="notice" id="payInfoCny" style="margin-bottom:10px">
+            <div style="font-weight:800;margin-bottom:6px">人民币付款（支付宝 / 微信支付）</div>
+            <div class="small" id="payInfoCnyHint"></div>
+            <div class="payQrGrid" id="payInfoCnyQr"></div>
+          </div>
+        </div>
+
+        <div class="card" id="paymentProof" style="display:none;margin-top:14px">
+          <div style="font-weight:800">付款确认</div>
+          <div class="help" style="margin-top:6px">若少付/手续费导致实收不足，我们将不会开始处理，请直接联系客服协助。</div>
+          <form id="paymentProofForm" style="margin-top:10px">
+            <div class="row">
+              <div>
+                <label>付款方式</label>
+                <select id="payMethod" required>
+                  <option value="">请选择</option>
+                  <option value="USDT">USDT (BEP20)</option>
+                  <option value="TWD">TWD bank transfer</option>
+                  <option value="CNY">CNY (Alipay)</option>
+                </select>
+              </div>
+              <div>
+                <label>TXID（仅 USDT）</label>
+                <input id="txid" type="text" placeholder="0x..." />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label>末五码（转账）</label>
+                <input id="last5" type="text" placeholder="12345" />
+              </div>
+            </div>
+            <input id="payCurrency" type="hidden" value="" />
+
+            <div>
+              <label>付款截图（转账／支付宝）</label>
+              <input id="proofImage" type="file" accept="image/*" />
+              <div class="help">请上传付款/转账记录截图。</div>
+            </div>
+
+            <div>
+              <label>备注（选填）</label>
+              <textarea id="payNote" rows="2" placeholder=""></textarea>
+            </div>
+
+            <button class="btn" type="submit">提交付款信息</button>
+          </form>
+        </div>
+
+        <div class="notice contactSection" style="margin-top:14px">
+          <div style="font-weight:800;margin-bottom:6px">联系我们</div>
+          <div class="small">（可用英文、中文、越南文沟通）</div>
+          <div class="small">官网：<a href="https://vietnam-discovery.netlify.app" target="_blank" rel="noopener">vietnam-discovery.netlify.app</a></div>
+          <div class="contactGrid" style="margin-top:10px">
+            <a class="contactBtn" href="https://u.wechat.com/MJ65zWUs3hWEz_cJ-s_WIQI?s=2" target="_blank" rel="noopener">WeChat 微信</a>
+            <a class="contactBtn" href="https://line.me/R/ti/p/@oth1852d" target="_blank" rel="noopener">LINE: @oth1852d</a>
+            <a class="contactBtn" href="https://wa.me/qr/WMWEEYWG32N7H1" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="contactBtn" href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">Telegram: @AlbertLaipi</a>
+            <a class="contactBtn" href="https://zaloapp.com/qr/p/1m345knav588v" target="_blank" rel="noopener">Zalo</a>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div><b>隐私提醒：</b>你上传的资料仅用于签证申请与客服联络；我们会在完成服务后删除资料（MVP 版会先以人工流程处理）。</div>
+          <div style="margin-top:6px">© Vietnam Discovery</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/shared/app.js"></script>
+  <script type="module">window.__VD_init('zh-CN');</script>
+</body>
+</html>
