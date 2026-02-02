@@ -1,0 +1,10 @@
+{
+  "intervalMs": 5000,
+  "images": [
+    "/shared/hero/9c7efe54-fb69-4ab6-837d-20279c2adb6e.jpg",
+    "/shared/hero/a001a419-abf9-4a51-9472-1a88c01a33d5.jpg",
+    "/shared/hero/8a422656-f158-4cf8-b8b9-ec93f0e46ebd.jpg",
+    "/shared/hero/975ab74c-3046-448a-8c2c-c7c8b2d53489.jpg",
+    "/shared/hero/dc77bbb4-9671-4177-9721-03a692457f2c.jpg"
+  ]
+}

@@ -27,7 +27,12 @@
     </div>
 
     <div class="grid">
-      <div class="card hero">
+      <div class="card hero" data-hero-slider>
+        <div class="heroSlider" aria-hidden="true">
+          <div class="heroSlideA"></div>
+          <div class="heroSlideB"></div>
+          <div class="heroOverlay"></div>
+        </div>
         <div class="heroInner">
           <div class="h1">Local Vietnam travel services</div>
           <p class="p">We operate with a <b>licensed travel business in Vietnam</b>, accept <b>USDT</b>, and provide <b>one‑stop services</b> (tours, airport transfer/private car, business trips, and Vietnam eVisa assistance). We also use <b>AI</b> to streamline workflows and help <b>protect your privacy</b>.</p>
@@ -103,7 +108,9 @@
 
   <script type="module">
     import { initLangSelect } from '/shared/lang.js';
+    import { initHeroSlider } from '/shared/hero/hero.js';
     initLangSelect('en');
+    initHeroSlider();
   </script>
 </body>
 </html>
