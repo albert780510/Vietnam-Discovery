@@ -4,108 +4,132 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vietnam Discovery｜越南在地旅遊與簽證服務</title>
-  <meta name="description" content="Vietnam Discovery｜越南在地旅遊、包車接送、商務考察與 eVisa 簽證代辦。中文/英文/越南文可溝通，流程透明。" />
-  <link rel="stylesheet" href="/shared/site.css" />
+  <meta name="description" content="Vietnam Discovery｜越南在地旅遊、包車接送、商務考察與 eVisa 簽證代辦。" />
+
+  <!-- Tailwind (CDN) + config -->
+  <script src="/shared/tailwind-config.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/shared/marketing.css" />
 </head>
-<body>
-  <div class="container">
-    <div class="nav">
-      <div class="brand">
-        <img src="/shared/logo.jpg" alt="Vietnam Discovery" />
-        <span>Vietnam Discovery</span>
-        <span class="badge">官方網站</span>
-      </div>
-      <div class="navLinks" aria-label="Navigation">
-        <a href="/zh-tw/">首頁</a>
-        <a href="#services">服務</a>
-        <a href="/zh-tw/evisa/">eVisa</a>
-        <a href="#contact">聯繫</a>
-      </div>
-      <div class="small">
-        <select id="langSelect" aria-label="Language"></select>
+<body class="min-h-screen bg-brand-4 font-sans text-zinc-900">
+  <!-- Top nav (sticky, premium) -->
+  <header class="sticky top-0 z-50">
+    <div class="mx-auto max-w-6xl px-4 pt-4">
+      <div class="flex items-center justify-between rounded-2xl border border-black/5 bg-white/70 px-4 py-3 shadow-soft backdrop-blur">
+        <div class="flex items-center gap-3">
+          <img src="/shared/logo.jpg" alt="Vietnam Discovery" class="h-9 w-9 rounded-xl border border-black/5 bg-white p-1" />
+          <div class="flex items-center gap-2">
+            <span class="text-sm font-extrabold tracking-tight">Vietnam Discovery</span>
+            <span class="rounded-full bg-brand-2/40 px-3 py-1 text-xs font-extrabold text-brand-1">官方網站</span>
+          </div>
+        </div>
+
+        <nav class="hidden items-center gap-2 md:flex" aria-label="Navigation">
+          <a href="/zh-tw/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">首頁</a>
+          <a href="#services" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">服務</a>
+          <a href="/zh-tw/evisa/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">eVisa</a>
+          <a href="#contact" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">聯繫</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <select id="langSelect" aria-label="Language" class="rounded-xl border border-black/10 bg-white px-3 py-2 text-sm font-bold text-zinc-800">
+          </select>
+        </div>
       </div>
     </div>
+  </header>
 
-    <div class="grid">
-      <div class="card hero">
-        <div class="heroInner">
-          <div class="h1">越南在地旅遊與簽證服務</div>
-          <p class="p">我們在越南有 <b>旅行業務合法經營執照</b>，可接受 <b>USDT 付款</b>，提供客戶在越南 <b>一站式全方位服務</b>（旅遊行程、機場接送/包車、商務考察、越南 eVisa 代辦），並透過 <b>AI 技術</b> 協助流程整理與 <b>保護您的隱私</b>。</p>
+  <main class="mx-auto max-w-6xl px-4 pb-16">
+    <!-- HERO: image-only slider (no text overlay) -->
+    <section class="mt-4" aria-label="Hero">
+      <div class="relative overflow-hidden rounded-[24px] border border-black/5 bg-white shadow-soft" data-hero-slider>
+        <div class="heroSlider" aria-hidden="true">
+          <div class="heroSlide heroSlideA" data-hero-slide></div>
+          <div class="heroSlide heroSlideB" data-hero-slide></div>
+          <div class="heroVignette"></div>
+        </div>
+        <div class="h-[520px] md:h-[460px]"></div>
+      </div>
+    </section>
 
-          <div class="row" style="margin-top:12px">
-            <a class="btn" href="#contact">立即諮詢 / 取得報價</a>
-            <a class="btn" href="/zh-tw/evisa/">越南 eVisa 代辦 →</a>
-          </div>
+    <!-- Primary CTAs (next section, like reference site) -->
+    <section class="mt-6" aria-label="Primary actions">
+      <div class="grid gap-3 md:grid-cols-2">
+        <a href="#contact" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95">立即諮詢 / 取得報價</a>
+        <a href="/zh-tw/evisa/" class="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-5 py-4 text-base font-extrabold text-zinc-900 shadow-card hover:bg-brand-4">越南 eVisa 代辦 →</a>
+      </div>
+    </section>
 
-          <div class="kv" aria-label="Highlights">
-            <div><div class="t">回覆速度</div><div class="v">快速回覆</div></div>
-            <div><div class="t">溝通語言</div><div class="v">中 / 英 / 越</div></div>
-            <div><div class="t">服務範圍</div><div class="v">旅遊 / 簽證</div></div>
-          </div>
-
-          <div class="help">快速入口：<a href="/zh-tw/evisa/">簽證申請</a>、<a href="#tours">行程</a>、<a href="#transfer">包車接送</a>、<a href="#business">商務考察</a></div>
+    <!-- Services (modular cards) -->
+    <section id="services" class="mt-10" aria-label="Services">
+      <div class="flex items-end justify-between">
+        <div>
+          <h2 class="text-2xl font-extrabold tracking-tight">服務項目</h2>
+          <p class="mt-2 text-sm font-medium text-zinc-600">主打旅遊與簽證，一站式整合，流程清楚。</p>
         </div>
       </div>
 
-      <div class="card" id="services">
-        <div style="font-weight:900;font-size:18px;margin-bottom:10px">服務項目</div>
-        <div class="grid" style="grid-template-columns:1fr;gap:12px">
-          <div class="card" id="tours">
-            <div style="font-weight:900">Tours｜旅遊行程</div>
-            <div class="small" style="margin-top:6px">胡志明 / 河內 / 峴港｜自由行規劃、小團、客製深度。</div>
-            <div style="margin-top:10px"><a class="contactBtn" href="#contact">私訊詢價</a></div>
+      <div class="mt-5 grid gap-4 md:grid-cols-2">
+        <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
+          <h3 class="text-base font-extrabold">Tours｜旅遊行程</h3>
+          <p class="mt-2 text-sm text-zinc-600">胡志明 / 河內 / 峴港｜自由行規劃、小團、客製深度。</p>
+          <div class="mt-4">
+            <a href="#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">私訊詢價</a>
           </div>
-          <div class="card" id="transfer">
-            <div style="font-weight:900">Car & Airport Transfer｜機場接送 / 包車</div>
-            <div class="small" style="margin-top:6px">機場接送、市區包車、跨城移動。可依人數/行李/路線報價。</div>
-            <div style="margin-top:10px"><a class="contactBtn" href="#contact">詢價</a></div>
+        </article>
+
+        <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
+          <h3 class="text-base font-extrabold">Car & Airport Transfer｜機場接送 / 包車</h3>
+          <p class="mt-2 text-sm text-zinc-600">機場接送、市區包車、跨城移動。依人數/行李/路線報價。</p>
+          <div class="mt-4">
+            <a href="#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">詢價</a>
           </div>
-          <div class="card" id="business">
-            <div style="font-weight:900">Business Trip｜商務考察</div>
-            <div class="small" style="margin-top:6px">翻譯、車輛、拜訪安排、在地資源對接（依需求客製）。</div>
-            <div style="margin-top:10px"><a class="contactBtn" href="#contact">先講需求</a></div>
+        </article>
+
+        <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
+          <h3 class="text-base font-extrabold">Business Trip｜商務考察</h3>
+          <p class="mt-2 text-sm text-zinc-600">翻譯、車輛、拜訪安排、在地資源對接（依需求客製）。</p>
+          <div class="mt-4">
+            <a href="#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">先講需求</a>
           </div>
-          <div class="card">
-            <div style="font-weight:900">Vietnam eVisa｜越南簽證代辦</div>
-            <div class="small" style="margin-top:6px">上傳護照/照片→我們檢查整理→送件→回傳結果。透明、快速、在地協助。</div>
-            <div style="margin-top:10px"><a class="contactBtn" href="/zh-tw/evisa/">前往申請</a></div>
+        </article>
+
+        <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
+          <h3 class="text-base font-extrabold">Vietnam eVisa｜越南簽證代辦</h3>
+          <p class="mt-2 text-sm text-zinc-600">上傳護照/照片 → 我們檢查整理 → 送件 → 回傳結果。</p>
+          <div class="mt-4">
+            <a href="/zh-tw/evisa/" class="inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-brand-1 to-brand-5 px-4 py-3 text-sm font-extrabold text-white hover:opacity-95">前往申請</a>
           </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact (minimal, high trust) -->
+    <section id="contact" class="mt-10" aria-label="Contact">
+      <div class="rounded-2xl border border-black/5 bg-white p-6 shadow-card">
+        <div class="flex flex-col gap-1">
+          <h2 class="text-xl font-extrabold tracking-tight">聯繫我們</h2>
+          <p class="text-sm font-medium text-zinc-600">可用英文、中文、越南文溝通。</p>
         </div>
-      </div>
 
-      <div class="card">
-        <div style="font-weight:900;font-size:18px;margin-bottom:10px">為什麼選我們</div>
-        <ul class="small" style="line-height:1.7">
-          <li><b>在地團隊</b>：越南本地協助，資訊更新快。</li>
-          <li><b>流程透明</b>：交付內容、所需資料、風險提醒說清楚。</li>
-          <li><b>多語溝通</b>：英文/中文/越南文皆可。</li>
-          <li><b>回覆快速</b>：優先用 LINE / WhatsApp / Telegram / Zalo。</li>
-        </ul>
-        <div class="help" style="margin-top:8px">（接下來我們會補上更多：客戶評價/案例截圖、公司資訊、退款/取消政策）</div>
-      </div>
-
-      <div class="notice contactSection" id="contact">
-        <div style="font-weight:800;margin-bottom:6px">聯繫我們</div>
-        <div class="small">（可用英文、中文、越南文溝通）</div>
-        <div class="small">官方網站：<a href="https://vietnam-discovery.netlify.app" target="_blank" rel="noopener">vietnam-discovery.netlify.app</a></div>
-        <div class="contactGrid" style="margin-top:10px">
-          <a class="contactBtn" href="https://u.wechat.com/MJ65zWUs3hWEz_cJ-s_WIQI?s=2" target="_blank" rel="noopener">WeChat 微信</a>
-          <a class="contactBtn" href="https://line.me/R/ti/p/@oth1852d" target="_blank" rel="noopener">LINE: @oth1852d</a>
-          <a class="contactBtn" href="https://wa.me/qr/WMWEEYWG32N7H1" target="_blank" rel="noopener">WhatsApp</a>
-          <a class="contactBtn" href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">Telegram: @AlbertLaipi</a>
-          <a class="contactBtn" href="https://zaloapp.com/qr/p/1m345knav588v" target="_blank" rel="noopener">Zalo</a>
+        <div class="mt-5 grid gap-3 md:grid-cols-3">
+          <a class="rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-center text-sm font-extrabold text-zinc-900 hover:bg-white" href="https://line.me/R/ti/p/@oth1852d" target="_blank" rel="noopener">LINE: @oth1852d</a>
+          <a class="rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-center text-sm font-extrabold text-zinc-900 hover:bg-white" href="https://wa.me/qr/WMWEEYWG32N7H1" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-center text-sm font-extrabold text-zinc-900 hover:bg-white" href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">Telegram</a>
+          <a class="rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-center text-sm font-extrabold text-zinc-900 hover:bg-white" href="https://zaloapp.com/qr/p/1m345knav588v" target="_blank" rel="noopener">Zalo</a>
+          <a class="rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-center text-sm font-extrabold text-zinc-900 hover:bg-white" href="https://u.wechat.com/MJ65zWUs3hWEz_cJ-s_WIQI?s=2" target="_blank" rel="noopener">WeChat</a>
         </div>
-      </div>
 
-      <div class="footer">
-        <div class="small">© Vietnam Discovery</div>
+        <p class="mt-6 text-xs text-zinc-500">© Vietnam Discovery</p>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <script type="module">
     import { initLangSelect } from '/shared/lang.js';
+    import { initHeroSliderV2 } from '/shared/hero/hero-v2.js';
     initLangSelect('zh-TW');
+    initHeroSliderV2();
   </script>
 </body>
 </html>

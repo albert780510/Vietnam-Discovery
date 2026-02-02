@@ -4,108 +4,113 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vietnam Discovery｜越南本地旅行与签证服务</title>
-  <meta name="description" content="Vietnam Discovery｜越南本地旅行、包车接送、商务考察与 eVisa 签证代办。中文/英文/越南文可沟通，流程透明。" />
-  <link rel="stylesheet" href="/shared/site.css" />
+  <meta name="description" content="Vietnam Discovery｜越南本地旅行、包车接送、商务考察与 eVisa 签证代办。" />
+
+  <script src="/shared/tailwind-config.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/shared/marketing.css" />
 </head>
-<body>
-  <div class="container">
-    <div class="nav">
-      <div class="brand">
-        <img src="/shared/logo.jpg" alt="Vietnam Discovery" />
-        <span>Vietnam Discovery</span>
-        <span class="badge">官网</span>
-      </div>
-      <div class="navLinks" aria-label="Navigation">
-        <a href="/zh-cn/">首页</a>
-        <a href="#services">服务</a>
-        <a href="/zh-cn/evisa/">eVisa</a>
-        <a href="#contact">联系</a>
-      </div>
-      <div class="small">
-        <select id="langSelect" aria-label="Language"></select>
+<body class="min-h-screen bg-brand-4 font-sans text-zinc-900">
+  <header class="sticky top-0 z-50">
+    <div class="mx-auto max-w-6xl px-4 pt-4">
+      <div class="flex items-center justify-between rounded-2xl border border-black/5 bg-white/70 px-4 py-3 shadow-soft backdrop-blur">
+        <div class="flex items-center gap-3">
+          <img src="/shared/logo.jpg" alt="Vietnam Discovery" class="h-9 w-9 rounded-xl border border-black/5 bg-white p-1" />
+          <div class="flex items-center gap-2">
+            <span class="text-sm font-extrabold tracking-tight">Vietnam Discovery</span>
+            <span class="rounded-full bg-brand-2/40 px-3 py-1 text-xs font-extrabold text-brand-1">官网</span>
+          </div>
+        </div>
+
+        <nav class="hidden items-center gap-2 md:flex" aria-label="Navigation">
+          <a href="/zh-cn/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">首页</a>
+          <a href="#services" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">服务</a>
+          <a href="/zh-cn/evisa/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">eVisa</a>
+          <a href="#contact" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">联系</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <select id="langSelect" aria-label="Language" class="rounded-xl border border-black/10 bg-white px-3 py-2 text-sm font-bold text-zinc-800"></select>
+        </div>
       </div>
     </div>
+  </header>
 
-    <div class="grid">
-      <div class="card hero">
-        <div class="heroInner">
-          <div class="h1">越南本地旅行与签证服务</div>
-          <p class="p">我们在越南拥有 <b>旅行业务合法经营执照</b>，支持 <b>USDT 付款</b>，为客户提供越南 <b>一站式全方位服务</b>（旅行行程、机场接送/包车、商务考察、越南 eVisa 代办），并通过 <b>AI 技术</b> 协助流程整理与 <b>保护您的隐私</b>。</p>
-
-          <div class="row" style="margin-top:12px">
-            <a class="btn" href="#contact">立即咨询 / 获取报价</a>
-            <a class="btn" href="/zh-cn/evisa/">越南 eVisa 代办 →</a>
-          </div>
-
-          <div class="kv" aria-label="Highlights">
-            <div><div class="t">回复速度</div><div class="v">快速回复</div></div>
-            <div><div class="t">沟通语言</div><div class="v">中 / EN / VI</div></div>
-            <div><div class="t">服务范围</div><div class="v">旅行 / 签证</div></div>
-          </div>
-
-          <div class="help">快速入口：<a href="/zh-cn/evisa/">签证申请</a>、<a href="#tours">行程</a>、<a href="#transfer">包车接送</a>、<a href="#business">商务考察</a></div>
+  <main class="mx-auto max-w-6xl px-4 pb-16">
+    <section class="mt-4" aria-label="Hero">
+      <div class="relative overflow-hidden rounded-[24px] border border-black/5 bg-white shadow-soft" data-hero-slider>
+        <div class="heroSlider" aria-hidden="true">
+          <div class="heroSlide heroSlideA" data-hero-slide></div>
+          <div class="heroSlide heroSlideB" data-hero-slide></div>
+          <div class="heroVignette"></div>
         </div>
+        <div class="h-[520px] md:h-[460px]"></div>
+      </div>
+    </section>
+
+    <section class="mt-6" aria-label="Primary actions">
+      <div class="grid gap-3 md:grid-cols-2">
+        <a href="#contact" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95">立即咨询 / 获取报价</a>
+        <a href="/zh-cn/evisa/" class="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-5 py-4 text-base font-extrabold text-zinc-900 shadow-card hover:bg-brand-4">越南 eVisa 代办 →</a>
+      </div>
+    </section>
+
+    <section id="services" class="mt-10" aria-label="Services">
+      <div>
+        <h2 class="text-2xl font-extrabold tracking-tight">服务项目</h2>
+        <p class="mt-2 text-sm font-medium text-zinc-600">主打旅行与签证，一站式整合，流程清楚。</p>
       </div>
 
-      <div class="card" id="services">
-        <div style="font-weight:900;font-size:18px;margin-bottom:10px">服务项目</div>
-        <div class="grid" style="grid-template-columns:1fr;gap:12px">
-          <div class="card" id="tours">
-            <div style="font-weight:900">Tours｜旅行行程</div>
-            <div class="small" style="margin-top:6px">胡志明 / 河内 / 岘港｜自由行规划、小团、客制深度。</div>
-            <div style="margin-top:10px"><a class="contactBtn" href="#contact">私信询价</a></div>
-          </div>
-          <div class="card" id="transfer">
-            <div style="font-weight:900">Car & Airport Transfer｜机场接送 / 包车</div>
-            <div class="small" style="margin-top:6px">机场接送、市区包车、跨城移动。可按人数/行李/路线报价。</div>
-            <div style="margin-top:10px"><a class="contactBtn" href="#contact">询价</a></div>
-          </div>
-          <div class="card" id="business">
-            <div style="font-weight:900">Business Trip｜商务考察</div>
-            <div class="small" style="margin-top:6px">翻译、车辆、拜访安排、在地资源对接（按需求客制）。</div>
-            <div style="margin-top:10px"><a class="contactBtn" href="#contact">先讲需求</a></div>
-          </div>
-          <div class="card">
-            <div style="font-weight:900">Vietnam eVisa｜越南签证代办</div>
-            <div class="small" style="margin-top:6px">上传护照/照片→我们检查整理→送件→回传结果。透明、快速、本地协助。</div>
-            <div style="margin-top:10px"><a class="contactBtn" href="/zh-cn/evisa/">前往申请</a></div>
-          </div>
+      <div class="mt-5 grid gap-4 md:grid-cols-2">
+        <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
+          <h3 class="text-base font-extrabold">Tours｜旅行行程</h3>
+          <p class="mt-2 text-sm text-zinc-600">胡志明 / 河内 / 岘港｜自由行规划、小团、客制深度。</p>
+          <div class="mt-4"><a href="#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">私信询价</a></div>
+        </article>
+
+        <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
+          <h3 class="text-base font-extrabold">Car & Airport Transfer｜机场接送 / 包车</h3>
+          <p class="mt-2 text-sm text-zinc-600">机场接送、市区包车、跨城移动。可按人数/行李/路线报价。</p>
+          <div class="mt-4"><a href="#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">询价</a></div>
+        </article>
+
+        <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
+          <h3 class="text-base font-extrabold">Business Trip｜商务考察</h3>
+          <p class="mt-2 text-sm text-zinc-600">翻译、车辆、拜访安排、在地资源对接（按需求客制）。</p>
+          <div class="mt-4"><a href="#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">先讲需求</a></div>
+        </article>
+
+        <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
+          <h3 class="text-base font-extrabold">Vietnam eVisa｜越南签证代办</h3>
+          <p class="mt-2 text-sm text-zinc-600">上传护照/照片 → 我们检查整理 → 送件 → 回传结果。</p>
+          <div class="mt-4"><a href="/zh-cn/evisa/" class="inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-brand-1 to-brand-5 px-4 py-3 text-sm font-extrabold text-white hover:opacity-95">前往申请</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="mt-10" aria-label="Contact">
+      <div class="rounded-2xl border border-black/5 bg-white p-6 shadow-card">
+        <h2 class="text-xl font-extrabold tracking-tight">联系我们</h2>
+        <p class="mt-1 text-sm font-medium text-zinc-600">支持英文 / 中文 / 越南文沟通。</p>
+
+        <div class="mt-5 grid gap-3 md:grid-cols-3">
+          <a class="rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-center text-sm font-extrabold text-zinc-900 hover:bg-white" href="https://line.me/R/ti/p/@oth1852d" target="_blank" rel="noopener">LINE: @oth1852d</a>
+          <a class="rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-center text-sm font-extrabold text-zinc-900 hover:bg-white" href="https://wa.me/qr/WMWEEYWG32N7H1" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-center text-sm font-extrabold text-zinc-900 hover:bg-white" href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">Telegram</a>
+          <a class="rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-center text-sm font-extrabold text-zinc-900 hover:bg-white" href="https://zaloapp.com/qr/p/1m345knav588v" target="_blank" rel="noopener">Zalo</a>
+          <a class="rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-center text-sm font-extrabold text-zinc-900 hover:bg-white" href="https://u.wechat.com/MJ65zWUs3hWEz_cJ-s_WIQI?s=2" target="_blank" rel="noopener">WeChat</a>
         </div>
-      </div>
 
-      <div class="card">
-        <div style="font-weight:900;font-size:18px;margin-bottom:10px">为什么选我们</div>
-        <ul class="small" style="line-height:1.7">
-          <li><b>本地团队</b>：越南本地协助，信息更新快。</li>
-          <li><b>流程透明</b>：交付内容、所需资料、风险提醒说清楚。</li>
-          <li><b>多语沟通</b>：英文/中文/越南文皆可。</li>
-          <li><b>回复快速</b>：优先用 LINE / WhatsApp / Telegram / Zalo。</li>
-        </ul>
-        <div class="help" style="margin-top:8px">（接下来我们会补上更多：客户评价/案例截图、公司信息、退款/取消政策）</div>
+        <p class="mt-6 text-xs text-zinc-500">© Vietnam Discovery</p>
       </div>
-
-      <div class="notice contactSection" id="contact">
-        <div style="font-weight:800;margin-bottom:6px">联系我们</div>
-        <div class="small">（可用英文、中文、越南文沟通）</div>
-        <div class="small">官网：<a href="https://vietnam-discovery.netlify.app" target="_blank" rel="noopener">vietnam-discovery.netlify.app</a></div>
-        <div class="contactGrid" style="margin-top:10px">
-          <a class="contactBtn" href="https://u.wechat.com/MJ65zWUs3hWEz_cJ-s_WIQI?s=2" target="_blank" rel="noopener">WeChat 微信</a>
-          <a class="contactBtn" href="https://line.me/R/ti/p/@oth1852d" target="_blank" rel="noopener">LINE: @oth1852d</a>
-          <a class="contactBtn" href="https://wa.me/qr/WMWEEYWG32N7H1" target="_blank" rel="noopener">WhatsApp</a>
-          <a class="contactBtn" href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">Telegram: @AlbertLaipi</a>
-          <a class="contactBtn" href="https://zaloapp.com/qr/p/1m345knav588v" target="_blank" rel="noopener">Zalo</a>
-        </div>
-      </div>
-
-      <div class="footer">
-        <div class="small">© Vietnam Discovery</div>
-      </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <script type="module">
     import { initLangSelect } from '/shared/lang.js';
+    import { initHeroSliderV2 } from '/shared/hero/hero-v2.js';
     initLangSelect('zh-CN');
+    initHeroSliderV2();
   </script>
 </body>
 </html>

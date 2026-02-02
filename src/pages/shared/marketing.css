@@ -1,0 +1,10 @@
+/* Minimal CSS for the new Tailwind-based marketing home (only what Tailwind can't do cleanly) */
+.heroSlider{position:absolute;inset:0;overflow:hidden;border-radius:24px}
+.heroSlide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 900ms ease}
+.heroSlide.isActive{opacity:1}
+.heroVignette{position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.22) 0%, rgba(0,0,0,.08) 35%, rgba(0,0,0,0) 70%)}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .heroSlide{transition:none}
+}

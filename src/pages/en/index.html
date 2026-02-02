@@ -4,104 +4,113 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vietnam Discovery | Local Tours & eVisa</title>
-  <meta name="description" content="Vietnam Discovery: local tours, airport transfer/private car, business trips, and Vietnam eVisa assistance. English/Chinese/Vietnamese supported." />
-  <link rel="stylesheet" href="/shared/site.css" />
+  <meta name="description" content="Vietnam Discovery: local tours, airport transfer/private car, business trips, and Vietnam eVisa assistance." />
+
+  <script src="/shared/tailwind-config.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/shared/marketing.css" />
 </head>
-<body>
-  <div class="container">
-    <div class="nav">
-      <div class="brand">
-        <img src="/shared/logo.jpg" alt="Vietnam Discovery" />
-        <span>Vietnam Discovery</span>
-        <span class="badge">Official</span>
-      </div>
-      <div class="navLinks" aria-label="Navigation">
-        <a href="/en/">Home</a>
-        <a href="#services">Services</a>
-        <a href="/en/evisa/">eVisa</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="small">
-        <select id="langSelect" aria-label="Language"></select>
+<body class="min-h-screen bg-brand-4 font-sans text-zinc-900">
+  <header class="sticky top-0 z-50">
+    <div class="mx-auto max-w-6xl px-4 pt-4">
+      <div class="flex items-center justify-between rounded-2xl border border-black/5 bg-white/70 px-4 py-3 shadow-soft backdrop-blur">
+        <div class="flex items-center gap-3">
+          <img src="/shared/logo.jpg" alt="Vietnam Discovery" class="h-9 w-9 rounded-xl border border-black/5 bg-white p-1" />
+          <div class="flex items-center gap-2">
+            <span class="text-sm font-extrabold tracking-tight">Vietnam Discovery</span>
+            <span class="rounded-full bg-brand-2/40 px-3 py-1 text-xs font-extrabold text-brand-1">Official</span>
+          </div>
+        </div>
+
+        <nav class="hidden items-center gap-2 md:flex" aria-label="Navigation">
+          <a href="/en/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">Home</a>
+          <a href="#services" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">Services</a>
+          <a href="/en/evisa/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">eVisa</a>
+          <a href="#contact" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <select id="langSelect" aria-label="Language" class="rounded-xl border border-black/10 bg-white px-3 py-2 text-sm font-bold text-zinc-800"></select>
+        </div>
       </div>
     </div>
+  </header>
 
-    <div class="grid">
-      <div class="card hero" data-hero-slider aria-label="Hero image slider">
+  <main class="mx-auto max-w-6xl px-4 pb-16">
+    <section class="mt-4" aria-label="Hero">
+      <div class="relative overflow-hidden rounded-[24px] border border-black/5 bg-white shadow-soft" data-hero-slider>
         <div class="heroSlider" aria-hidden="true">
-          <div class="heroSlideA"></div>
-          <div class="heroSlideB"></div>
-          <div class="heroOverlay"></div>
+          <div class="heroSlide heroSlideA" data-hero-slide></div>
+          <div class="heroSlide heroSlideB" data-hero-slide></div>
+          <div class="heroVignette"></div>
         </div>
-        <div class="heroInner"></div>
+        <div class="h-[520px] md:h-[460px]"></div>
+      </div>
+    </section>
+
+    <section class="mt-6" aria-label="Primary actions">
+      <div class="grid gap-3 md:grid-cols-2">
+        <a href="#contact" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95">Get a quote</a>
+        <a href="/en/evisa/" class="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-5 py-4 text-base font-extrabold text-zinc-900 shadow-card hover:bg-brand-4">Vietnam eVisa →</a>
+      </div>
+    </section>
+
+    <section id="services" class="mt-10" aria-label="Services">
+      <div>
+        <h2 class="text-2xl font-extrabold tracking-tight">Services</h2>
+        <p class="mt-2 text-sm font-medium text-zinc-600">One‑stop local support. Clear process. Fast replies.</p>
       </div>
 
-      <div class="card">
-        <div class="row" style="margin-top:0">
-          <a class="btn" href="#contact">Get a quote</a>
-          <a class="btn" href="/en/evisa/">Vietnam eVisa →</a>
+      <div class="mt-5 grid gap-4 md:grid-cols-2">
+        <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
+          <h3 class="text-base font-extrabold">Tours</h3>
+          <p class="mt-2 text-sm text-zinc-600">Ho Chi Minh City / Hanoi / Da Nang. Private & small group options.</p>
+          <div class="mt-4"><a href="#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">Message for pricing</a></div>
+        </article>
+
+        <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
+          <h3 class="text-base font-extrabold">Airport transfer / Private car</h3>
+          <p class="mt-2 text-sm text-zinc-600">Airport pickup, city rides, intercity trips. Quote by route & group size.</p>
+          <div class="mt-4"><a href="#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">Get a quote</a></div>
+        </article>
+
+        <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
+          <h3 class="text-base font-extrabold">Business trip support</h3>
+          <p class="mt-2 text-sm text-zinc-600">Translation, transportation, scheduling, and local coordination.</p>
+          <div class="mt-4"><a href="#contact" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">Tell us your needs</a></div>
+        </article>
+
+        <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
+          <h3 class="text-base font-extrabold">Vietnam eVisa assistance</h3>
+          <p class="mt-2 text-sm text-zinc-600">Upload passport/photo → we review → submit → deliver results.</p>
+          <div class="mt-4"><a href="/en/evisa/" class="inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-brand-1 to-brand-5 px-4 py-3 text-sm font-extrabold text-white hover:opacity-95">Apply now</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="mt-10" aria-label="Contact">
+      <div class="rounded-2xl border border-black/5 bg-white p-6 shadow-card">
+        <h2 class="text-xl font-extrabold tracking-tight">Contact</h2>
+        <p class="mt-1 text-sm font-medium text-zinc-600">English / Chinese / Vietnamese supported.</p>
+
+        <div class="mt-5 grid gap-3 md:grid-cols-3">
+          <a class="rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-center text-sm font-extrabold text-zinc-900 hover:bg-white" href="https://line.me/R/ti/p/@oth1852d" target="_blank" rel="noopener">LINE</a>
+          <a class="rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-center text-sm font-extrabold text-zinc-900 hover:bg-white" href="https://wa.me/qr/WMWEEYWG32N7H1" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-center text-sm font-extrabold text-zinc-900 hover:bg-white" href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">Telegram</a>
+          <a class="rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-center text-sm font-extrabold text-zinc-900 hover:bg-white" href="https://zaloapp.com/qr/p/1m345knav588v" target="_blank" rel="noopener">Zalo</a>
+          <a class="rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-center text-sm font-extrabold text-zinc-900 hover:bg-white" href="https://u.wechat.com/MJ65zWUs3hWEz_cJ-s_WIQI?s=2" target="_blank" rel="noopener">WeChat</a>
         </div>
-      </div>
 
-      <div class="card" id="services">
-        <div style="font-weight:900;font-size:18px;margin-bottom:10px">Services</div>
-        <div class="grid" style="grid-template-columns:1fr;gap:12px">
-          <div class="card" id="tours">
-            <div style="font-weight:900">Tours</div>
-            <div class="small" style="margin-top:6px">Ho Chi Minh City / Hanoi / Da Nang. Private & small group options.</div>
-            <div style="margin-top:10px"><a class="contactBtn" href="#contact">Message for pricing</a></div>
-          </div>
-          <div class="card" id="transfer">
-            <div style="font-weight:900">Airport transfer / Private car</div>
-            <div class="small" style="margin-top:6px">Airport pickup, city rides, intercity trips. Quote by route & group size.</div>
-            <div style="margin-top:10px"><a class="contactBtn" href="#contact">Get a quote</a></div>
-          </div>
-          <div class="card" id="business">
-            <div style="font-weight:900">Business trip support</div>
-            <div class="small" style="margin-top:6px">Translation, transportation, meeting scheduling, and local coordination.</div>
-            <div style="margin-top:10px"><a class="contactBtn" href="#contact">Tell us your needs</a></div>
-          </div>
-          <div class="card">
-            <div style="font-weight:900">Vietnam eVisa assistance</div>
-            <div class="small" style="margin-top:6px">Upload passport/photo → we review & submit → receive results.</div>
-            <div style="margin-top:10px"><a class="contactBtn" href="/en/evisa/">Apply now</a></div>
-          </div>
-        </div>
+        <p class="mt-6 text-xs text-zinc-500">© Vietnam Discovery</p>
       </div>
-
-      <div class="card">
-        <div style="font-weight:900;font-size:18px;margin-bottom:10px">Why us</div>
-        <ul class="small" style="line-height:1.7">
-          <li><b>Local team</b> in Vietnam</li>
-          <li><b>Transparent</b> process & expectations</li>
-          <li><b>Multilingual</b> support (EN/中文/VI)</li>
-          <li><b>Fast replies</b> via LINE/WhatsApp/Telegram/Zalo</li>
-        </ul>
-      </div>
-
-      <div class="notice contactSection" id="contact">
-        <div style="font-weight:800;margin-bottom:6px">Contact</div>
-        <div class="small">(English / Chinese / Vietnamese supported)</div>
-        <div class="small">Website: <a href="https://vietnam-discovery.netlify.app" target="_blank" rel="noopener">vietnam-discovery.netlify.app</a></div>
-        <div class="contactGrid" style="margin-top:10px">
-          <a class="contactBtn" href="https://line.me/R/ti/p/@oth1852d" target="_blank" rel="noopener">LINE: @oth1852d</a>
-          <a class="contactBtn" href="https://wa.me/qr/WMWEEYWG32N7H1" target="_blank" rel="noopener">WhatsApp</a>
-          <a class="contactBtn" href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">Telegram: @AlbertLaipi</a>
-          <a class="contactBtn" href="https://zaloapp.com/qr/p/1m345knav588v" target="_blank" rel="noopener">Zalo</a>
-        </div>
-      </div>
-
-      <div class="footer">
-        <div class="small">© Vietnam Discovery</div>
-      </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <script type="module">
     import { initLangSelect } from '/shared/lang.js';
-    import { initHeroSlider } from '/shared/hero/hero.js';
+    import { initHeroSliderV2 } from '/shared/hero/hero-v2.js';
     initLangSelect('en');
-    initHeroSlider();
+    initHeroSliderV2();
   </script>
 </body>
 </html>
