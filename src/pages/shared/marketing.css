@@ -1,10 +1,50 @@
-/* Minimal CSS for the new Tailwind-based marketing home (only what Tailwind can't do cleanly) */
+/* Minimal CSS for Tailwind-based pages (only what Tailwind can't do cleanly)
+   A) Subtle brand gradient + grain
+   B) Gentle spotlight for hero areas
+*/
+
+/* A) Background mood (Notion-clean, but not flat) */
+.vdBg{
+  background:
+    radial-gradient(1200px 640px at 12% -10%, rgba(249,205,207,.55) 0%, rgba(245,243,235,1) 52%),
+    radial-gradient(980px 560px at 92% 0%, rgba(203,183,157,.50) 0%, rgba(245,243,235,1) 55%);
+}
+.vdBgGrain::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.035;
+  mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+}
+
+/* B) Spotlight: use on sections to pull focus (very subtle) */
+.vdSpotlight{position:relative}
+.vdSpotlight::before{
+  content:"";
+  position:absolute;
+  inset:-40px -40px auto -40px;
+  height:340px;
+  border-radius:32px;
+  background:radial-gradient(600px 240px at 50% 30%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.55) 35%, rgba(255,255,255,0) 70%);
+  pointer-events:none;
+  opacity:.65;
+}
+
+/* Hero slider */
 .heroSlider{position:absolute;inset:0;overflow:hidden;border-radius:24px}
 .heroSlide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 900ms ease}
 .heroSlide.isActive{opacity:1}
 .heroVignette{position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.22) 0%, rgba(0,0,0,.08) 35%, rgba(0,0,0,0) 70%)}
 
+/* Mega menu: allow hover/focus open (Apple-like) */
+.megaRoot:hover .megaMenu,
+.megaRoot:focus-within .megaMenu{opacity:1;transform:translateY(0);pointer-events:auto}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce){
   .heroSlide{transition:none}
+  .megaMenu{transition:none}
+  .vdSpotlight::before{display:none}
 }
