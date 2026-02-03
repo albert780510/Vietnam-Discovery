@@ -24,8 +24,36 @@
           </div>
         </a>
 
-        <nav class="hidden items-center gap-2 md:flex" aria-label="Navigation">
+        <nav class="hidden items-center gap-2 md:flex" aria-label="Navigation" data-mega-root>
           <a href="/zh-tw/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">首頁</a>
+
+          <!-- Mega Menu: 旅遊行程（國內/國外） -->
+          <div class="relative megaRoot" data-mega-root>
+            <button type="button" data-mega-toggle aria-expanded="false" aria-controls="megaToursHomeTW" class="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-extrabold text-zinc-900 hover:bg-white">
+              旅遊行程
+              <span class="text-zinc-500">▾</span>
+            </button>
+            <div id="megaToursHomeTW" data-mega-menu class="megaMenu hidden pointer-events-none absolute left-0 top-[44px] w-[680px] -translate-y-1 rounded-3xl border border-black/10 bg-white/95 p-5 opacity-0 shadow-soft backdrop-blur transition duration-200">
+              <div class="grid gap-4 md:grid-cols-2">
+                <div>
+                  <div class="text-xs font-extrabold text-zinc-500">越南國內旅遊</div>
+                  <a href="/zh-tw/tours/vn/" class="mt-2 block rounded-2xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold hover:bg-white">城市/區域（胡志明／河內／峴港…）</a>
+                  <a href="/zh-tw/tours/vn/hiking/" class="mt-3 block rounded-2xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold hover:bg-white">深度探索（登山）</a>
+                  <a href="#" data-contact-open class="mt-3 block rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-extrabold hover:bg-brand-4">客製化自由行（留下資料）</a>
+                </div>
+                <div>
+                  <div class="text-xs font-extrabold text-zinc-500">越南出境旅遊</div>
+                  <a href="/zh-tw/tours/outbound/tw/" class="mt-2 block rounded-2xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold hover:bg-white">去台灣</a>
+                  <a href="/zh-tw/tours/outbound/cn/" class="mt-3 block rounded-2xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold hover:bg-white">去中國</a>
+                  <div class="mt-3 rounded-2xl border border-dashed border-black/15 bg-white px-4 py-3 text-sm font-medium text-zinc-600">（未來可擴充：日本／韓國／泰國…）</div>
+                </div>
+              </div>
+              <div class="mt-4">
+                <a href="/zh-tw/tours/" class="text-sm font-extrabold text-brand-1 hover:underline">前往旅遊行程總覽 →</a>
+              </div>
+            </div>
+          </div>
+
           <a href="/zh-tw/#services" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">服務</a>
           <!-- eVisa：新分頁開啟，避免切到申請介面回不來 -->
           <a href="/zh-tw/evisa/" target="_blank" rel="noopener" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">eVisa</a>
@@ -69,6 +97,7 @@
           <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>流程透明</span>
           <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>多語支援</span>
           <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>回覆快速</span>
+          <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>支持 USDT</span>
         </div>
       </div>
     </section>
@@ -124,9 +153,11 @@
     import { initLangSelect } from '/shared/lang.js';
     import { initHeroSliderV2 } from '/shared/hero/hero-v2.js';
     import { initContactModal } from '/shared/contact-modal.js';
+    import { initMegaNav } from '/shared/nav-mega.js';
     initLangSelect('zh-TW');
     initHeroSliderV2();
     initContactModal('zh-TW');
+    initMegaNav();
   </script>
 </body>
 </html>
