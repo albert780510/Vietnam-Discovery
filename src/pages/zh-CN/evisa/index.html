@@ -4,127 +4,141 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>越南 eVisa 代办｜Vietnam Discovery</title>
-  <link rel="stylesheet" href="/shared/site.css" />
+  <meta name="description" content="越南 eVisa 代办：流程透明、快速回复、本地协助。上传护照与证件照，我们协助检查整理、送件并回传结果。" />
+
+  <script src="/shared/tailwind-config.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/shared/marketing.css" />
+  <link rel="stylesheet" href="/shared/forms.css" />
 </head>
-<body>
-  <div class="container">
-    <div class="nav">
-      <div class="brand">
-        <img src="/shared/logo.jpg" alt="Vietnam Discovery" />
-        <span>Vietnam Discovery</span>
-        <span class="badge">eVisa</span>
-      </div>
-      <div class="small">
-        <select id="langSelect" aria-label="Language"></select>
+<body class="min-h-screen bg-brand-4 font-sans text-zinc-900">
+  <header class="sticky top-0 z-50">
+    <div class="mx-auto max-w-6xl px-4 pt-4">
+      <div class="flex items-center justify-between rounded-2xl border border-black/5 bg-white/70 px-4 py-3 shadow-soft backdrop-blur">
+        <a href="/zh-cn/" class="flex items-center gap-3" aria-label="Go to home">
+          <img src="/shared/logo.jpg" alt="Vietnam Discovery" class="h-9 w-9 rounded-xl border border-black/5 bg-white p-1" />
+          <div class="flex items-center gap-2">
+            <span class="text-sm font-extrabold tracking-tight">Vietnam Discovery</span>
+            <span class="rounded-full bg-brand-2/40 px-3 py-1 text-xs font-extrabold text-brand-1">eVisa</span>
+          </div>
+        </a>
+
+        <nav class="hidden items-center gap-2 md:flex" aria-label="Navigation">
+          <a href="/zh-cn/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">首页</a>
+          <a href="/zh-cn/tours/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">旅游行程</a>
+          <a href="/zh-cn/evisa/" class="rounded-full bg-white px-3 py-2 text-sm font-extrabold text-zinc-900 shadow-sm">eVisa</a>
+          <a href="#" data-contact-open class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">联系</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <select id="langSelect" aria-label="Language" class="rounded-xl border border-black/10 bg-white px-3 py-2 text-sm font-bold text-zinc-800"></select>
+        </div>
       </div>
     </div>
+  </header>
 
-    <div class="grid">
-      <div class="card">
-        <div class="h1"><span class="nowrap">越南 eVisa 代办</span>（透明、快速、本地协助）</div>
-        <p class="p">办理越南签证：请上传护照资料页与证件照，并留下联系方式（地址/电话）。我们协助整理、检查与送件，降低退件风险。</p>
+  <main class="mx-auto max-w-6xl px-4 pb-16">
+    <section class="mt-8" aria-label="eVisa hero">
+      <div class="grid gap-6 md:grid-cols-2 md:items-center">
+        <div>
+          <h1 class="text-4xl font-extrabold tracking-tight md:text-5xl">越南 eVisa 代办</h1>
+          <p class="mt-4 max-w-xl text-base font-medium leading-7 text-zinc-600">你只要上传护照资料页＋证件照，并留下联系方式与入境信息；我们协助<strong class="text-zinc-900">检查整理 → 送件 → 回传结果</strong>，降低退件与补件风险。</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#apply" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95">开始申请</a>
+            <a href="#" data-contact-open class="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-5 py-4 text-base font-extrabold text-zinc-900 shadow-card hover:bg-brand-4">先聊需求</a>
+          </div>
+        </div>
+        <div class="rounded-3xl border border-black/5 bg-white p-6 shadow-card">
+          <div class="text-sm font-extrabold text-zinc-900">申请流程（3 步）</div>
+          <ol class="mt-4 space-y-3 text-sm text-zinc-700">
+            <li class="flex gap-3"><span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-4 text-xs font-extrabold text-brand-1">1</span><span>填资料 + 上传护照/证件照</span></li>
+            <li class="flex gap-3"><span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-4 text-xs font-extrabold text-brand-1">2</span><span>我们检查整理（先挡常见错误）</span></li>
+            <li class="flex gap-3"><span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-4 text-xs font-extrabold text-brand-1">3</span><span>送件 & 回传结果（需要补件会通知）</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
 
-        <div class="notice" id="status" style="display:none"></div>
-        <form id="lead-form">
+    <section id="apply" class="mt-10" aria-label="Apply">
+      <div class="rounded-3xl border border-black/5 bg-white p-6 shadow-card">
+        <h2 class="text-xl font-extrabold tracking-tight">开始申请</h2>
+        <p class="mt-1 text-sm font-medium text-zinc-600">地址请用英文填写。</p>
+
+        <div class="mt-5" id="status" style="display:none"></div>
+
+        <form id="lead-form" class="mt-5 grid gap-4">
           <div>
-            <label>签证类型</label>
-            <select id="product"></select>
-            <div class="help" id="productPrice" style="margin-top:6px"></div>
+            <label class="text-sm font-bold text-zinc-700">签证类型</label>
+            <select id="product" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-bold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40"></select>
+            <div class="mt-2 text-xs font-medium text-zinc-600" id="productPrice"></div>
           </div>
-
-          <div style="margin-top:10px">
-            <label>处理时间（送件当日不算第一个工作日）</label>
-            <select id="speed"></select>
-            <div class="help" style="margin-top:6px">收到付款信息后，当天立刻处理。</div>
+          <div>
+            <label class="text-sm font-bold text-zinc-700">处理时间（送件当日不算第一个工作日）</label>
+            <select id="speed" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-bold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40"></select>
+            <div class="mt-2 text-xs font-medium text-zinc-600">收到付款信息后，当天立刻处理。</div>
           </div>
-
-          <div class="row">
+          <div class="grid gap-4 md:grid-cols-2">
             <div>
-              <label>Email（用于回复与寄送结果）</label>
-              <input id="email" type="email" placeholder="name@example.com" required />
+              <label class="text-sm font-bold text-zinc-700">Email（用于回覆与寄送结果）</label>
+              <input id="email" type="email" placeholder="name@example.com" required class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40" />
             </div>
             <div>
-              <label>联系电话</label>
-              <input id="phone" type="tel" placeholder="138-0000-0000" required />
+              <label class="text-sm font-bold text-zinc-700">联系电话</label>
+              <input id="phone" type="tel" placeholder="138-0000-0000" required class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40" />
             </div>
           </div>
-
           <div>
-            <label>联系地址（英文）</label>
-            <textarea id="address" rows="2" placeholder="Street, District, City, Country" required></textarea>
-            <div class="help">越南 eVisa 申请表通常需要填写地址与电话，请用英文填写。若你只有其他语言地址，可先贴上，再点 <a id="translateAddress" href="#" target="_blank" rel="noopener">一键翻译成英文</a>。</div>
+            <label class="text-sm font-bold text-zinc-700">联系地址（英文）</label>
+            <textarea id="address" rows="2" placeholder="Street, District, City, Country" required class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40"></textarea>
+            <div class="mt-2 text-xs font-medium text-zinc-600">如果只有其他语言地址，可先贴上，再点 <a id="translateAddress" href="#" target="_blank" rel="noopener" class="font-extrabold text-brand-1 hover:underline">一键翻译成英文</a>。</div>
           </div>
-
           <div>
-            <label>预计入境日期 <span class="small">(YYYY-MM-DD)</span></label>
-            <div class="dateWrap">
-              <input id="arrival" type="date" required />
+            <label class="text-sm font-bold text-zinc-700">预计入境日期 <span class="text-xs font-semibold text-zinc-500">(YYYY-MM-DD)</span></label>
+            <div class="dateWrap mt-2">
+              <input id="arrival" type="date" required class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40" />
               <button type="button" class="iconBtn" data-open-date aria-label="Open calendar">📅</button>
             </div>
-            <div class="help">格式：YYYY-MM-DD（点右侧日历选日期）</div>
           </div>
-
-          <div class="row">
+          <div class="grid gap-4 md:grid-cols-2">
             <div>
-              <label>国籍</label>
-              <select id="nationality" required><option value="">请选择</option></select>
-              <div class="help">将显示国旗 + 英文国名。</div>
+              <label class="text-sm font-bold text-zinc-700">国籍</label>
+              <select id="nationality" required class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-bold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40"><option value="">请选择</option></select>
             </div>
             <div>
-              <label>入境口岸</label>
-              <select id="entryGate" required><option value="">请选择</option></select>
-              <div class="help">请选择你预计入境的机场/口岸。</div>
+              <label class="text-sm font-bold text-zinc-700">入境口岸</label>
+              <select id="entryGate" required class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-bold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40"><option value="">请选择</option></select>
             </div>
           </div>
-
-          <div class="row">
+          <div class="grid gap-4 md:grid-cols-2">
             <div>
-              <label>护照资料页（照片）</label>
-              <input id="passport" type="file" accept="image/*" required />
-              <div class="help">建议：光线充足、文字清楚可读、不要反光。</div>
+              <label class="text-sm font-bold text-zinc-700">护照资料页（照片）</label>
+              <input id="passport" type="file" accept="image/*" required class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm" />
             </div>
             <div>
-              <label>证件照（照片）</label>
-              <input id="photo" type="file" accept="image/*" required />
-              <div class="help">系统会做基本质量检查（模糊/过暗/过曝）。</div>
+              <label class="text-sm font-bold text-zinc-700">证件照（照片）</label>
+              <input id="photo" type="file" accept="image/*" required class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm" />
             </div>
           </div>
-
-          <div>
-            <label>备注（选填）</label>
-            <textarea id="notes" rows="3" placeholder="例如：是否需要加急、航班信息…"></textarea>
-          </div>
-
-          <button class="btn" type="submit">创建订单并获取付款信息</button>
+          <button class="w-full rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95" type="submit">建立订单并取得转账信息</button>
         </form>
 
-        <div class="card" id="paymentBox" style="display:none;margin-top:14px">
-          <div style="font-weight:800">下一步：付款</div>
-          <p class="p">订单编号： <span id="orderId" style="font-weight:800"></span></p>
-
-          <div class="notice" id="payInfoTwd" style="margin-bottom:10px">
-            <div style="font-weight:800;margin-bottom:6px">转账（台币）</div>
-            <div class="small">银行：玉山银行（代码 808）</div>
-            <div class="small">账号：0152979250648</div>
-            <div class="small">户名：赖瑞鸿</div>
-            <div class="small" style="margin-top:8px">转账后请回传：<b>末五码 + 转账时间 + 截图（可选）</b>（建议备注填：订单编号）</div>
-          </div>
-
+        <div class="mt-6 rounded-3xl border border-black/5 bg-brand-4 p-5" id="paymentBox" style="display:none">
+          <div class="text-sm font-extrabold">下一步：付款</div>
+          <p class="mt-2 text-sm font-medium text-zinc-700">订单编号： <span id="orderId" class="font-extrabold"></span></p>
+          <div class="notice" id="payInfoTwd" style="margin-bottom:10px"></div>
           <div class="notice" id="payInfoCny" style="margin-bottom:10px">
-            <div style="font-weight:800;margin-bottom:6px">人民币付款（支付宝 / 微信支付）</div>
-            <div class="small" id="payInfoCnyHint"></div>
+            <div class="text-sm text-zinc-700" id="payInfoCnyHint"></div>
             <div class="payQrGrid" id="payInfoCnyQr"></div>
           </div>
         </div>
 
-        <div class="card" id="paymentProof" style="display:none;margin-top:14px">
-          <div style="font-weight:800">付款确认</div>
-          <div class="help" style="margin-top:6px">若少付/手续费导致实收不足，我们将不会开始处理，请直接联系客服协助。</div>
-          <form id="paymentProofForm" style="margin-top:10px">
-            <div class="row">
+        <div class="mt-6 rounded-3xl border border-black/5 bg-white p-5" id="paymentProof" style="display:none">
+          <div class="text-sm font-extrabold">付款确认</div>
+          <form id="paymentProofForm" class="mt-4 grid gap-4">
+            <div class="grid gap-4 md:grid-cols-2">
               <div>
-                <label>付款方式</label>
-                <select id="payMethod" required>
+                <label class="text-sm font-bold text-zinc-700">付款方式</label>
+                <select id="payMethod" required class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-bold text-zinc-900 shadow-sm">
                   <option value="">请选择</option>
                   <option value="USDT">USDT (BEP20)</option>
                   <option value="TWD">TWD bank transfer</option>
@@ -132,56 +146,30 @@
                 </select>
               </div>
               <div>
-                <label>TXID（仅 USDT）</label>
-                <input id="txid" type="text" placeholder="0x..." />
+                <label class="text-sm font-bold text-zinc-700">TXID（仅 USDT）</label>
+                <input id="txid" type="text" placeholder="0x..." class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm" />
               </div>
             </div>
-
-            <div class="row">
-              <div>
-                <label>末五码（转账）</label>
-                <input id="last5" type="text" placeholder="12345" />
-              </div>
-            </div>
+            <input id="last5" type="text" placeholder="12345" class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm" />
             <input id="payCurrency" type="hidden" value="" />
-
-            <div>
-              <label>付款截图（转账／支付宝）</label>
-              <input id="proofImage" type="file" accept="image/*" />
-              <div class="help">请上传付款/转账记录截图。</div>
-            </div>
-
-            <div>
-              <label>备注（选填）</label>
-              <textarea id="payNote" rows="2" placeholder=""></textarea>
-            </div>
-
-            <button class="btn" type="submit">提交付款信息</button>
+            <input id="proofImage" type="file" accept="image/*" class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm" />
+            <textarea id="payNote" rows="2" class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm"></textarea>
+            <button class="w-full rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95" type="submit">提交付款信息</button>
           </form>
         </div>
 
-        <div class="notice contactSection" style="margin-top:14px">
-          <div style="font-weight:800;margin-bottom:6px">联系我们</div>
-          <div class="small">（可用英文、中文、越南文沟通）</div>
-          <div class="small">官网：<a href="https://vietnam-discovery.netlify.app" target="_blank" rel="noopener">vietnam-discovery.netlify.app</a></div>
-          <div class="contactGrid" style="margin-top:10px">
-            <a class="contactBtn" href="https://u.wechat.com/MJ65zWUs3hWEz_cJ-s_WIQI?s=2" target="_blank" rel="noopener">WeChat 微信</a>
-            <a class="contactBtn" href="https://line.me/R/ti/p/@oth1852d" target="_blank" rel="noopener">LINE: @oth1852d</a>
-            <a class="contactBtn" href="https://wa.me/qr/WMWEEYWG32N7H1" target="_blank" rel="noopener">WhatsApp</a>
-            <a class="contactBtn" href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">Telegram: @AlbertLaipi</a>
-            <a class="contactBtn" href="https://zaloapp.com/qr/p/1m345knav588v" target="_blank" rel="noopener">Zalo</a>
-          </div>
-        </div>
-
-        <div class="footer">
-          <div><b>隐私提醒：</b>你上传的资料仅用于签证申请与客服联络；我们会在完成服务后删除资料（MVP 版会先以人工流程处理）。</div>
-          <div style="margin-top:6px">© Vietnam Discovery</div>
-        </div>
+        <div class="mt-8 text-xs font-medium leading-6 text-zinc-600"><b class="text-zinc-900">隐私提醒：</b>你上传的资料仅用于签证申请与客服联络；完成服务后会删除资料。</div>
       </div>
-    </div>
-  </div>
+    </section>
+
+    <footer class="mt-12 pb-2"><div class="text-center text-xs font-medium text-zinc-500">© Vietnam Discovery</div></footer>
+  </main>
 
   <script type="module" src="/shared/app.js"></script>
-  <script type="module">window.__VD_init('zh-CN');</script>
+  <script type="module">
+    import { initContactModal } from '/shared/contact-modal.js';
+    initContactModal('zh-CN');
+    window.__VD_init('zh-CN');
+  </script>
 </body>
 </html>

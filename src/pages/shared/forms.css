@@ -1,0 +1,57 @@
+/* Shared form styles for Tailwind pages where JS injects legacy classnames.
+   Keep this small; prefer Tailwind utilities in markup. */
+
+/* Status / notices */
+.notice{
+  border-left:4px solid rgba(234,130,165,.95);
+  padding:10px 12px;
+  background:rgba(249,205,207,.26);
+  border-radius:16px;
+  color:#3f3f46; /* zinc-700 */
+  border:1px solid rgba(0,0,0,.06);
+}
+.notice.danger{
+  border-left-color:#d94b4b;
+  background:rgba(217,75,75,.10);
+}
+
+/* Price emphasis injected by /shared/app.js */
+.totalBanner{
+  margin-top:10px;
+  padding:10px 12px;
+  border-radius:16px;
+  border:1px solid rgba(0,0,0,.08);
+  background:rgba(203,183,157,.22);
+  color:#18181b;
+  font-weight:800;
+}
+.totalBanner .sub{
+  display:block;
+  margin-top:4px;
+  font-size:12px;
+  font-weight:700;
+  color:#52525b;
+}
+
+/* Date picker helper button (kept for old UX) */
+.dateWrap{position:relative}
+.dateWrap input[type="date"]{padding-right:44px}
+.iconBtn{
+  position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  width:34px;height:34px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.08);
+  background:rgba(255,255,255,.7);
+  color:#18181b;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* Payment QR blocks */
+.payQrGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:10px}
+@media(max-width:700px){.payQrGrid{grid-template-columns:1fr}}
+.payQrItem{border:1px solid rgba(0,0,0,.08);border-radius:16px;padding:10px;background:rgba(255,255,255,.7)}
+.payQrItem .t{font-size:12px;color:#52525b;margin-bottom:8px;font-weight:700}
+.payQr{max-width:220px;width:100%;height:auto;object-fit:contain;border-radius:14px;border:1px solid rgba(0,0,0,.08);background:#fff}
+
+.hidden{display:none !important}

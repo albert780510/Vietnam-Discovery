@@ -4,121 +4,139 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vietnam eVisa Assistance | Vietnam Discovery</title>
-  <link rel="stylesheet" href="/shared/site.css" />
+  <meta name="description" content="Vietnam eVisa assistance: fast, transparent, and reliable. Upload passport + photo, we review and help submit to reduce rejection risk." />
+
+  <script src="/shared/tailwind-config.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/shared/marketing.css" />
+  <link rel="stylesheet" href="/shared/forms.css" />
 </head>
-<body>
-  <div class="container">
-    <div class="nav">
-      <div class="brand">
-        <img src="/shared/logo.jpg" alt="Vietnam Discovery" />
-        <span>Vietnam Discovery</span>
-        <span class="badge">eVisa</span>
-      </div>
-      <div class="small">
-        <select id="langSelect" aria-label="Language"></select>
+<body class="min-h-screen bg-brand-4 font-sans text-zinc-900">
+  <header class="sticky top-0 z-50">
+    <div class="mx-auto max-w-6xl px-4 pt-4">
+      <div class="flex items-center justify-between rounded-2xl border border-black/5 bg-white/70 px-4 py-3 shadow-soft backdrop-blur">
+        <a href="/en/" class="flex items-center gap-3" aria-label="Go to home">
+          <img src="/shared/logo.jpg" alt="Vietnam Discovery" class="h-9 w-9 rounded-xl border border-black/5 bg-white p-1" />
+          <div class="flex items-center gap-2">
+            <span class="text-sm font-extrabold tracking-tight">Vietnam Discovery</span>
+            <span class="rounded-full bg-brand-2/40 px-3 py-1 text-xs font-extrabold text-brand-1">eVisa</span>
+          </div>
+        </a>
+
+        <nav class="hidden items-center gap-2 md:flex" aria-label="Navigation">
+          <a href="/en/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">Home</a>
+          <a href="/en/tours/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">Tours</a>
+          <a href="/en/evisa/" class="rounded-full bg-white px-3 py-2 text-sm font-extrabold text-zinc-900 shadow-sm">eVisa</a>
+          <a href="#" data-contact-open class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <select id="langSelect" aria-label="Language" class="rounded-xl border border-black/10 bg-white px-3 py-2 text-sm font-bold text-zinc-800"></select>
+        </div>
       </div>
     </div>
+  </header>
 
-    <div class="grid">
-      <div class="card">
-        <div class="h1"><span class="nowrap">Vietnam eVisa Assistance</span> (fast & reliable)</div>
-        <p class="p">Apply for a Vietnam eVisa: upload your passport bio page and ID photo, and leave your contact details (address/phone). We help review and prepare your application to reduce rejection risk.</p>
+  <main class="mx-auto max-w-6xl px-4 pb-16">
+    <section class="mt-8" aria-label="eVisa hero">
+      <div class="grid gap-6 md:grid-cols-2 md:items-center">
+        <div>
+          <h1 class="text-4xl font-extrabold tracking-tight md:text-5xl">Vietnam eVisa assistance</h1>
+          <p class="mt-4 max-w-xl text-base font-medium leading-7 text-zinc-600">Upload your passport bio page + ID photo and leave your contact + entry details. We help <strong class="text-zinc-900">review → prepare → submit</strong> to reduce rejection & back‑and‑forth.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#apply" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95">Start</a>
+            <a href="#" data-contact-open class="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-5 py-4 text-base font-extrabold text-zinc-900 shadow-card hover:bg-brand-4">Ask first</a>
+          </div>
+        </div>
+        <div class="rounded-3xl border border-black/5 bg-white p-6 shadow-card">
+          <div class="text-sm font-extrabold text-zinc-900">3-step flow</div>
+          <ol class="mt-4 space-y-3 text-sm text-zinc-700">
+            <li class="flex gap-3"><span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-4 text-xs font-extrabold text-brand-1">1</span><span>Fill details + upload files</span></li>
+            <li class="flex gap-3"><span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-4 text-xs font-extrabold text-brand-1">2</span><span>We review & fix common issues</span></li>
+            <li class="flex gap-3"><span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand-4 text-xs font-extrabold text-brand-1">3</span><span>Submit & deliver result</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
 
-        <div class="notice" id="status" style="display:none"></div>
+    <section id="apply" class="mt-10" aria-label="Apply">
+      <div class="rounded-3xl border border-black/5 bg-white p-6 shadow-card">
+        <h2 class="text-xl font-extrabold tracking-tight">Apply</h2>
+        <p class="mt-1 text-sm font-medium text-zinc-600">Address should be in English.</p>
 
-        <form id="lead-form">
+        <div class="mt-5" id="status" style="display:none"></div>
+
+        <form id="lead-form" class="mt-5 grid gap-4">
           <div>
-            <label>Visa type</label>
-            <select id="product"></select>
-            <div class="help" id="productPrice" style="margin-top:6px"></div>
+            <label class="text-sm font-bold text-zinc-700">Visa type</label>
+            <select id="product" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-bold text-zinc-900 shadow-sm"></select>
+            <div class="mt-2 text-xs font-medium text-zinc-600" id="productPrice"></div>
           </div>
-
-          <div style="margin-top:10px">
-            <label>Processing time (Submission day is not counted as the first business day)</label>
-            <select id="speed"></select>
-            <div class="help" style="margin-top:6px">We start processing the same day once payment info is received.</div>
-          </div>
-
-          <div class="row">
-            <div>
-              <label>Email</label>
-              <input id="email" type="email" placeholder="name@example.com" required />
-            </div>
-            <div>
-              <label>Phone</label>
-              <input id="phone" type="tel" placeholder="+1 000 000 0000" required />
-            </div>
-          </div>
-
           <div>
-            <label>Address (English)</label>
-            <textarea id="address" rows="2" placeholder="Street, District, City, Country" required></textarea>
-            <div class="help">Vietnam eVisa forms usually require an English address. If yours is in another language, paste it and click <a id="translateAddress" href="#" target="_blank" rel="noopener">Translate to English</a>.</div>
+            <label class="text-sm font-bold text-zinc-700">Processing time</label>
+            <select id="speed" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-bold text-zinc-900 shadow-sm"></select>
           </div>
-
-          <div>
-            <label>Arrival date <span class="small">(YYYY-MM-DD)</span></label>
-            <div class="dateWrap">
-              <input id="arrival" type="date" required />
-              <button type="button" class="iconBtn" data-open-date aria-label="Open calendar">📅</button>
-            </div>
-            <div class="help">Format: YYYY-MM-DD. Tip: click the calendar icon.</div>
+          <div class="grid gap-4 md:grid-cols-2">
+            <input id="email" type="email" placeholder="name@example.com" required class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm" />
+            <input id="phone" type="tel" placeholder="+1 000 000 0000" required class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm" />
           </div>
-
-          <div class="row">
-            <div>
-              <label>Nationality</label>
-              <select id="nationality" required><option value="">Select…</option></select>
-              <div class="help">Flag + English name.</div>
-            </div>
-            <div>
-              <label>Entry gate</label>
-              <select id="entryGate" required><option value="">Select…</option></select>
-              <div class="help">Choose your planned entry airport/gate.</div>
-            </div>
+          <textarea id="address" rows="2" placeholder="Street, District, City, Country" required class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm"></textarea>
+          <div class="dateWrap">
+            <input id="arrival" type="date" required class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm" />
+            <button type="button" class="iconBtn" data-open-date aria-label="Open calendar">📅</button>
           </div>
-
-          <div class="row">
-            <div>
-              <label>Passport bio page (photo)</label>
-              <input id="passport" type="file" accept="image/*" required />
-              <div class="help">Tip: good lighting, sharp text, no glare.</div>
-            </div>
-            <div>
-              <label>ID photo (photo)</label>
-              <input id="photo" type="file" accept="image/*" required />
-              <div class="help">We run basic quality checks (blurry/too dark/overexposed).</div>
-            </div>
+          <div class="grid gap-4 md:grid-cols-2">
+            <select id="nationality" required class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-bold text-zinc-900 shadow-sm"><option value="">Select…</option></select>
+            <select id="entryGate" required class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-bold text-zinc-900 shadow-sm"><option value="">Select…</option></select>
           </div>
-
-          <div>
-            <label>Notes (optional)</label>
-            <textarea id="notes" rows="3" placeholder="e.g., rush request, flight info…"></textarea>
+          <div class="grid gap-4 md:grid-cols-2">
+            <input id="passport" type="file" accept="image/*" required class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm" />
+            <input id="photo" type="file" accept="image/*" required class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm" />
           </div>
-
-          <button class="btn" type="submit">Create order & get payment info</button>
+          <textarea id="notes" rows="3" placeholder="Notes (optional)" class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm"></textarea>
+          <button class="w-full rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95" type="submit">Create order & get payment info</button>
         </form>
 
-        <div class="notice contactSection" style="margin-top:14px">
-          <div style="font-weight:800;margin-bottom:6px">Contact</div>
-          <div class="small">(English / Chinese / Vietnamese supported)</div>
-          <div class="small">Website: <a href="https://vietnam-discovery.netlify.app" target="_blank" rel="noopener">vietnam-discovery.netlify.app</a></div>
-          <div class="contactGrid" style="margin-top:10px">
-            <a class="contactBtn" href="https://line.me/R/ti/p/@oth1852d" target="_blank" rel="noopener">LINE: @oth1852d</a>
-            <a class="contactBtn" href="https://wa.me/qr/WMWEEYWG32N7H1" target="_blank" rel="noopener">WhatsApp</a>
-            <a class="contactBtn" href="https://t.me/AlbertLaipi" target="_blank" rel="noopener">Telegram: @AlbertLaipi</a>
-            <a class="contactBtn" href="https://zaloapp.com/qr/p/1m345knav588v" target="_blank" rel="noopener">Zalo</a>
+        <div class="mt-6 rounded-3xl border border-black/5 bg-brand-4 p-5" id="paymentBox" style="display:none">
+          <div class="text-sm font-extrabold">Next: Payment</div>
+          <p class="mt-2 text-sm font-medium text-zinc-700">Order ID: <span id="orderId" class="font-extrabold"></span></p>
+          <div class="notice" id="payInfoTwd" style="margin-bottom:10px"></div>
+          <div class="notice" id="payInfoCny" style="margin-bottom:10px">
+            <div class="text-sm text-zinc-700" id="payInfoCnyHint"></div>
+            <div class="payQrGrid" id="payInfoCnyQr"></div>
           </div>
         </div>
 
-        <div class="footer">
-          <div class="small">© Vietnam Discovery</div>
+        <div class="mt-6 rounded-3xl border border-black/5 bg-white p-5" id="paymentProof" style="display:none">
+          <div class="text-sm font-extrabold">Payment confirmation</div>
+          <form id="paymentProofForm" class="mt-4 grid gap-4">
+            <select id="payMethod" required class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-bold text-zinc-900 shadow-sm">
+              <option value="">Select…</option>
+              <option value="USDT">USDT (BEP20)</option>
+              <option value="TWD">TWD bank transfer</option>
+              <option value="CNY">CNY (Alipay)</option>
+            </select>
+            <input id="txid" type="text" placeholder="TXID (USDT only)" class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm" />
+            <input id="last5" type="text" placeholder="Last 5 digits (bank transfer)" class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm" />
+            <input id="payCurrency" type="hidden" value="" />
+            <input id="proofImage" type="file" accept="image/*" class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm" />
+            <textarea id="payNote" rows="2" placeholder="Note (optional)" class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm"></textarea>
+            <button class="w-full rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95" type="submit">Submit payment info</button>
+          </form>
         </div>
+
+        <div class="mt-8 text-xs font-medium leading-6 text-zinc-600"><b class="text-zinc-900">Privacy:</b> uploads are used only for visa processing and support; we delete after service completion.</div>
       </div>
-    </div>
-  </div>
+    </section>
+
+    <footer class="mt-12 pb-2"><div class="text-center text-xs font-medium text-zinc-500">© Vietnam Discovery</div></footer>
+  </main>
 
   <script type="module" src="/shared/app.js"></script>
-  <script type="module">window.__VD_init('en');</script>
+  <script type="module">
+    import { initContactModal } from '/shared/contact-modal.js';
+    initContactModal('en');
+    window.__VD_init('en');
+  </script>
 </body>
 </html>
