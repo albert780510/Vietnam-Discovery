@@ -1,5 +1,63 @@
 /* Shared form styles for Tailwind pages where JS injects legacy classnames.
-   Keep this small; prefer Tailwind utilities in markup. */
+   Keep this small; prefer Tailwind utilities in markup.
+
+   NOTE: /shared/app.js also injects a payment-method dialog and a few legacy classnames.
+*/
+
+/* Legacy button class used by /shared/app.js modals */
+.btn{
+  cursor:pointer;
+  border:0;
+  border-radius:16px;
+  padding:12px 14px;
+  background:linear-gradient(90deg,#986743,#EA82A5);
+  color:#fff;
+  font-weight:900;
+  box-shadow:0 10px 18px rgba(152,103,67,.18);
+}
+.btn:hover{filter:saturate(1.05)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+
+/* Payment method dialog (美化) */
+dialog.vd-modal{border:0;padding:0;background:transparent}
+dialog.vd-modal::backdrop{background:rgba(0,0,0,.45);backdrop-filter:blur(6px)}
+.vd-modal__card{
+  width:min(560px, 92vw);
+  border-radius:24px;
+  border:1px solid rgba(0,0,0,.10);
+  background:rgba(255,255,255,.92);
+  box-shadow:0 18px 60px rgba(0,0,0,.22);
+  padding:16px;
+}
+.vd-modal__title{font-size:16px;font-weight:900;letter-spacing:-.2px;color:#18181b}
+.vd-modal__body{margin-top:10px;color:#3f3f46;font-size:14px;line-height:1.55}
+.vd-modal__actions{display:flex;justify-content:flex-end;margin-top:12px}
+.vdBtnAlt{
+  border:1px solid rgba(0,0,0,.10);
+  background:#fff;
+  color:#18181b;
+  border-radius:16px;
+  padding:10px 12px;
+  font-weight:900;
+  cursor:pointer;
+}
+.vdPayGrid{display:grid;gap:10px}
+.vdPayBtn{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  width:100%;
+  border-radius:18px;
+  border:1px solid rgba(0,0,0,.10);
+  background:rgba(245,243,235,.8);
+  padding:12px 14px;
+  color:#18181b;
+  font-weight:900;
+  cursor:pointer;
+}
+.vdPayBtn:hover{background:#fff}
+.vdPayBtn .sub{font-size:12px;font-weight:700;color:#52525b}
 
 /* Status / notices */
 .notice{
