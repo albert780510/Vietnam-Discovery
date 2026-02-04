@@ -1149,6 +1149,11 @@ async function main(locale){
       arrival: qs('#arrival').value,
       nationality,
       entryGate,
+      // Extra lead context (optional)
+      inquiryType: qs('#inquiryType')?.value || '',
+      budgetRange: qs('#budgetRange')?.value || '',
+      businessType: qs('#businessType')?.value || '',
+      travelPrefs: qs('#travelPrefs')?.value || '',
       notes: qs('#notes').value
     };
 
