@@ -14,6 +14,3 @@ deno.lock
 # local scratch / generated
 marketing/radar-state.json
 marketing/market-community-lists.md
-src/pages/shared/nav-mega.js
-src/pages/zh-cn/tours/
-src/pages/zh-tw/tours/
