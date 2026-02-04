@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>顾问咨询（付费）｜Vietnam Discovery</title>
+  <meta name="description" content="付费顾问咨询：填完即可报价（Fast Track、接送、On-site Concierge、商务支援、签证/入境辅导）。" />
+
+  <script src="/shared/tailwind-config.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/shared/marketing.css" />
+</head>
+<body class="min-h-screen bg-brand-4 font-sans text-zinc-900">
+  <header class="sticky top-0 z-50">
+    <div class="mx-auto max-w-6xl px-4 pt-4">
+      <div class="flex items-center justify-between rounded-2xl border border-black/5 bg-white/70 px-4 py-3 shadow-soft backdrop-blur">
+        <a href="/zh-cn/" class="flex items-center gap-3" aria-label="Go to home">
+          <img src="/shared/logo.jpg" alt="Vietnam Discovery" class="h-9 w-9 rounded-xl border border-black/5 bg-white p-1" />
+          <div class="flex items-center gap-2">
+            <span class="text-sm font-extrabold tracking-tight">Vietnam Discovery</span>
+            <span class="rounded-full bg-brand-2/40 px-3 py-1 text-xs font-extrabold text-brand-1">Consult</span>
+          </div>
+        </a>
+        <div class="flex items-center gap-2">
+          <a href="/zh-cn/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">回首页</a>
+          <select id="langSelect" aria-label="Language" class="rounded-xl border border-black/10 bg-white px-3 py-2 text-sm font-bold text-zinc-800"></select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 pb-16">
+    <section class="mt-8" aria-label="Consultation">
+      <div class="rounded-[24px] border border-black/5 bg-white p-7 shadow-soft">
+        <h1 class="text-3xl font-extrabold tracking-tight md:text-4xl">顾问咨询（付费）</h1>
+        <p class="mt-3 max-w-3xl text-sm font-medium leading-6 text-zinc-600">
+          这份表单的目的不是聊天，而是把范围厘清到“可报价、可执行”。
+          填完后会生成一段简报文字，你可以直接贴到 WhatsApp / Telegram / 微信 / LINE 给我们。
+        </p>
+
+        <!-- Paid acknowledgement (成交补点 #3) -->
+        <div class="mt-5 rounded-2xl border border-black/10 bg-brand-4 px-4 py-4">
+          <label class="flex gap-3 text-sm font-semibold text-zinc-800">
+            <input id="paidAck" type="checkbox" class="mt-1 h-5 w-5" />
+            <span>我理解：这是<strong>付费</strong>、按需的顾问与礼宾服务；不是免费咨询，也不是行程比价。</span>
+          </label>
+          <div class="mt-2 text-xs font-medium text-zinc-600">未勾选将无法复制/发送简报（用于过滤非目标客群）。</div>
+        </div>
+
+        <form id="consultForm" class="mt-6 grid gap-5" autocomplete="on">
+          <div class="grid gap-4 md:grid-cols-2">
+            <div>
+              <label class="text-sm font-bold text-zinc-700">想要的服务模块</label>
+              <select id="service" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-bold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40">
+                <option value="">不确定（让我们判断）</option>
+                <option value="fasttrack">Airport VIP Fast Track</option>
+                <option value="transfer">Airport Transfer + Luggage Assistance</option>
+                <option value="concierge">On-site Concierge & Advisory</option>
+                <option value="business">Business & Executive Support</option>
+                <option value="visa">Visa & Entry Assistance（Support-based）</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-sm font-bold text-zinc-700">城市 / 机场</label>
+              <input id="city" type="text" placeholder="例如：胡志明（SGN）/ 河内（HAN）/ 岘港（DAD）" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40" />
+            </div>
+          </div>
+
+          <div class="grid gap-4 md:grid-cols-2">
+            <div>
+              <label class="text-sm font-bold text-zinc-700">日期/时间</label>
+              <input id="dates" type="text" placeholder="例如：2/20 抵达、2/22 会议、2/23 离境" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40" />
+            </div>
+            <div>
+              <label class="text-sm font-bold text-zinc-700">航班/抵达点（如有）</label>
+              <input id="flights" type="text" placeholder="例如：VNxxx / 抵达时间 / 航厦" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40" />
+            </div>
+          </div>
+
+          <div class="grid gap-4 md:grid-cols-2">
+            <div>
+              <label class="text-sm font-bold text-zinc-700">人数/行李</label>
+              <input id="pax" type="text" placeholder="例如：2 人＋2 行李箱（或团体人数）" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40" />
+            </div>
+            <div>
+              <label class="text-sm font-bold text-zinc-700">沟通语言</label>
+              <input id="language" type="text" placeholder="例如：中文/英文/越文" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40" />
+            </div>
+          </div>
+
+          <div class="grid gap-4 md:grid-cols-3">
+            <div class="rounded-2xl border border-black/10 bg-brand-4 p-4">
+              <div class="text-sm font-extrabold">时间敏感度</div>
+              <div class="mt-3 grid gap-2 text-sm font-semibold">
+                <label class="flex items-center gap-2"><input type="radio" name="timing" value="高" /> 高（不能排队/不能延误）</label>
+                <label class="flex items-center gap-2"><input type="radio" name="timing" value="中" checked /> 中（可控即可）</label>
+                <label class="flex items-center gap-2"><input type="radio" name="timing" value="低" /> 低（时间弹性大）</label>
+              </div>
+            </div>
+            <div class="rounded-2xl border border-black/10 bg-brand-4 p-4">
+              <div class="text-sm font-extrabold">计划变动可能</div>
+              <div class="mt-3 grid gap-2 text-sm font-semibold">
+                <label class="flex items-center gap-2"><input type="radio" name="volatility" value="可能" checked /> 可能（临时加会/改点）</label>
+                <label class="flex items-center gap-2"><input type="radio" name="volatility" value="不太可能" /> 不太可能</label>
+              </div>
+            </div>
+            <div class="rounded-2xl border border-black/10 bg-brand-4 p-4">
+              <div class="text-sm font-extrabold">结果导向（商务）</div>
+              <div class="mt-3 grid gap-2 text-sm font-semibold">
+                <label class="flex items-center gap-2"><input type="radio" name="outcome" value="高" /> 高（要谈成下一步）</label>
+                <label class="flex items-center gap-2"><input type="radio" name="outcome" value="中" checked /> 中</label>
+                <label class="flex items-center gap-2"><input type="radio" name="outcome" value="低" /> 低</label>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="text-sm font-bold text-zinc-700">补充说明</label>
+            <textarea id="notes" rows="4" placeholder="例如：需要保密/接待规格、是否需要口译、会议数量、是否可能临时改行程…" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40"></textarea>
+          </div>
+
+          <div>
+            <label class="text-sm font-bold text-zinc-700">你的联系方式（必填）</label>
+            <input id="contact" type="text" placeholder="例如：WhatsApp/LINE/微信/Telegram + ID（或电话）" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40" required />
+          </div>
+
+          <button class="w-full rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95" type="submit">生成简报（用于报价）</button>
+        </form>
+
+        <div id="consultOut" class="mt-6 hidden rounded-3xl border border-black/10 bg-white p-6 shadow-card">
+          <div class="text-sm font-extrabold text-zinc-900">系统建议（用于自然推 B 模块）</div>
+          <div id="recommendation" class="mt-2 text-sm font-semibold text-zinc-800"></div>
+
+          <div class="mt-5 grid gap-3">
+            <div>
+              <label class="text-sm font-bold text-zinc-700">简报文字（可直接贴给我们）</label>
+              <textarea id="briefing" rows="10" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-mono text-zinc-900 shadow-sm"></textarea>
+            </div>
+            <div class="grid gap-3 md:grid-cols-3">
+              <button id="copyBrief" type="button" class="rounded-2xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white" disabled>复制简报</button>
+              <button id="openWhatsApp" type="button" class="rounded-2xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">用 WhatsApp 发送</button>
+              <button id="openTelegram" type="button" class="rounded-2xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">用 Telegram 发送</button>
+            </div>
+            <div class="text-xs font-medium text-zinc-500">提示：如果你习惯用微信/LINE，也可以直接复制简报贴过去。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="mt-12 pb-2">
+      <div class="text-center text-xs font-medium text-zinc-500">© Vietnam Discovery</div>
+    </footer>
+  </main>
+
+  <script type="module" src="/shared/app.js"></script>
+  <script type="module">
+    import { initConsultForm } from '/shared/consult/consult.js';
+    initConsultForm('zh-CN');
+    window.__VD_init('zh-CN');
+  </script>
+</body>
+</html>

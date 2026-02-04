@@ -3,16 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vietnam Discovery｜越南在地旅遊與簽證服務</title>
-  <meta name="description" content="Vietnam Discovery｜越南在地旅遊、包車接送、商務考察與 eVisa 簽證代辦。" />
+  <title>Vietnam Discovery｜越南在地顧問 × 禮賓整合（付費）</title>
+  <meta name="description" content="付費、按需的在地顧問與禮賓整合服務。不是旅行社、不是 OTA。給企業主/高管/第一次來越南的決策者：你不需要自己處理任何麻煩。" />
 
-  <!-- Tailwind (CDN) + config -->
   <script src="/shared/tailwind-config.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/shared/marketing.css" />
 </head>
 <body class="min-h-screen bg-brand-4 font-sans text-zinc-900">
-  <!-- Top nav: 永遠固定、永遠可回首頁 -->
   <header class="sticky top-0 z-50">
     <div class="mx-auto max-w-6xl px-4 pt-4">
       <div class="flex items-center justify-between rounded-2xl border border-black/5 bg-white/70 px-4 py-3 shadow-soft backdrop-blur">
@@ -20,46 +18,15 @@
           <img src="/shared/logo.jpg" alt="Vietnam Discovery" class="h-9 w-9 rounded-xl border border-black/5 bg-white p-1" />
           <div class="flex items-center gap-2">
             <span class="text-sm font-extrabold tracking-tight">Vietnam Discovery</span>
-            <span class="rounded-full bg-brand-2/40 px-3 py-1 text-xs font-extrabold text-brand-1">官方網站</span>
+            <span class="rounded-full bg-brand-2/40 px-3 py-1 text-xs font-extrabold text-brand-1">Paid</span>
           </div>
         </a>
 
-        <nav class="hidden items-center gap-2 md:flex" aria-label="Navigation" data-mega-root>
-          <a href="/zh-tw/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">首頁</a>
-
-          <!-- Mega Menu: 旅遊行程（國內/國外） -->
-          <div class="relative megaRoot" data-mega-root>
-            <button type="button" data-mega-toggle aria-expanded="false" aria-controls="megaToursHomeTW" class="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-extrabold text-zinc-900 hover:bg-white">
-              旅遊行程
-              <span class="text-zinc-500">▾</span>
-            </button>
-            <div id="megaToursHomeTW" data-mega-menu class="megaMenu hidden pointer-events-none absolute left-0 top-[44px] w-[680px] -translate-y-1 rounded-3xl border border-black/10 bg-white/95 p-5 opacity-0 shadow-soft backdrop-blur transition duration-200">
-              <div class="grid gap-4 md:grid-cols-2">
-                <div>
-                  <div class="text-xs font-extrabold text-zinc-500">越南國內旅遊</div>
-                  <a href="/zh-tw/tours/vn/" class="mt-2 block rounded-2xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold hover:bg-white">城市/區域（胡志明／河內／峴港…）</a>
-                  <a href="/zh-tw/tours/vn/hiking/" class="mt-3 block rounded-2xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold hover:bg-white">深度探索（登山）</a>
-                  <a href="#" data-contact-open class="mt-3 block rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-extrabold hover:bg-brand-4">客製化自由行（留下資料）</a>
-                </div>
-                <div>
-                  <div class="text-xs font-extrabold text-zinc-500">越南出境旅遊</div>
-                  <a href="/zh-tw/tours/outbound/tw/" class="mt-2 block rounded-2xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold hover:bg-white">去台灣</a>
-                  <a href="/zh-tw/tours/outbound/cn/" class="mt-3 block rounded-2xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold hover:bg-white">去中國</a>
-                  <div class="mt-3 rounded-2xl border border-dashed border-black/15 bg-white px-4 py-3 text-sm font-medium text-zinc-600">（未來可擴充：日本／韓國／泰國…）</div>
-                </div>
-              </div>
-              <div class="mt-4">
-                <a href="/zh-tw/tours/" class="text-sm font-extrabold text-brand-1 hover:underline">前往旅遊行程總覽 →</a>
-              </div>
-            </div>
-          </div>
-
-          <a href="/zh-tw/#services" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">服務</a>
-          <a href="/zh-tw/custom-tour/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">客製旅行</a>
-          <a href="/zh-tw/business-trip/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">商務考察</a>
-          <!-- eVisa：新分頁開啟，避免切到申請介面回不來 -->
-          <a href="/zh-tw/evisa/" target="_blank" rel="noopener" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">eVisa</a>
-          <a href="#" data-contact-open class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">聯繫</a>
+        <nav class="hidden items-center gap-2 md:flex" aria-label="Navigation">
+          <a href="#solutions" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">解決方案</a>
+          <a href="#pricing" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">收費邏輯</a>
+          <a href="#faq" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">FAQ</a>
+          <a href="/zh-tw/consult/" class="rounded-full px-3 py-2 text-sm font-extrabold text-zinc-900 hover:bg-white">顧問諮詢</a>
         </nav>
 
         <div class="flex items-center gap-2">
@@ -70,80 +37,185 @@
   </header>
 
   <main class="mx-auto max-w-6xl px-4 pb-16">
-    <!-- HERO: image-only slider (Notion style: 圖在上、文字在下) -->
-    <section class="mt-4" aria-label="Hero">
-      <div class="relative overflow-hidden rounded-[24px] border border-black/5 bg-white shadow-soft" data-hero-slider>
-        <div class="heroSlider" aria-hidden="true">
-          <div class="heroSlide heroSlideA" data-hero-slide></div>
-          <div class="heroSlide heroSlideB" data-hero-slide></div>
-          <div class="heroVignette"></div>
-        </div>
-        <div class="h-[520px] md:h-[460px]"></div>
-      </div>
+    <section class="mt-8" aria-label="Hero">
+      <div class="rounded-[24px] border border-black/5 bg-white p-7 shadow-soft">
+        <div class="grid gap-6 md:grid-cols-2 md:items-center">
+          <div>
+            <div class="inline-flex items-center gap-2 rounded-full border border-black/10 bg-brand-4 px-3 py-1 text-xs font-extrabold text-zinc-900">Vietnam • On-demand • Paid</div>
+            <h1 class="mt-4 text-4xl font-extrabold tracking-tight md:text-5xl">越南在地顧問 × 禮賓整合（付費、按需）</h1>
+            <p class="mt-4 max-w-xl text-base font-medium leading-7 text-zinc-600">
+              不是旅行社、不是 OTA、不是免費諮詢。
+              我們提供<strong class="text-zinc-900">付費的在地解決能力</strong>：從抵達到離境，把不確定變成可控的流程。
+            </p>
 
-      <div class="mx-auto mt-8 max-w-3xl text-center">
-        <h1 class="text-4xl font-extrabold tracking-tight md:text-5xl">越南在地旅遊與簽證，
-          <span class="text-zinc-900">一站式搞定。</span>
-        </h1>
-        <p class="mx-auto mt-4 max-w-2xl text-base font-medium leading-7 text-zinc-600">
-          在地團隊協助：旅遊行程、機場接送/包車、商務考察與越南 eVisa 代辦。中文/英文/越南文皆可溝通，流程透明。
-        </p>
+            <!-- 使用者場景句（成交補點 #1） -->
+            <div class="mt-5 rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-800">
+              典型情境：你明天落地胡志明，後天要見關鍵客戶/供應商——你只出面決策，其它我們負責串起來。
+            </div>
 
-        <div class="mt-6 grid gap-3 md:grid-cols-2">
-          <a href="#" data-contact-open class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95">立即諮詢 / 取得報價</a>
-          <a href="/zh-tw/evisa/" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-5 py-4 text-base font-extrabold text-zinc-900 shadow-card hover:bg-brand-4">越南 eVisa 代辦 →</a>
-        </div>
+            <ul class="mt-6 space-y-3 text-sm font-medium text-zinc-700">
+              <li class="flex gap-3"><span class="mt-0.5">✓</span><span><strong class="text-zinc-900">Paid, on-demand</strong>：按需與按範圍計價，不走購物車下單。</span></li>
+              <li class="flex gap-3"><span class="mt-0.5">✓</span><span>Someone on the ground who takes responsibility：有人在越南負責到底。</span></li>
+              <li class="flex gap-3"><span class="mt-0.5">✓</span><span>For executives & founders：時間、節奏、保密、形象都到位。</span></li>
+            </ul>
 
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-bold text-zinc-500">
-          <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>在地團隊</span>
-          <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>流程透明</span>
-          <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>多語支援</span>
-          <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>回覆快速</span>
-          <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>合法公司</span>
-          <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-1"></span>支持 USDT</span>
+            <div class="mt-7 flex flex-wrap gap-3">
+              <a href="/zh-tw/consult/" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95">Request a paid consultation</a>
+              <a href="#solutions" class="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-5 py-4 text-base font-extrabold text-zinc-900 shadow-card hover:bg-brand-4">View solutions</a>
+            </div>
+
+            <div class="mt-4 text-xs font-medium text-zinc-500">如果你在找景點/套裝旅遊/行程比價，這裡可能不適合你。</div>
+          </div>
+
+          <div class="rounded-3xl border border-black/5 bg-brand-4 p-6">
+            <div class="text-sm font-extrabold text-zinc-900">你買的是什麼</div>
+            <div class="mt-4 grid gap-3">
+              <div class="rounded-2xl border border-black/10 bg-white p-4">
+                <div class="text-xs font-extrabold text-zinc-500">Outcome</div>
+                <div class="mt-1 text-sm font-semibold text-zinc-800">把「高風險/時間敏感」的流程變 SOP</div>
+              </div>
+              <div class="rounded-2xl border border-black/10 bg-white p-4">
+                <div class="text-xs font-extrabold text-zinc-500">Responsibility</div>
+                <div class="mt-1 text-sm font-semibold text-zinc-800">單一窗口負責到底（不是把你丟給供應商）</div>
+              </div>
+              <div class="rounded-2xl border border-black/10 bg-white p-4">
+                <div class="text-xs font-extrabold text-zinc-500">Discretion</div>
+                <div class="mt-1 text-sm font-semibold text-zinc-800">保密、克制、適合商務節奏</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Services (modular cards) -->
-    <section id="services" class="mt-12" aria-label="Services">
+    <section id="solutions" class="mt-12" aria-label="Solutions">
       <div>
-        <h2 class="text-2xl font-extrabold tracking-tight">服務項目</h2>
-        <p class="mt-2 text-sm font-medium text-zinc-600">主打旅遊與簽證，一站式整合，流程清楚。</p>
+        <h2 class="text-2xl font-extrabold tracking-tight">解決方案（Solutions）</h2>
+        <p class="mt-2 text-sm font-medium text-zinc-600">我們不賣行程。我們賣「在越南的即時解決能力」。</p>
       </div>
 
       <div class="mt-6 grid gap-4 md:grid-cols-2">
+        <!-- A: 入口服務 -->
         <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
-          <h3 class="text-base font-extrabold">Tours｜旅遊行程</h3>
-          <p class="mt-2 text-sm text-zinc-600">胡志明 / 河內 / 峴港｜自由行規劃、小團、客製深度。</p>
+          <div class="text-xs font-extrabold text-zinc-500">Airport</div>
+          <h3 class="mt-2 text-base font-extrabold">Airport VIP Fast Track</h3>
+          <p class="mt-2 text-sm text-zinc-600">抵達/出境流程的 Priority assistance：專人迎接、引導、協助銜接後續接送（合規措辭：協助/引導，不承諾結果）。</p>
+          <div class="mt-4"><a href="/zh-tw/consult/?service=fasttrack" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">詢問可用性 / 報價</a></div>
+        </article>
+
+        <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
+          <div class="text-xs font-extrabold text-zinc-500">Airport</div>
+          <h3 class="mt-2 text-base font-extrabold">Airport Transfer + Luggage Assistance</h3>
+          <p class="mt-2 text-sm text-zinc-600">私人接送（商務/高端客戶）。航班追蹤、無縫交接、行李協助（選配），把落地的不確定降到最低。</p>
+          <div class="mt-4"><a href="/zh-tw/consult/?service=transfer" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">取得接送方案 / 報價</a></div>
+        </article>
+
+        <!-- B: 核心毛利服務（要被推） -->
+        <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card md:col-span-2">
+          <div class="text-xs font-extrabold text-zinc-500">Core</div>
+          <h3 class="mt-2 text-base font-extrabold">On-site Concierge & Advisory</h3>
+          <p class="mt-2 text-sm text-zinc-600">不是客服、不是翻譯、不是代訂。
+            你在越南有一個<strong class="text-zinc-900">能做判斷、會排優先順序、並且負責到底的人</strong>——不只是執行，而是做取捨與控風險。</p>
+          <div class="mt-4 grid gap-3 md:grid-cols-3">
+            <div class="rounded-2xl border border-black/10 bg-brand-4 p-4">
+              <div class="text-xs font-extrabold text-zinc-500">Judgment</div>
+              <div class="mt-1 text-sm font-semibold text-zinc-800">即時判斷：什麼該砍、什麼要加資源</div>
+            </div>
+            <div class="rounded-2xl border border-black/10 bg-brand-4 p-4">
+              <div class="text-xs font-extrabold text-zinc-500">Responsibility</div>
+              <div class="mt-1 text-sm font-semibold text-zinc-800">單一窗口負責到底（你不需要追供應商）</div>
+            </div>
+            <div class="rounded-2xl border border-black/10 bg-brand-4 p-4">
+              <div class="text-xs font-extrabold text-zinc-500">Emergency</div>
+              <div class="mt-1 text-sm font-semibold text-zinc-800">突發處理：延誤、改點、臨時會議</div>
+            </div>
+          </div>
+
+          <!-- 成交補點 #2：Who this is for -->
+          <div class="mt-5 rounded-2xl border border-black/10 bg-white px-4 py-4">
+            <div class="text-sm font-extrabold text-zinc-900">Most suitable if</div>
+            <ul class="mt-2 space-y-2 text-sm font-medium text-zinc-700">
+              <li>• 你時間很緊，不能被機場/交通/安排拖節奏</li>
+              <li>• 你的行程可能會變（臨時加會、改地點、插入突發狀況）</li>
+              <li>• 你需要有人在現場替你控風險、控細節、控交付</li>
+            </ul>
+            <div class="mt-3 text-sm font-semibold text-zinc-800">建議選擇：Half Day / Full Day（最常見，也最省心）。</div>
+          </div>
+
           <div class="mt-4">
-            <a href="#" data-contact-open class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">私訊詢價</a>
+            <a href="/zh-tw/consult/?service=concierge" class="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95">Book Half Day / Full Day Concierge →</a>
           </div>
         </article>
 
         <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
-          <h3 class="text-base font-extrabold">Car & Airport Transfer｜機場接送 / 包車</h3>
-          <p class="mt-2 text-sm text-zinc-600">機場接送、市區包車、跨城移動。依人數/行李/路線報價。</p>
-          <div class="mt-4">
-            <a href="#" data-contact-open class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">詢價</a>
-          </div>
+          <div class="text-xs font-extrabold text-zinc-500">Core</div>
+          <h3 class="mt-2 text-base font-extrabold">Business & Executive Support</h3>
+          <p class="mt-2 text-sm text-zinc-600">商務不是跑行程，是確保「會談結果」：議程節奏控場、陪同溝通支援、必要時提供會後 action list（選配）。</p>
+          <div class="mt-4"><a href="/zh-tw/consult/?service=business" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">取得商務支援方案 / 報價</a></div>
         </article>
 
+        <!-- C: 輔助信任（不搶戲） -->
         <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
-          <h3 class="text-base font-extrabold">Business Trip｜商務考察</h3>
-          <p class="mt-2 text-sm text-zinc-600">翻譯、車輛、拜訪安排、在地資源對接（依需求客製）。</p>
-          <div class="mt-4">
-            <a href="#" data-contact-open class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">先講需求</a>
-          </div>
+          <div class="text-xs font-extrabold text-zinc-500">Support</div>
+          <h3 class="mt-2 text-base font-extrabold">Visa & Entry Assistance (Support-based)</h3>
+          <p class="mt-2 text-sm text-zinc-600">文件檢查與流程顧問，降低退件/補件風險（不承諾核准、不寫保證下簽）。</p>
+          <div class="mt-4"><a href="/zh-tw/evisa/" class="inline-flex w-full items-center justify-center rounded-xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold text-zinc-900 hover:bg-white">查看 eVisa 支援</a></div>
         </article>
+      </div>
+    </section>
 
-        <article class="rounded-2xl border border-black/5 bg-white p-5 shadow-card">
-          <h3 class="text-base font-extrabold">Vietnam eVisa｜越南簽證代辦</h3>
-          <p class="mt-2 text-sm text-zinc-600">上傳護照/照片 → 我們檢查整理 → 送件 → 回傳結果。</p>
-          <div class="mt-4">
-            <a href="/zh-tw/evisa/" target="_blank" rel="noopener" class="inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-brand-1 to-brand-5 px-4 py-3 text-sm font-extrabold text-white hover:opacity-95">前往申請</a>
+    <section id="pricing" class="mt-12" aria-label="Pricing">
+      <div class="rounded-3xl border border-black/5 bg-white p-6 shadow-card">
+        <h2 class="text-2xl font-extrabold tracking-tight">How we charge（服務型收費）</h2>
+        <p class="mt-2 text-sm font-medium text-zinc-600">不做購物車、不做即時下單。先釐清範圍 → 報價 → 確認 → 執行。</p>
+
+        <!-- 情境對號入座（成交補點 #4） -->
+        <div class="mt-5 grid gap-3 md:grid-cols-2">
+          <div class="rounded-2xl border border-black/10 bg-brand-4 p-5">
+            <div class="text-sm font-extrabold">什麼時候該用什麼？</div>
+            <ul class="mt-3 space-y-2 text-sm text-zinc-700">
+              <li>• <strong>If timing matters</strong> → Fast Track</li>
+              <li>• <strong>If you want zero friction on arrival</strong> → Transfer + Luggage</li>
+              <li>• <strong>If plans may change</strong> → On-site Concierge（Half Day / Full Day）</li>
+              <li>• <strong>If business outcome matters</strong> → Executive Support</li>
+              <li>• <strong>If you want fewer surprises</strong> → Visa & Entry Assistance</li>
+            </ul>
           </div>
-        </article>
+          <div class="rounded-2xl border border-black/10 bg-brand-4 p-5">
+            <div class="text-sm font-extrabold">價格呈現（From / Starting at）</div>
+            <ul class="mt-3 space-y-2 text-sm text-zinc-700">
+              <li>• Fast Track：from USD XX / person</li>
+              <li>• Transfer：starting at USD XX</li>
+              <li>• Concierge：Hourly / Half Day / Full Day（from USD XX）</li>
+              <li>• Executive Support：Custom Quote</li>
+              <li>• Visa & Entry：starting at USD XX</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6 text-center">
+          <a href="/zh-tw/consult/" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-6 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95">Request a quote（顧問諮詢）→</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="mt-12" aria-label="FAQ">
+      <div class="rounded-3xl border border-black/5 bg-white p-6 shadow-card">
+        <h2 class="text-2xl font-extrabold tracking-tight">FAQ（邊界與合規）</h2>
+        <div class="mt-4 space-y-4 text-sm text-zinc-700">
+          <div>
+            <div class="font-extrabold text-zinc-900">Fast Track 可以保證通關/不排隊嗎？</div>
+            <div class="mt-1">不會這樣承諾。我們提供的是迎接、引導與流程協助（priority assistance）。實際通關仍以機場/官方流程為準。</div>
+          </div>
+          <div>
+            <div class="font-extrabold text-zinc-900">On-site Concierge 跟客服/翻譯差在哪？</div>
+            <div class="mt-1">核心是「判斷力＋責任」。不只回覆或翻譯，而是替你做取捨、控節奏、控風險，並負責把事情辦成。</div>
+          </div>
+          <div>
+            <div class="font-extrabold text-zinc-900">怎麼開始？</div>
+            <div class="mt-1">填寫顧問諮詢 → 我們確認範圍與風險 → 報價 → 確認後執行。</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -152,15 +224,11 @@
     </footer>
   </main>
 
+  <script type="module" src="/shared/app.js"></script>
   <script type="module">
-    import { initLangSelect } from '/shared/lang.js';
-    import { initHeroSliderV2 } from '/shared/hero/hero-v2.js';
     import { initContactModal } from '/shared/contact-modal.js';
-    import { initMegaNav } from '/shared/nav-mega.js';
-    initLangSelect('zh-TW');
-    initHeroSliderV2();
     initContactModal('zh-TW');
-    initMegaNav();
+    window.__VD_init('zh-TW');
   </script>
 </body>
 </html>
