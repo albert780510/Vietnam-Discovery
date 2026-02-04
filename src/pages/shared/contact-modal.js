@@ -10,6 +10,10 @@ function getContactItems(locale){
       name: isZhCn ? '微信 WeChat' : 'WeChat 微信',
       idLabel: isZhCn ? '添加链接' : '加入連結',
       idText: 'u.wechat.com/MJ65zWUs3hWEz_cJ-s_WIQI?s=2',
+      // Universal link that should open WeChat on mobile when installed.
+      openHref: 'https://u.wechat.com/MJ65zWUs3hWEz_cJ-s_WIQI?s=2',
+      // QR should encode a web-safe URL.
+      qrData: 'https://u.wechat.com/MJ65zWUs3hWEz_cJ-s_WIQI?s=2',
       href: 'https://u.wechat.com/MJ65zWUs3hWEz_cJ-s_WIQI?s=2'
     },
     {
@@ -17,6 +21,8 @@ function getContactItems(locale){
       name: 'LINE',
       idLabel: 'ID',
       idText: '@oth1852d',
+      openHref: 'https://line.me/R/ti/p/@oth1852d',
+      qrData: 'https://line.me/R/ti/p/@oth1852d',
       href: 'https://line.me/R/ti/p/@oth1852d'
     },
     {
@@ -24,6 +30,9 @@ function getContactItems(locale){
       name: 'WhatsApp',
       idLabel: isZhCn ? '二维码链接' : (isZhTw ? 'QR 連結' : 'QR link'),
       idText: 'wa.me/qr/WMWEEYWG32N7H1',
+      // WhatsApp universal link (opens app when installed)
+      openHref: 'https://wa.me/qr/WMWEEYWG32N7H1',
+      qrData: 'https://wa.me/qr/WMWEEYWG32N7H1',
       href: 'https://wa.me/qr/WMWEEYWG32N7H1'
     },
     {
@@ -31,14 +40,20 @@ function getContactItems(locale){
       name: 'Telegram',
       idLabel: 'ID',
       idText: '@AlbertLaipi',
+      openHref: 'https://t.me/AlbertLaipi',
+      qrData: 'https://t.me/AlbertLaipi',
       href: 'https://t.me/AlbertLaipi'
     },
     {
       key: 'zalo',
       name: 'Zalo',
-      idLabel: isZhCn ? '二维码链接' : (isZhTw ? 'QR 連結' : 'QR link'),
-      idText: 'zaloapp.com/qr/p/1m345knav588v',
-      href: 'https://zaloapp.com/qr/p/1m345knav588v'
+      idLabel: isZhCn ? '电话' : (isZhTw ? '電話' : 'Phone'),
+      idText: '+84 388238020',
+      // Most reliable for mobile deep-linking: zalo.me/{phone or id}
+      // Phone format: country code + number, no '+'
+      openHref: 'https://zalo.me/84388238020',
+      qrData: 'https://zalo.me/84388238020',
+      href: 'https://zalo.me/84388238020'
     }
   ];
 }
@@ -57,10 +72,18 @@ function buildModal(locale){
       ? '只保留 5 種聯絡方式與 QR code，方便快速加入。'
       : 'Five contact methods + QR codes for fast add.');
 
+  // On mobile, opening in a new tab often prevents deep-linking into apps.
+  // So we keep links in the same tab on coarse-pointer devices.
+  const isMobile = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+  const targetAttr = isMobile ? '' : ' target="_blank" rel="noopener"';
+
   const items = getContactItems(locale);
 
   const cards = items.map((it)=>{
-    const qr = qrUrl(it.href);
+    const openHref = it.openHref || it.href;
+    const qrData = it.qrData || it.href;
+    const qr = qrUrl(qrData);
+
     return `
       <article class="rounded-2xl border border-black/10 bg-white p-4 shadow-card">
         <div class="flex items-start justify-between gap-3">
@@ -68,7 +91,7 @@ function buildModal(locale){
             <h3 class="text-sm font-extrabold">${esc(it.name)}</h3>
             <p class="mt-1 text-xs font-semibold text-zinc-600">${esc(it.idLabel)}：<span class="font-mono">${esc(it.idText)}</span></p>
           </div>
-          <a href="${esc(it.href)}" target="_blank" rel="noopener" class="shrink-0 rounded-xl border border-black/10 bg-brand-4 px-3 py-2 text-xs font-extrabold text-zinc-900 hover:bg-white">Open</a>
+          <a href="${esc(openHref)}"${targetAttr} class="shrink-0 rounded-xl border border-black/10 bg-brand-4 px-3 py-2 text-xs font-extrabold text-zinc-900 hover:bg-white">Open</a>
         </div>
         <div class="mt-3 overflow-hidden rounded-xl border border-black/10 bg-white">
           <img alt="${esc(it.name)} QR" src="${esc(qr)}" class="block h-[220px] w-[220px]" loading="lazy" />
