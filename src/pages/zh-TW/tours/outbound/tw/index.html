@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>越南出境旅遊｜去台灣｜Vietnam Discovery</title>
+  <meta name="description" content="越南旅客去台灣的旅遊行程（占位頁）。" />
+  <script src="/shared/tailwind-config.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/shared/marketing.css" />
+</head>
+<body class="min-h-screen bg-brand-4 font-sans text-zinc-900">
+  <header class="sticky top-0 z-50">
+    <div class="mx-auto max-w-6xl px-4 pt-4">
+      <div class="flex items-center justify-between rounded-2xl border border-black/5 bg-white/70 px-4 py-3 shadow-soft backdrop-blur">
+        <a href="/zh-tw/" class="flex items-center gap-3" aria-label="Go to home">
+          <img src="/shared/logo.jpg" alt="Vietnam Discovery" class="h-9 w-9 rounded-xl border border-black/5 bg-white p-1" />
+          <div class="flex items-center gap-2">
+            <span class="text-sm font-extrabold tracking-tight">Vietnam Discovery</span>
+            <span class="rounded-full bg-brand-2/40 px-3 py-1 text-xs font-extrabold text-brand-1">官方網站</span>
+          </div>
+        </a>
+
+        <nav class="hidden items-center gap-2 md:flex" aria-label="Navigation">
+          <a href="/zh-tw/tours/" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">旅遊行程</a>
+          <a href="#" data-contact-open class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">聯繫</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <select id="langSelect" aria-label="Language" class="rounded-xl border border-black/10 bg-white px-3 py-2 text-sm font-bold text-zinc-800"></select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 pb-16">
+    <section class="mt-10">
+      <h1 class="text-3xl font-extrabold tracking-tight">去台灣（越南出境旅遊）</h1>
+      <p class="mt-3 max-w-2xl text-sm font-medium leading-7 text-zinc-600">這頁先做占位。後續我們會補：推薦行程、必去城市、季節亮點、費用範圍、以及「留下需求」表單。</p>
+
+      <div class="mt-8 rounded-3xl border border-black/5 bg-white p-6 shadow-card">
+        <div class="text-sm font-extrabold">下一步需要你決定：</div>
+        <ul class="mt-3 list-disc pl-5 text-sm text-zinc-700">
+          <li>主要客群（越南旅客？英語旅客？）</li>
+          <li>主打天數（3/4/5/6/8 天）</li>
+          <li>主打城市（台北/台中/高雄/花東/日月潭…）</li>
+        </ul>
+      </div>
+
+      <div class="mt-8">
+        <a href="#" data-contact-open class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95">留下需求（我們主動聯絡你）</a>
+      </div>
+    </section>
+
+    <footer class="mt-12 pb-2">
+      <div class="text-center text-xs font-medium text-zinc-500">© Vietnam Discovery</div>
+    </footer>
+  </main>
+
+  <script type="module">
+    import { initLangSelect } from '/shared/lang.js';
+    import { initContactModal } from '/shared/contact-modal.js';
+    initLangSelect('zh-TW');
+    initContactModal('zh-TW');
+  </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>旅遊行程｜Vietnam Discovery</title>
+  <meta name="description" content="越南境內旅遊、越南出境旅遊（去台灣/中國…），以及客製化自由行。" />
+  <script src="/shared/tailwind-config.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/shared/marketing.css" />
+</head>
+<body class="min-h-screen bg-brand-4 font-sans text-zinc-900">
+  <header class="sticky top-0 z-50">
+    <div class="mx-auto max-w-6xl px-4 pt-4">
+      <div class="flex items-center justify-between rounded-2xl border border-black/5 bg-white/70 px-4 py-3 shadow-soft backdrop-blur">
+        <a href="/zh-tw/" class="flex items-center gap-3" aria-label="Go to home">
+          <img src="/shared/logo.jpg" alt="Vietnam Discovery" class="h-9 w-9 rounded-xl border border-black/5 bg-white p-1" />
+          <div class="flex items-center gap-2">
+            <span class="text-sm font-extrabold tracking-tight">Vietnam Discovery</span>
+            <span class="rounded-full bg-brand-2/40 px-3 py-1 text-xs font-extrabold text-brand-1">官方網站</span>
+          </div>
+        </a>
+
+        <nav class="hidden items-center gap-2 md:flex" aria-label="Navigation" data-mega-root>
+          <div class="relative megaRoot" data-mega-root>
+            <button type="button" data-mega-toggle aria-expanded="false" aria-controls="megaToursTW" class="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-extrabold text-zinc-900 hover:bg-white">
+              旅遊行程
+              <span class="text-zinc-500">▾</span>
+            </button>
+            <div id="megaToursTW" data-mega-menu class="megaMenu pointer-events-none absolute left-0 top-[44px] w-[680px] -translate-y-1 rounded-3xl border border-black/10 bg-white/95 p-5 opacity-0 shadow-soft backdrop-blur transition duration-200">
+              <div class="grid gap-4 md:grid-cols-2">
+                <div>
+                  <div class="text-xs font-extrabold text-zinc-500">越南國內旅遊</div>
+                  <a href="/zh-tw/tours/vn/" class="mt-2 block rounded-2xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold hover:bg-white">城市/區域（胡志明／河內／峴港…）</a>
+                  <a href="/zh-tw/tours/vn/hiking/" class="mt-3 block rounded-2xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold hover:bg-white">深度探索（登山）</a>
+                  <a href="#" data-contact-open class="mt-3 block rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-extrabold hover:bg-brand-4">客製化自由行（留下資料）</a>
+                </div>
+                <div>
+                  <div class="text-xs font-extrabold text-zinc-500">越南出境旅遊</div>
+                  <a href="/zh-tw/tours/outbound/tw/" class="mt-2 block rounded-2xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold hover:bg-white">去台灣</a>
+                  <a href="/zh-tw/tours/outbound/cn/" class="mt-3 block rounded-2xl border border-black/10 bg-brand-4 px-4 py-3 text-sm font-extrabold hover:bg-white">去中國</a>
+                  <div class="mt-3 rounded-2xl border border-dashed border-black/15 bg-white px-4 py-3 text-sm font-medium text-zinc-600">（未來可擴充：日本／韓國／泰國…）</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="/zh-tw/evisa/" target="_blank" rel="noopener" class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">eVisa</a>
+          <a href="#" data-contact-open class="rounded-full px-3 py-2 text-sm font-bold text-zinc-800 hover:bg-white">聯繫</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <select id="langSelect" aria-label="Language" class="rounded-xl border border-black/10 bg-white px-3 py-2 text-sm font-bold text-zinc-800"></select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 pb-16">
+    <section class="mt-10">
+      <h1 class="text-3xl font-extrabold tracking-tight">旅遊行程</h1>
+      <p class="mt-3 max-w-2xl text-sm font-medium leading-7 text-zinc-600">我們會把旅遊服務拆成兩條主線：越南國內旅遊（境內）與越南出境旅遊（去台灣/中國…）。這樣未來擴充不會打架，也更好做 SEO 與轉換。</p>
+
+      <div class="mt-8 grid gap-4 md:grid-cols-2">
+        <a href="/zh-tw/tours/vn/" class="rounded-3xl border border-black/5 bg-white p-6 shadow-card hover:bg-brand-4">
+          <div class="text-sm font-extrabold text-zinc-900">越南國內旅遊</div>
+          <div class="mt-2 text-sm text-zinc-600">城市/區域、深度登山、客製自由行</div>
+        </a>
+        <a href="/zh-tw/tours/outbound/tw/" class="rounded-3xl border border-black/5 bg-white p-6 shadow-card hover:bg-brand-4">
+          <div class="text-sm font-extrabold text-zinc-900">越南出境旅遊</div>
+          <div class="mt-2 text-sm text-zinc-600">去台灣、去中國（後續可擴到日本/韓國…）</div>
+        </a>
+      </div>
+
+      <div class="mt-10">
+        <a href="#" data-contact-open class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-brand-1 to-brand-5 px-5 py-4 text-base font-extrabold text-white shadow-card hover:opacity-95">留下需求（我們主動聯絡你）</a>
+      </div>
+    </section>
+
+    <footer class="mt-12 pb-2">
+      <div class="text-center text-xs font-medium text-zinc-500">© Vietnam Discovery</div>
+    </footer>
+  </main>
+
+  <script type="module">
+    import { initLangSelect } from '/shared/lang.js';
+    import { initContactModal } from '/shared/contact-modal.js';
+    import { initMegaNav } from '/shared/nav-mega.js';
+    initLangSelect('zh-TW');
+    initContactModal('zh-TW');
+    initMegaNav();
+  </script>
+</body>
+</html>
