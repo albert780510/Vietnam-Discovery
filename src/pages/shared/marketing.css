@@ -53,14 +53,14 @@
    - Three types only: A narrative, B process, C closing CTA
    ============================= */
 .story-section{
-  padding-block:96px;
-  min-height:clamp(420px, 62vh, 560px);
+  padding-block:72px;
+  min-height:clamp(380px, 56vh, 520px);
   display:flex;
   align-items:center;
 }
 @media (max-width: 768px){
   .story-section{
-    padding-block:64px;
+    padding-block:48px;
     min-height:auto; /* keep mobile readable, avoid forcing tall screens */
   }
 }
@@ -73,7 +73,7 @@
   letter-spacing:-.02em;
   line-height:1.2;
   font-size:clamp(28px, 3.2vw, 44px);
-  margin:0 0 28px;
+  margin:0 0 24px;
   color:#18181b; /* zinc-900 */
 }
 
@@ -85,10 +85,10 @@
   color:#52525b; /* zinc-600 */
 }
 .story-body p{margin:0}
-.story-body p + p{margin-top:20px}
+.story-body p + p{margin-top:16px}
 
 /* TYPE B */
-.story-b{min-height:clamp(520px, 72vh, 640px)}
+.story-b{min-height:clamp(460px, 64vh, 600px)}
 .story-kicker{
   font-size:13px;
   font-weight:800;
