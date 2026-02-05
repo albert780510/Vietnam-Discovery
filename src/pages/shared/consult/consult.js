@@ -6,7 +6,7 @@ function getParam(name){
 
 function pickServiceDefault(){
   const v = (getParam('service') || '').toLowerCase();
-  const allowed = new Set(['fasttrack','transfer','concierge','business','visa','unknown']);
+  const allowed = new Set(['fasttrack','transfer','concierge','business','visa','market_entry','unknown']);
   return allowed.has(v) ? v : '';
 }
 
@@ -26,6 +26,21 @@ function buildBriefing(locale){
   const timing = getRadio('timing');
   const volatility = getRadio('volatility');
   const outcome = getRadio('outcome');
+
+  // Market Entry extra fields (optional)
+  const meStage = get('meStage');
+  const meCity = get('meCity');
+  const meIndustry = get('meIndustry');
+  const meTimeline = get('meTimeline');
+  const meBudget = get('meBudget');
+  const meSectors = [
+    qs('#meSectorRetail')?.checked ? (isCN ? '零售' : '零售') : '',
+    qs('#meSectorCash')?.checked ? (isCN ? '收现金' : '收現金') : '',
+    qs('#meSectorFnb')?.checked ? (isCN ? '餐饮' : '餐飲') : '',
+    qs('#meSectorEdu')?.checked ? (isCN ? '教育' : '教育') : '',
+    qs('#meSectorTravel')?.checked ? (isCN ? '旅游' : '旅遊') : ''
+  ].filter(Boolean).join(' / ');
+
   const notes = get('notes');
   const contact = get('contact');
 
@@ -40,6 +55,19 @@ function buildBriefing(locale){
   if (timing) lines.push((isCN?'时间敏感：':'時間敏感：') + timing);
   if (volatility) lines.push((isCN?'计划变动：':'計畫變動：') + volatility);
   if (outcome) lines.push((isCN?'结果导向：':'結果導向：') + outcome);
+
+  // Market Entry output (only print when any field is provided)
+  const hasMe = meStage || meCity || meIndustry || meSectors || meTimeline || meBudget;
+  if (hasMe) {
+    lines.push(isCN ? '【Market Entry / Company Setup】' : '【Market Entry / Company Setup】');
+    if (meStage) lines.push((isCN ? '目前阶段：' : '目前階段：') + meStage);
+    if (meCity) lines.push((isCN ? '预计城市：' : '預計城市：') + meCity);
+    if (meIndustry) lines.push((isCN ? '预计行业/服务：' : '預計行業/服務：') + meIndustry);
+    if (meSectors) lines.push((isCN ? '涉及：' : '涉及：') + meSectors);
+    if (meTimeline) lines.push((isCN ? '时间表：' : '時間表：') + meTimeline);
+    if (meBudget) lines.push((isCN ? '预算区间：' : '預算區間：') + meBudget);
+  }
+
   if (notes) lines.push((isCN?'补充：':'補充：') + notes);
   if (contact) lines.push((isCN?'联系方式：':'聯絡方式：') + contact);
   return lines.join('\n');
