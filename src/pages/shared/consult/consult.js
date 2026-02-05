@@ -107,17 +107,15 @@ export function initConsultForm(locale){
   const tgBtn = qs('#openTelegram');
 
   function updateOutputs(){
-    const ack = qs('#paidAck');
-    const ok = !!ack?.checked;
     const msg = buildBriefing(locale);
     const recMsg = recommend(locale);
 
     if (briefingEl) briefingEl.value = msg;
     if (recEl) recEl.textContent = recMsg;
 
-    if (copyBtn) copyBtn.disabled = !ok;
-    if (waBtn) waBtn.classList.toggle('opacity-50', !ok);
-    if (tgBtn) tgBtn.classList.toggle('opacity-50', !ok);
+    if (copyBtn) copyBtn.disabled = false;
+    if (waBtn) waBtn.classList.remove('opacity-50');
+    if (tgBtn) tgBtn.classList.remove('opacity-50');
   }
 
   document.addEventListener('input', (e)=>{
@@ -125,8 +123,6 @@ export function initConsultForm(locale){
   });
 
   copyBtn?.addEventListener('click', async ()=>{
-    const ack = qs('#paidAck');
-    if (!ack?.checked) return;
     try {
       await navigator.clipboard.writeText(briefingEl?.value || '');
       copyBtn.textContent = (locale==='zh-CN') ? '已复制' : '已複製';
@@ -137,11 +133,6 @@ export function initConsultForm(locale){
   });
 
   function openLink(kind){
-    const ack = qs('#paidAck');
-    if (!ack?.checked) {
-      ack?.scrollIntoView?.({ behavior:'smooth', block:'center' });
-      return;
-    }
     const text = briefingEl?.value || '';
     if (!text) return;
 
