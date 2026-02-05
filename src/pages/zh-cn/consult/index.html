@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>顾问咨询（付费）｜Vietnam Discovery</title>
-  <meta name="description" content="付费顾问咨询：填完即可报价（Fast Track、接送、On-site Concierge、商务支援、签证/入境辅导）。" />
+  <title>顾问咨询｜Vietnam Discovery</title>
+  <meta name="description" content="顾问咨询：填完即可报价（Fast Track、接送、On-site Concierge、商务支援、签证/入境辅导）。" />
 
   <script src="/shared/tailwind-config.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -32,7 +32,7 @@
   <main class="mx-auto max-w-6xl px-4 pb-16">
     <section class="mt-8" aria-label="Consultation">
       <div class="rounded-[24px] border border-black/5 bg-white p-7 shadow-soft">
-        <h1 class="text-3xl font-extrabold tracking-tight md:text-4xl">顾问咨询（付费）</h1>
+        <h1 class="text-3xl font-extrabold tracking-tight md:text-4xl">顾问咨询</h1>
         <p class="mt-3 max-w-3xl text-sm font-medium leading-6 text-zinc-600">
           这份表单的目的不是聊天，而是把范围厘清到“可报价、可执行”。
           填完后会生成一段简报文字，你可以直接贴到 WhatsApp / Telegram / 微信 / LINE 给我们。
@@ -53,11 +53,12 @@
               <label class="text-sm font-bold text-zinc-700">想要的服务模块</label>
               <select id="service" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-bold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40">
                 <option value="">不确定（让我们判断）</option>
-                <option value="fasttrack">Airport VIP Fast Track</option>
-                <option value="transfer">Airport Transfer + Luggage Assistance</option>
-                <option value="concierge">On-site Concierge & Advisory</option>
-                <option value="business">Business & Executive Support</option>
-                <option value="visa">Visa & Entry Assistance（Support-based）</option>
+                <option value="fasttrack">机场 VIP 快速通关｜Airport VIP Fast Track</option>
+                <option value="transfer">机场接送＋行李协助｜Airport Transfer + Luggage Assistance</option>
+                <option value="concierge">现场顾问与礼宾支援｜On-site Concierge & Advisory</option>
+                <option value="business">商务与高阶接待支援｜Business & Executive Support</option>
+                <option value="visa">签证与入境文件辅导｜Visa & Entry Assistance（Support-based）</option>
+                <option value="market_entry">市场进入与公司设立陪跑（外资）｜Market Entry / Company Setup Companion</option>
               </select>
             </div>
             <div>
@@ -110,6 +111,65 @@
                 <label class="flex items-center gap-2"><input type="radio" name="outcome" value="高" /> 高（要谈成下一步）</label>
                 <label class="flex items-center gap-2"><input type="radio" name="outcome" value="中" checked /> 中</label>
                 <label class="flex items-center gap-2"><input type="radio" name="outcome" value="低" /> 低</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Market Entry extra fields (B-2) -->
+          <div class="rounded-3xl border border-black/10 bg-white p-5">
+            <div class="text-sm font-extrabold text-zinc-900">Market Entry / Company Setup（外资公司设立陪跑）</div>
+            <div class="mt-1 text-xs font-medium text-zinc-600">如果你选择了 Market Entry，请尽量填写以下信息，方便我们直接报价与排程。</div>
+
+            <div class="mt-4 grid gap-4 md:grid-cols-2">
+              <div>
+                <label class="text-sm font-bold text-zinc-700">目前阶段</label>
+                <select id="meStage" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-bold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40">
+                  <option value="">未选</option>
+                  <option value="A 了解">A 了解</option>
+                  <option value="B 要考察">B 要考察</option>
+                  <option value="C 要落地">C 要落地</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-sm font-bold text-zinc-700">预计城市</label>
+                <select id="meCity" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-bold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40">
+                  <option value="">未选</option>
+                  <option value="HCMC">HCMC</option>
+                  <option value="Hanoi">Hanoi</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <label class="text-sm font-bold text-zinc-700">预计行业/服务内容</label>
+              <input id="meIndustry" type="text" placeholder="例如：餐饮连锁/零售/跨境贸易/制造/教育服务…" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40" />
+            </div>
+
+            <div class="mt-4">
+              <div class="text-sm font-bold text-zinc-700">是否涉及（勾选）</div>
+              <div class="mt-2 grid gap-2 md:grid-cols-3 text-sm font-semibold text-zinc-800">
+                <label class="flex items-center gap-2"><input type="checkbox" id="meSectorRetail" /> 零售</label>
+                <label class="flex items-center gap-2"><input type="checkbox" id="meSectorCash" /> 收现金</label>
+                <label class="flex items-center gap-2"><input type="checkbox" id="meSectorFnb" /> 餐饮</label>
+                <label class="flex items-center gap-2"><input type="checkbox" id="meSectorEdu" /> 教育</label>
+                <label class="flex items-center gap-2"><input type="checkbox" id="meSectorTravel" /> 旅游</label>
+              </div>
+            </div>
+
+            <div class="mt-4 grid gap-4 md:grid-cols-2">
+              <div>
+                <label class="text-sm font-bold text-zinc-700">时间表（何时成立/何时营运）</label>
+                <input id="meTimeline" type="text" placeholder="例如：3 月完成设立、4 月开始营运" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40" />
+              </div>
+              <div>
+                <label class="text-sm font-bold text-zinc-700">预算区间</label>
+                <select id="meBudget" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-bold text-zinc-900 shadow-sm focus:outline-none focus:ring-4 focus:ring-brand-3/40">
+                  <option value="">未选</option>
+                  <option value="<2000">&lt; 2000</option>
+                  <option value="2000-10000">2000-10000</option>
+                  <option value="10000+">10000+</option>
+                </select>
               </div>
             </div>
           </div>

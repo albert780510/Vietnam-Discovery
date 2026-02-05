@@ -17,7 +17,8 @@ function buildBriefing(locale){
   const get = (id) => (qs('#' + id)?.value || '').trim();
   const getRadio = (name) => (qs(`input[name="${name}"]:checked`)?.value || '').trim();
 
-  const service = get('service');
+  // Prefer the visible label (includes Chinese) so the output is copy-paste ready.
+  const service = (qs('#service')?.selectedOptions?.[0]?.textContent || get('service')).trim();
   const city = get('city');
   const dates = get('dates');
   const flights = get('flights');
