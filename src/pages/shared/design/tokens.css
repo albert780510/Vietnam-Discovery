@@ -1,0 +1,31 @@
+/* Design tokens — Phase 1 output (not yet wired into pages)
+   Apple-like: premium, calm, trustworthy.
+*/
+
+:root{
+  --c-bg:#ffffff;
+  --c-surface:#F7F7F8;
+  --c-border:rgba(0,0,0,.08);
+  --c-text:#0B0B0C;
+  --c-text-2:rgba(0,0,0,.70);
+  --c-text-3:rgba(0,0,0,.52);
+
+  /* single accent */
+  --c-accent:#0A84FF;
+  --c-accent-2:rgba(10,132,255,.12);
+
+  /* radius */
+  --r-sm:12px;
+  --r-md:16px;
+  --r-lg:24px;
+  --r-xl:32px;
+
+  /* shadows */
+  --sh-card:0 8px 30px rgba(0,0,0,.06);
+  --sh-float:0 14px 50px rgba(0,0,0,.10);
+
+  /* motion */
+  --ease-apple:cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-1:150ms;
+  --dur-2:220ms;
+}
