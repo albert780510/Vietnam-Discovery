@@ -6,6 +6,7 @@ function getParam(name){
 
 function pickServiceDefault(){
   const v = (getParam('service') || '').toLowerCase();
+  if (v === 'consult') return ''; // keep default ("不確定")
   const allowed = new Set(['fasttrack','transfer','concierge','business','visa','market_entry','unknown']);
   return allowed.has(v) ? v : '';
 }
@@ -95,8 +96,20 @@ export function initConsultForm(locale){
   const serviceSel = qs('#service');
   if (serviceSel) {
     const d = pickServiceDefault();
+    // only override when an explicit service is provided
     if (d) serviceSel.value = d;
   }
+
+  // Auto scroll to anchors after DOM is ready
+  requestAnimationFrame(() => {
+    const h = (location.hash || '').toLowerCase();
+    const target = h === '#market-entry'
+      ? qs('#market-entry')
+      : (h === '#form-top' ? qs('#form-top') : null);
+    if (target && typeof target.scrollIntoView === 'function') {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
 
   const form = qs('#consultForm');
   const out = qs('#consultOut');
